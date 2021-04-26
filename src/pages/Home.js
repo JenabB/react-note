@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import jwt from "jwt-decode"; // import dependency
+import jwt from "jwt-decode";
 import CreateShop from "../components/shop/CreateShop";
 
 const Home = (props) => {
@@ -8,7 +8,12 @@ const Home = (props) => {
     let token = localStorage.getItem("token");
 
     useEffect(() => {
-        setUser(jwt(token, { header: true }));
+        try {
+            setUser(jwt(token, { header: true }));
+        } catch (error) {
+            console.log("no token")
+        }
+
     }, [token]);
 
     console.log(user);
