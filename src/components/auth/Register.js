@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+import Swal from "sweetalert2";
+
+
 const Register = (props) => {
     const [data, setData] = useState({
         email: "",
@@ -35,8 +38,14 @@ const Register = (props) => {
                     },
                 }
             );
+            console.log(res.data);
+            Swal.fire({
+                icon: 'success',
+                text: res.data.message,
+                confirmButtonText: "ok"
+            })
             props.history.push("/user/login");
-            console.log("response", res.data)
+
         } catch (error) {
             console.log(error);
         }
@@ -57,6 +66,7 @@ const Register = (props) => {
                                 name="email"
                                 value={email}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
                         <div className="mt-4">
@@ -67,6 +77,7 @@ const Register = (props) => {
                                 name="password"
                                 value={password}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
 
@@ -78,7 +89,8 @@ const Register = (props) => {
                                 name="fullName"
                                 value={fullName}
                                 onChange={handleChange}
-                            />
+
+                                required />
                         </div>
 
                         <div className="mt-4">
@@ -89,11 +101,12 @@ const Register = (props) => {
                                 name="contactNumber"
                                 value={contactNumber}
                                 onChange={handleChange}
+                                required
                             />
                         </div>
 
-                        <div className="text-center">
-                            <button className="btn btn-primary" onClick={handleSubmit}>
+                        <div className="text-center my-5">
+                            <button className="text-white bg-green-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 px-3 py-1 rounded-lg" onClick={handleSubmit}>
                                 Register
             </button>
                         </div>

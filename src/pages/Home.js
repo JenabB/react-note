@@ -8,7 +8,7 @@ const Home = (props) => {
     let token = localStorage.getItem("token");
 
     useEffect(() => {
-        setUser(jwt(token));
+        setUser(jwt(token, { header: true }));
     }, [token]);
 
     console.log(user);

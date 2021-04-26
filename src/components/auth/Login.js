@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+import Swal from "sweetalert2";
+
 const Login = (props) => {
     const [data, setData] = useState({
         email: "",
@@ -31,7 +33,12 @@ const Login = (props) => {
                     },
                 }
             );
-            console.log(res);
+            console.log(res.data);
+            Swal.fire({
+                icon: 'success',
+                text: "login success",
+                confirmButtonText: "ok"
+            })
             localStorage.setItem("token", res.data.data.token);
             props.history.push("/user");
         } catch (err) {
@@ -52,6 +59,7 @@ const Login = (props) => {
                             name="email"
                             value={email}
                             onChange={handleChange}
+                            required
                         />
                     </div>
 
@@ -63,6 +71,7 @@ const Login = (props) => {
                             name="password"
                             value={password}
                             onChange={handleChange}
+                            required
                         /></div>
 
 
