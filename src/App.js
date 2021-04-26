@@ -1,11 +1,12 @@
 import React from 'react'
+import { GlobalProvider } from "./hook/GlobalState";
 import Navigation from "./Navigation"
 
 function App() {
   return (
-    <div>
+    <GlobalProvider>
       <Navigation />
-    </div>
+    </GlobalProvider>
   )
 }
 

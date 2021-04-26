@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 
+import Swal from "sweetalert2";
 import axios from "axios";
 
 const CreateShop = () => {
     const [data, setData] = useState({
         shopName: "",
-        countryId: "",
-        provinceId: "",
-        districtId: "",
+        countryId: 1,
+        provinceId: 1,
+        districtId: 1,
         addressDetail: "",
         contactNumber: "",
     });
@@ -23,8 +24,8 @@ const CreateShop = () => {
         e.preventDefault();
         try {
             setData({ ...data, error: null });
-            await axios.post(
-                "https://warm-earth-68639.herokuapp.com/v1/user/register/owner",
+            const res = await axios.post(
+                "https://warm-earth-68639.herokuapp.com/v1/shop",
                 {
                     shopName: shopName,
                     countryId: countryId,
@@ -39,7 +40,12 @@ const CreateShop = () => {
                         Authorization: `Bearer ${localStorage.getItem("token")}`
                     },
                 });
-
+            console.log(res)
+            Swal.fire({
+                icon: 'success',
+                text: res.data.message,
+                confirmButtonText: "ok"
+            })
         } catch (err) {
             console.log(err);
         }
@@ -47,25 +53,37 @@ const CreateShop = () => {
 
     return (
         <div>
-            <div className="form mt-4 auth-container">
-                <h4 className="text-muted text-center mb-2">Create Shop</h4>
 
+            <div className="mt-4">
+                <h4 className="text-muted text-center mb-2">Create Shop</h4>
                 <div className="card py-2 px-5 shadow">
-                    <form>
-                        <div className="form-group">
-                            <label htmlFor="email">Email</label>
+                    <form className="text-center">
+                        <div className="my-2">
+                            <h1>Shop name</h1>
                             <input
-                                className="form-control"
+                                className="bg-blue-200 px-2 py-1"
                                 type="name"
                                 name="shopName"
                                 value={shopName}
                                 onChange={handleChange}
                             />
                         </div>
-                        <div className="form-group">
-                            <label htmlFor="contactNumber">contactNumber</label>
+
+                        <div className="my-2">
+                            <h1>Address Detail</h1>
                             <input
-                                className="form-control"
+                                className="bg-blue-200 px-2 py-1"
+                                type="name"
+                                name="addressDetail"
+                                value={addressDetail}
+                                onChange={handleChange}
+                            />
+                        </div>
+
+                        <div className="my-2">
+                            <h1>contactNumber</h1>
+                            <input
+                                className="bg-blue-200 px-2 py-1"
                                 type="name"
                                 name="contactNumber"
                                 value={contactNumber}

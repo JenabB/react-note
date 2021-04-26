@@ -1,15 +1,25 @@
+import { useState, useEffect } from "react"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Home from "./pages/Home"
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 
-const Navigation = () => {
-  let token = localStorage.getItem("item")
+const Navigation = (props) => {
+  const [isLogin, setIsLogin] = useState(false)
+
+
+  let token = localStorage.getItem("token")
+
+
+  useEffect(() => {
+    token ? (setIsLogin(true)
+    ) : (setIsLogin(false))
+  }, [token])
 
   return (
 
     <Router>
-      {token ? (
+      {isLogin ? (
         <div className="flex justify-between bg-green-500 text-white p-4">
           <div>
             <Link
