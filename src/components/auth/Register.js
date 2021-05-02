@@ -38,7 +38,7 @@ const Register = (props) => {
                     },
                 }
             );
-            console.log(res.data);
+
             Swal.fire({
                 icon: 'success',
                 text: res.data.message,
@@ -47,7 +47,11 @@ const Register = (props) => {
             props.history.push("/user/login");
 
         } catch (error) {
-            console.log(error);
+            Swal.fire({
+                icon: 'error',
+                text: error.response.data.message,
+                confirmButtonText: "ok"
+            })
         }
     };
 
