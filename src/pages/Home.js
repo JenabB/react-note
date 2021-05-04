@@ -9,7 +9,7 @@ const Home = (props) => {
 
     useEffect(() => {
         try {
-            setUser(jwt(token, { header: true }));
+            setUser(jwt(token));
         } catch (error) {
             console.log("no token")
         }
