@@ -64,7 +64,7 @@ const CreateShop = () => {
     return (
         <div>
             <div className="mt-4">
-                <button className="bg-green-200 p-2 rounded-lg" onClick={handleOpenModal}>Create Shop</button>
+                <button className="bg-green-500 p-2 rounded-lg hover:px-5" onClick={handleOpenModal}>Create Shop</button>
                 <Modal isOpen={showModal}>
                     <div>
                         <button onClick={handleCloseModal}>Close</button>
