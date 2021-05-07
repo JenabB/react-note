@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 
+import Modal from 'react-modal';
 import Swal from "sweetalert2";
 import axios from "axios";
 
 const CreateShop = () => {
+
+    const [showModal, setShowModal] = useState(false)
     const [data, setData] = useState({
         shopName: "",
         countryId: 1,
@@ -15,7 +18,14 @@ const CreateShop = () => {
 
     const { shopName, countryId, provinceId, districtId, addressDetail, contactNumber } = data;
 
-    console.log(data);
+
+    const handleOpenModal = () => {
+        setShowModal(true)
+    }
+
+    const handleCloseModal = () => {
+        setShowModal(false)
+    }
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
     };
@@ -53,50 +63,58 @@ const CreateShop = () => {
 
     return (
         <div>
-
             <div className="mt-4">
-                <h4 className="text-muted text-center mb-2">Create Shop</h4>
-                <div className="card py-2 px-5 shadow">
-                    <form className="text-center">
-                        <div className="my-2">
-                            <h1>Shop name</h1>
-                            <input
-                                className="bg-blue-200 px-2 py-1"
-                                type="name"
-                                name="shopName"
-                                value={shopName}
-                                onChange={handleChange}
-                            />
-                        </div>
+                <button className="bg-green-200 p-2 rounded-lg" onClick={handleOpenModal}>Create Shop</button>
+                <Modal isOpen={showModal}>
+                    <div>
+                        <button onClick={handleCloseModal}>Close</button>
+                        <h4 className="text-muted text-center mb-2">Create Shop</h4>
+                        <div className="card py-2 px-5 shadow">
+                            <form className="text-center">
+                                <div className="my-2">
+                                    <h1>Shop name</h1>
+                                    <input
+                                        className="bg-blue-200 px-2 py-1"
+                                        type="name"
+                                        name="shopName"
+                                        value={shopName}
+                                        onChange={handleChange}
+                                    />
+                                </div>
 
-                        <div className="my-2">
-                            <h1>Address Detail</h1>
-                            <input
-                                className="bg-blue-200 px-2 py-1"
-                                type="name"
-                                name="addressDetail"
-                                value={addressDetail}
-                                onChange={handleChange}
-                            />
-                        </div>
+                                <div className="my-2">
+                                    <h1>Address Detail</h1>
+                                    <input
+                                        className="bg-blue-200 px-2 py-1"
+                                        type="name"
+                                        name="addressDetail"
+                                        value={addressDetail}
+                                        onChange={handleChange}
+                                    />
+                                </div>
 
-                        <div className="my-2">
-                            <h1>contactNumber</h1>
-                            <input
-                                className="bg-blue-200 px-2 py-1"
-                                type="name"
-                                name="contactNumber"
-                                value={contactNumber}
-                                onChange={handleChange}
-                            />
-                        </div>
+                                <div className="my-2">
+                                    <h1>contactNumber</h1>
+                                    <input
+                                        className="bg-blue-200 px-2 py-1"
+                                        type="name"
+                                        name="contactNumber"
+                                        value={contactNumber}
+                                        onChange={handleChange}
+                                    />
+                                </div>
 
-                        <div className="text-center">
-                            <button className="btn bg-green-500 text-white px-3 py-1 rounded-lg" onClick={handleSubmit}>Create</button>
-                        </div>
+                                <div className="text-center">
+                                    <button className="btn bg-green-500 text-white px-3 py-1 rounded-lg" onClick={handleSubmit}>Create</button>
+                                </div>
 
-                    </form>
-                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </Modal>
+
+
             </div>
         </div>
     )

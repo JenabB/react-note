@@ -26,11 +26,8 @@ const Home = (props) => {
                 <div className="jumbotron-inner text-center text-white">
                     <h1 className="font-bold  text-lg">Welcome {user.fullName}</h1>
                     <h2>Create Shop, Btw Ziva unch kali</h2>
+                    <CreateShop />
                 </div>
-            </div>
-
-            <div className="m-5">
-                <CreateShop />
             </div>
 
             <div>
