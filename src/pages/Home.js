@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import jwt from "jwt-decode";
 import CreateShop from "../components/shop/CreateShop";
+import OwnerShopList from "../components/shop/OwnerShopList";
 
 const Home = (props) => {
     const [user, setUser] = useState({});
@@ -16,26 +17,24 @@ const Home = (props) => {
 
     }, [token]);
 
-    console.log(user);
-
-    const logout = () => {
-        localStorage.removeItem("token");
-        props.history.push("/user/login");
-    };
-
     if (!localStorage.getItem("token")) {
         props.history.push("/user/login");
     }
     return (
         <div>
-            <nav className="">
-                <p className="lead">Welcome {user.fullName}</p>
-                <button className="btn btn-danger" onClick={logout}>
-                    Logout
-        </button>
-            </nav>
+            <div className="jumbotron py-12">
+                <div className="jumbotron-inner text-center text-white">
+                    <h1 className="font-bold  text-lg">Welcome {user.fullName}</h1>
+                    <h2>Create Shop, Btw Ziva unch kali</h2>
+                </div>
+            </div>
+
             <div className="m-5">
                 <CreateShop />
+            </div>
+
+            <div>
+                <OwnerShopList />
             </div>
         </div>
     );
