@@ -4,6 +4,8 @@ import Home from './pages/Home';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 
+import OwnerShopDetails from "./components/shop/OwnerShopDetails"
+
 const Navigation = () => {
   const [isLogin, SetIsLogin] = useState(false);
 
@@ -52,6 +54,7 @@ const Navigation = () => {
         <Route exact path='/user' component={Home} />
         <Route exact path='/user/register' component={Register} />
         <Route exact path='/user/login' component={Login} />
+        <Route exact path='/user/shop/detail/:id' component={OwnerShopDetails} />
       </Switch>
     </Router>
   );
