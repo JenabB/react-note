@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios from "axios"
 import { useHistory } from "react-router-dom";
 import moment from "moment";
+import ShopInvoiceList from './ShopInvoiceList';
+import CreateInvoice from './CreateInvoice';
 
 
 const OwnerShopDetails = (props) => {
@@ -37,11 +39,16 @@ const OwnerShopDetails = (props) => {
 
             <div className="jumbotron-detail text-center py-12">
                 <h1 className="font-bold text-lg">{detail.shopName}</h1>
+                <h2>{detail.addressDetail}</h2>
+                <h3>Created: {moment(detail.createdAt).format(dateFormat)}</h3>
+                <p>{detail.contactNumber}</p>
+
             </div>
-            <h1>{detail.shopName}</h1>
-            <h2>{detail.addressDetail}</h2>
-            <h3>Created: {moment(detail.createdAt).format(dateFormat)}</h3>
-            <p>{detail.contactNumber}</p>
+
+            <div>
+                <CreateInvoice />
+                <ShopInvoiceList id={shopId} />
+            </div>
         </div>
     )
 }

@@ -1,13 +1,17 @@
 .jumbotron {
-  height: 300px;
+  height: 400px;
   background-image: url("../src/images/w644.jpeg");
   background-size: cover;
   background-position: center center;
 }
 
 .jumbotron-detail {
-  height: 300px;
+  height: 400px;
   background-image: url("../src/images/detailShop.jpg");
   background-size: cover;
   background-position: center center;
+}
+
+.ReactModal__Content {
+  height: 400px;
 }

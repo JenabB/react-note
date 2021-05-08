@@ -18,13 +18,10 @@ const CreateShop = () => {
 
     const { shopName, countryId, provinceId, districtId, addressDetail, contactNumber } = data;
 
-    const handleOpenModal = () => {
-        setShowModal(true)
-    }
+    const handleOpenModal = () => { setShowModal(true) }
 
-    const handleCloseModal = () => {
-        setShowModal(false)
-    }
+    const handleCloseModal = () => { setShowModal(false) }
+
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
     };
@@ -78,6 +75,7 @@ const CreateShop = () => {
                                         name="shopName"
                                         value={shopName}
                                         onChange={handleChange}
+                                        required
                                     />
                                 </div>
 
@@ -89,6 +87,7 @@ const CreateShop = () => {
                                         name="addressDetail"
                                         value={addressDetail}
                                         onChange={handleChange}
+                                        required
                                     />
                                 </div>
 
@@ -100,6 +99,7 @@ const CreateShop = () => {
                                         name="contactNumber"
                                         value={contactNumber}
                                         onChange={handleChange}
+                                        required
                                     />
                                 </div>
 
