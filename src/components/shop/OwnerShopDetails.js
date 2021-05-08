@@ -12,6 +12,9 @@ const OwnerShopDetails = (props) => {
     function goBack() {
         history.goBack();
     }
+
+    const dateFormat = "dddd, MMMM Do YYYY, h:mm:ss a";
+
     useEffect(() => {
         axios.get(`https://warm-earth-68639.herokuapp.com/v1/shop/${shopId}`, {
             headers: {
@@ -19,12 +22,10 @@ const OwnerShopDetails = (props) => {
                 Authorization: `Bearer ${localStorage.getItem("token")}`
             },
         }).then(result => {
-
             setDetail(result.data.data)
         })
     }, [shopId])
 
-    console.log(detail)
     return (
         <div>
             <button
@@ -35,11 +36,11 @@ const OwnerShopDetails = (props) => {
       </button>
 
             <div className="jumbotron-detail text-center py-12">
-                <h1 className="font-bold  text-lg">{detail.shopName}</h1>
+                <h1 className="font-bold text-lg">{detail.shopName}</h1>
             </div>
             <h1>{detail.shopName}</h1>
             <h2>{detail.addressDetail}</h2>
-            <h3>{detail.createdAt}</h3>
+            <h3>Created: {moment(detail.createdAt).format(dateFormat)}</h3>
             <p>{detail.contactNumber}</p>
         </div>
     )
