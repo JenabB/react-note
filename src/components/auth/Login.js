@@ -40,7 +40,7 @@ const Login = (props) => {
                 confirmButtonText: "ok"
             })
             localStorage.setItem("token", res.data.data.token);
-            props.history.push("/user");
+            props.history.push("/");
             window.location.reload()
         } catch (error) {
             Swal.fire({
