@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+
 import Home from './pages/Home';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
+import InvoiceDetail from "./components/shop/InvoiceDetail";
 
 import OwnerShopDetails from "./components/shop/OwnerShopDetails"
+import cart from "./images/cart.png";
 
 const Navigation = () => {
   const [isLogin, SetIsLogin] = useState(false);
@@ -33,6 +36,10 @@ const Navigation = () => {
               Logout
             </Link>
           </div>
+          <div>
+            <Link><img src={cart} alt="cart" width="30px" /></Link>
+          </div>
+
         </div>
       ) : (
         <div className='sticky top-0 flex justify-between bg-green-500 text-white p-4'>
@@ -55,6 +62,8 @@ const Navigation = () => {
         <Route exact path='/user/register' component={Register} />
         <Route exact path='/user/login' component={Login} />
         <Route exact path='/user/shop/detail/:id' component={OwnerShopDetails} />
+        <Route exact path='/user/shop/:id/invoice' component={InvoiceDetail} />
+        <Route exact path='/user/shop/:id/invoice/:id' component={InvoiceDetail} />
       </Switch>
     </Router>
   );

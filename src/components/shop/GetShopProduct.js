@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import axios from "axios";
-import moment from "moment"
-import { Link } from "react-router-dom"
 
 const GetShopProduct = ({ id }) => {
     const [productList, setProductList] = useState([])
@@ -24,12 +22,10 @@ const GetShopProduct = ({ id }) => {
             {productList.length > 0 ? (
                 <div className="grid grid-cols-3">
                     {productList.map((product, index) => (
-                        <Link to={`user/shop/detail/${product.invoiceId}`}>
-                            <div key={index} className="shadow-lg m-3 p-3">
-                                <h1 className="font-bold">{product.productName}</h1>
-                                <h2>{product.productPrice}</h2>
-                            </div>
-                        </Link>
+                        <div key={index} className="shadow-lg m-3 p-3">
+                            <h1 className="font-bold">{product.productName}</h1>
+                            <h2>{product.productPrice}</h2>
+                        </div>
                     ))}
                 </div>
             ) : (<h1 className="text-center py-12">No Product Yet</h1>)}

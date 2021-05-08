@@ -3,7 +3,9 @@ import AppReducer from "./AppReducer";
 
 //initial state
 const initialState = {
-    token: localStorage.getItem("token") ? localStorage.getItem("token") : []
+    token: localStorage.getItem("token") ? localStorage.getItem("token") : [],
+    id: "",
+    invoiceId: ""
 }
 
 //create context
