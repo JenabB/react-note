@@ -41,6 +41,7 @@ const Login = (props) => {
             })
             localStorage.setItem("token", res.data.data.token);
             props.history.push("/user");
+            window.location.reload()
         } catch (error) {
             Swal.fire({
                 icon: 'error',

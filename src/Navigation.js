@@ -13,6 +13,7 @@ const Navigation = () => {
     let token = localStorage.getItem('token');
     if (token) {
       SetIsLogin(true);
+
     } else {
       SetIsLogin(false);
     }

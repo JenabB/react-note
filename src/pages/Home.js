@@ -24,7 +24,7 @@ const Home = (props) => {
         <div>
             <div className="jumbotron py-12">
                 <div className="text-center text-white">
-                    <h1 className="font-bold  text-lg">Welcome {user.fullName}</h1>
+                    <h1 className="text-lg">Welcome <b>{user.fullName}</b></h1>
                     <h2>Create Shop, Btw Ziva unch kali</h2>
                     <CreateShop />
                 </div>
