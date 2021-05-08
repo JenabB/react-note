@@ -34,7 +34,7 @@ const ShopInvoiceList = ({ id }) => {
                         </Link>
                     ))}
                 </div>
-            ) : (<h1 className="text-center py-12">No Shop Yet</h1>)}
+            ) : (<h1 className="text-center py-12">No Invoice Yet</h1>)}
         </div>
     )
 }

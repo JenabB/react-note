@@ -4,6 +4,8 @@ import { useHistory } from "react-router-dom";
 import moment from "moment";
 import ShopInvoiceList from './ShopInvoiceList';
 import CreateInvoice from './CreateInvoice';
+import AddShopProduct from './AddShopProduct';
+import GetShopProduct from './GetShopProduct';
 
 
 const OwnerShopDetails = (props) => {
@@ -42,13 +44,19 @@ const OwnerShopDetails = (props) => {
                 <h2>{detail.addressDetail}</h2>
                 <h3>Created: {moment(detail.createdAt).format(dateFormat)}</h3>
                 <p>{detail.contactNumber}</p>
-
             </div>
+
+            <div>
+                <AddShopProduct id={shopId} />
+                <GetShopProduct id={shopId} />
+            </div>
+
 
             <div>
                 <CreateInvoice />
                 <ShopInvoiceList id={shopId} />
             </div>
+
         </div>
     )
 }

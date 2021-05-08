@@ -27,7 +27,7 @@ const Navigation = () => {
   return (
     <Router>
       {isLogin ? (
-        <div className='flex justify-between bg-green-500 text-white p-4'>
+        <div className='sticky top-0 flex justify-between bg-green-500 text-white p-4'>
           <div>
             <Link to='/user/login' onClick={logout}>
               Logout
@@ -35,7 +35,7 @@ const Navigation = () => {
           </div>
         </div>
       ) : (
-        <div className='flex justify-between bg-green-500 text-white p-4'>
+        <div className='sticky top-0 flex justify-between bg-green-500 text-white p-4'>
           <div>
             <Link to='/user'>Home</Link>
           </div>
