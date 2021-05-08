@@ -18,7 +18,6 @@ const CreateShop = () => {
 
     const { shopName, countryId, provinceId, districtId, addressDetail, contactNumber } = data;
 
-
     const handleOpenModal = () => {
         setShowModal(true)
     }

@@ -23,7 +23,7 @@ const Home = (props) => {
     return (
         <div>
             <div className="jumbotron py-12">
-                <div className="jumbotron-inner text-center text-white">
+                <div className="text-center text-white">
                     <h1 className="font-bold  text-lg">Welcome {user.fullName}</h1>
                     <h2>Create Shop, Btw Ziva unch kali</h2>
                     <CreateShop />

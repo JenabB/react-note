@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from "axios"
 import { useHistory } from "react-router-dom";
+import moment from "moment";
+
 
 const OwnerShopDetails = (props) => {
     const [detail, setDetail] = useState([])
@@ -26,14 +28,19 @@ const OwnerShopDetails = (props) => {
     return (
         <div>
             <button
-                className=" top-1 bg-green-400 text-white px-2 py-1 rounded-lg"
+                className="absolute top-20 left-3 bg-green-400 text-white px-2 py-1 rounded-lg"
                 onClick={goBack}
             >
                 Back
       </button>
+
+            <div className="jumbotron-detail text-center py-12">
+                <h1 className="font-bold  text-lg">{detail.shopName}</h1>
+            </div>
             <h1>{detail.shopName}</h1>
             <h2>{detail.addressDetail}</h2>
-
+            <h3>{detail.createdAt}</h3>
+            <p>{detail.contactNumber}</p>
         </div>
     )
 }

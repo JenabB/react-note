@@ -4,3 +4,10 @@
   background-size: cover;
   background-position: center center;
 }
+
+.jumbotron-detail {
+  height: 300px;
+  background-image: url("../src/images/detailShop.jpg");
+  background-size: cover;
+  background-position: center center;
+}
