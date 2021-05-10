@@ -30,7 +30,7 @@ const Login = (props) => {
                 confirmButtonText: "ok"
             })
 
-            props.history.push("/");
+            props.history.push("/user");
             window.location.reload();
 
         } catch (error) {

@@ -1,3 +1,10 @@
+.landing-header {
+  height: 400px;
+  background-image: url("./images/landing.webp");
+  background-size: cover;
+  background-position: center center;
+  filter: grayscale(90%);
+}
 .jumbotron {
   height: 400px;
   background-image: url("../src/images/w644.jpeg");

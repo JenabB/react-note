@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import { useAuthDispatch, logout, useAuthState } from "./hook"
 
+import LandingPage from "./pages/LandingPage";
 import Home from './pages/Home';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
@@ -15,16 +16,18 @@ const Navigation = () => {
   const [isLogin, SetIsLogin] = useState(false);
 
   const dispatch = useAuthDispatch();
+  const userDetails = useAuthState();
+
 
   useEffect(() => {
-    let token = localStorage.getItem('token');
+    let token = userDetails.token;
     if (token) {
       SetIsLogin(true);
 
     } else {
       SetIsLogin(false);
     }
-  }, []);
+  }, [userDetails.token]);
 
   const handleLogout = () => {
     logout(dispatch)
@@ -48,7 +51,7 @@ const Navigation = () => {
       ) : (
         <div className='sticky top-0 flex justify-between bg-green-500 text-white p-4'>
           <div>
-            <Link to='/user'>Home</Link>
+            <Link to='/'>Home</Link>
           </div>
           <div className='flex'>
             <div className='mr-2'>
@@ -62,7 +65,8 @@ const Navigation = () => {
       )}
 
       <Switch>
-        <Route exact path='/' component={Home} />
+        <Route exact path='/' component={LandingPage} />
+        <Route exact path='/user' component={Home} />
         <Route exact path='/user/register' component={Register} />
         <Route exact path='/user/login' component={Login} />
         <Route exact path='/user/shop/detail/:id' component={OwnerShopDetails} />
