@@ -1,6 +1,11 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import Service1 from "../images/icons/001-email.png";
+import Service2 from "../images/icons/002-hosting.png";
+import Service3 from "../images/icons/003-browser.png";
+
 import Footer from "../components/Footer";
+
 const LandingPage = () => {
   return (
     <div>
@@ -15,12 +20,24 @@ const LandingPage = () => {
         </div>
       </div>
 
-      <div>
-        <h1 className="text-center mt-12">Our Services</h1>
-        <div className="grid lg:grid-cols-3 sm:grid-cols-1">
-          <div></div>
-          <div></div>
-          <div></div>
+      <div className="py-20 w-2/3 mx-auto">
+        <h1 className="text-center mb-12">Our Services</h1>
+        <div className="grid grid-cols-3">
+          <div className="text-center">
+            <img src={Service1} alt="service 1" width="120px" />
+            <h1>Service 1</h1>
+            <p>Ini service pertama</p>
+          </div>
+          <div className="text-center">
+            <img src={Service2} alt="service 2" width="120px" />
+            <h1>Service 2</h1>
+            <p>Ini service kedua</p>
+          </div>
+          <div className="text-center">
+            <img className="" src={Service3} alt="service 3" width="120px" />
+            <h1>Service 1</h1>
+            <p>Ini service ketiga</p>
+          </div>
         </div>
       </div>
 
