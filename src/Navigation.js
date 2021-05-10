@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
+import { useAuthDispatch, logout, useAuthState } from "./hook"
+
 import Home from './pages/Home';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
@@ -12,6 +14,8 @@ import cart from "./images/cart.png";
 const Navigation = () => {
   const [isLogin, SetIsLogin] = useState(false);
 
+  const dispatch = useAuthDispatch();
+
   useEffect(() => {
     let token = localStorage.getItem('token');
     if (token) {
@@ -22,8 +26,8 @@ const Navigation = () => {
     }
   }, []);
 
-  const logout = () => {
-    localStorage.removeItem('token');
+  const handleLogout = () => {
+    logout(dispatch)
     SetIsLogin(false)
   };
 
@@ -32,7 +36,7 @@ const Navigation = () => {
       {isLogin ? (
         <div className='sticky top-0 flex justify-between bg-green-500 text-white p-4'>
           <div>
-            <Link to='/user/login' onClick={logout}>
+            <Link to='/user/login' onClick={handleLogout}>
               Logout
             </Link>
           </div>

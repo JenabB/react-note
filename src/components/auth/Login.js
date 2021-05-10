@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { loginUser, useAuthState, useAuthDispatch } from '../../hook';
 
 import Swal from "sweetalert2";
 
@@ -12,7 +13,9 @@ const Login = (props) => {
 
     const { email, password } = data;
 
-    console.log(data);
+    const dispatch = useAuthDispatch();
+    const { loading, errorMessage } = useAuthState();
+
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
     };
@@ -20,28 +23,17 @@ const Login = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            setData({ ...data, error: null });
-            const res = await axios.post(
-                "https://warm-earth-68639.herokuapp.com/v1/user/login/owner",
-                {
-                    email: email,
-                    password: password,
-                },
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
-            console.log(res.data);
+            await loginUser(dispatch, { email, password });
+
             Swal.fire({
                 icon: 'success',
                 text: "login success",
                 confirmButtonText: "ok"
             })
-            localStorage.setItem("token", res.data.data.token);
+
             props.history.push("/");
-            window.location.reload()
+            window.location.reload();
+
         } catch (error) {
             Swal.fire({
                 icon: 'error',

@@ -1,14 +1,15 @@
 import React from 'react'
-import { GlobalProvider } from "./hook/GlobalState";
+import { AuthProvider } from "./hook"
+
 import Navigation from "./Navigation"
 
 import "./App.css"
 
 function App() {
   return (
-    <GlobalProvider>
+    <AuthProvider>
       <Navigation />
-    </GlobalProvider>
+    </AuthProvider>
   )
 }
 
