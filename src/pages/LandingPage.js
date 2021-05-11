@@ -20,22 +20,37 @@ const LandingPage = () => {
         </div>
       </div>
 
-      <div className="py-20 w-2/3 mx-auto">
-        <h1 className="text-center mb-12">Our Services</h1>
-        <div className="grid grid-cols-3">
-          <div className="text-center">
-            <img src={Service1} alt="service 1" width="120px" />
+      <div className="py-20 mx-auto">
+        <h1 className="text-center mb-10">Our Services</h1>
+        <div className="grid grid-cols-3 text-center">
+          <div className="mx-2">
+            <img
+              className="mx-auto"
+              src={Service1}
+              alt="service 1"
+              width="120px"
+            />
             <h1>Service 1</h1>
             <p>Ini service pertama</p>
           </div>
-          <div className="text-center">
-            <img src={Service2} alt="service 2" width="120px" />
+          <div className="mx-2">
+            <img
+              className="mx-auto"
+              src={Service2}
+              alt="service 2"
+              width="120px"
+            />
             <h1>Service 2</h1>
             <p>Ini service kedua</p>
           </div>
-          <div className="text-center">
-            <img className="" src={Service3} alt="service 3" width="120px" />
-            <h1>Service 1</h1>
+          <div className="mx-2">
+            <img
+              className="mx-auto"
+              src={Service3}
+              alt="service 3"
+              width="120px"
+            />
+            <h1>Service 3</h1>
             <p>Ini service ketiga</p>
           </div>
         </div>
