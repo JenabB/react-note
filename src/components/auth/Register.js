@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import { registerUser, useAuthDispatch } from "../../hook";
 
 import Swal from "sweetalert2";
@@ -54,6 +55,10 @@ const Register = (props) => {
 
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Register</title>
+      </Helmet>
       <div className="mt-10 w-2/3 mx-auto">
         <h4 className="mt-10 text-muted text-center mb-2">Create an account</h4>
 

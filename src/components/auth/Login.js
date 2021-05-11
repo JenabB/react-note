@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import { loginUser, useAuthDispatch } from "../../hook";
 
 import Swal from "sweetalert2";
@@ -41,6 +42,11 @@ const Login = (props) => {
 
   return (
     <div className="mt-10 w-2/3 mx-auto">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Login</title>
+      </Helmet>
+
       <h4 className="text-muted text-center mb-2">Login</h4>
       <div className="py-2 px-1 lg:w-2/5 mx-auto">
         <form className="text-center">
