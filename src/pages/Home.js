@@ -6,7 +6,6 @@ import { useAuthState } from "../hook";
 const Home = (props) => {
   const userDetails = useAuthState();
 
-  console.log(userDetails);
   if (!userDetails.token) {
     props.history.push("/user/login");
   }
