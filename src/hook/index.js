@@ -1,7 +1,11 @@
-import { loginUser, logout } from './actions';
-import { AuthProvider, useAuthDispatch, useAuthState } from './context';
+import { registerUser, loginUser, logout } from "./actions";
+import { AuthProvider, useAuthDispatch, useAuthState } from "./context";
 
-
-
-
-export { AuthProvider, loginUser, useAuthState, useAuthDispatch, logout };
+export {
+  AuthProvider,
+  registerUser,
+  loginUser,
+  useAuthState,
+  useAuthDispatch,
+  logout,
+};

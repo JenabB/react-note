@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { registerUser, useAuthDispatch } from "../../hook";
 
 import Swal from "sweetalert2";
 
@@ -12,9 +12,9 @@ const Register = (props) => {
     contactNumber: "",
   });
 
-  const { email, password, fullName, contactNumber } = data;
+  const dispatch = useAuthDispatch();
 
-  console.log(data);
+  const { email, password, fullName, contactNumber } = data;
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -22,28 +22,27 @@ const Register = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setData({ ...data, error: null });
-      const res = await axios.post(
-        "https://warm-earth-68639.herokuapp.com/v1/user/register/owner",
-        {
-          email: email,
-          password: password,
-          fullName: fullName,
-          contactNumber: contactNumber,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      Swal.fire({
-        icon: "success",
-        text: res.data.message,
-        confirmButtonText: "ok",
+      const res = await registerUser(dispatch, {
+        email: email,
+        password: password,
+        fullName: fullName,
+        contactNumber: contactNumber,
       });
-      props.history.push("/user/login");
+
+      if (res.status === 201) {
+        Swal.fire({
+          icon: "success",
+          text: res.message,
+          confirmButtonText: "ok",
+        });
+        props.history.push("/user/login");
+      } else {
+        Swal.fire({
+          icon: "warning",
+          text: res.message,
+          confirmButtonText: "ok",
+        });
+      }
     } catch (error) {
       Swal.fire({
         icon: "error",

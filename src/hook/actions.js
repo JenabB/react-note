@@ -1,5 +1,36 @@
 const HOST = "https://warm-earth-68639.herokuapp.com";
 
+export async function registerUser(dispatch, registerPayload) {
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(registerPayload),
+  };
+
+  try {
+    dispatch({ type: "REQUEST_REGISTER" });
+    let response = await fetch(
+      `${HOST}/v1/user/register/owner`,
+      requestOptions
+    );
+    let data = await response.json();
+
+    if (data) {
+      console.log("register response", data);
+      dispatch({ type: "REGISTER_SUCCESS", payload: data });
+
+      return data;
+    }
+
+    dispatch({ type: "REGISTER_ERROR", error: data.error });
+    console.log("register error", data.error);
+    return;
+  } catch (error) {
+    dispatch({ type: "REGISTER_ERROR", error: error });
+    console.log("catch error", error);
+  }
+}
+
 export async function loginUser(dispatch, loginPayload) {
   const requestOptions = {
     method: "POST",
