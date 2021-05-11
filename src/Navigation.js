@@ -8,8 +8,8 @@ import Home from "./pages/Home";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import InvoiceDetail from "./components/shop/InvoiceDetail";
-
 import OwnerShopDetails from "./components/shop/OwnerShopDetails";
+
 import cart from "./images/cart.png";
 
 const Navigation = () => {
@@ -50,9 +50,7 @@ const Navigation = () => {
       ) : (
         <div className="sticky top-0 z-10 flex justify-between bg-green-500 text-white p-4">
           <div>
-            <Link to="/">
-              NOT<b>E</b>
-            </Link>
+            <Link to="/">NOTE</Link>
           </div>
           <div className="flex">
             <div className="mr-5">
