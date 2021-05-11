@@ -22,7 +22,7 @@ const LandingPage = () => {
 
       <div className="py-20 mx-auto">
         <h1 className="text-center mb-10">Our Services</h1>
-        <div className="grid grid-cols-3 text-center">
+        <div className="grid grid-cols-3 text-center lg:w-3/5 w-4/5 mx-auto">
           <div className="mx-2">
             <img
               className="mx-auto"
