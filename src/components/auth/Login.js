@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { loginUser, useAuthState, useAuthDispatch } from "../../hook";
+import { loginUser, useAuthDispatch } from "../../hook";
 
 import Swal from "sweetalert2";
 
@@ -13,7 +13,6 @@ const Login = (props) => {
   const { email, password } = data;
 
   const dispatch = useAuthDispatch();
-  const { loading, errorMessage } = useAuthState();
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
