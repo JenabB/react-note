@@ -20,7 +20,7 @@ export function useAuthDispatch() {
   return context;
 }
 
-export const AuthProvider = ({ children }) => {
+export const GlobalProvider = ({ children }) => {
   const [user, dispatch] = useReducer(AuthReducer, initialState);
 
   return (

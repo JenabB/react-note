@@ -1,10 +1,11 @@
-import { registerUser, loginUser, logout } from "./actions";
-import { AuthProvider, useAuthDispatch, useAuthState } from "./context";
+import { registerUser, loginUser, ownerShopList, logout } from "./actions";
+import { GlobalProvider, useAuthDispatch, useAuthState } from "./context";
 
 export {
-  AuthProvider,
+  GlobalProvider,
   registerUser,
   loginUser,
+  ownerShopList,
   useAuthState,
   useAuthDispatch,
   logout,

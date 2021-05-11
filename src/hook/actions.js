@@ -1,5 +1,33 @@
 const HOST = "https://warm-earth-68639.herokuapp.com";
 
+export async function ownerShopList(dispatch, headers) {
+  try {
+    dispatch({ type: "GET_SHOP_LIST" });
+    let response = await fetch(`${HOST}/v1/shop`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    let data = response.json();
+
+    if (data) {
+      console.log("shoplist response", data);
+      dispatch({ type: "GET_SHOP_LIST_SUCCESS", payload: data });
+
+      return data;
+    }
+
+    dispatch({ type: "GET_SHOP_LIST_ERROR", error: data.error });
+    console.log("getshoplist error", data.error);
+    return;
+  } catch (error) {
+    dispatch({ type: "GET_SHOP_LIST_ERROR", error: error });
+    console.log("getshoplist error", error);
+  }
+}
+
 export async function registerUser(dispatch, registerPayload) {
   const requestOptions = {
     method: "POST",

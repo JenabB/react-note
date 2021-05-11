@@ -10,6 +10,8 @@ let token = localStorage.getItem("token")
 export const initialState = {
   user: "" || user,
   token: "" || token,
+  shopList: [],
+  shopId: "",
   loading: false,
   errorMessage: null,
 };
@@ -46,6 +48,7 @@ export const AuthReducer = (initialState, action) => {
         token: action.payload.token,
         loading: false,
       };
+
     case "LOGOUT":
       return {
         ...initialState,
@@ -57,6 +60,24 @@ export const AuthReducer = (initialState, action) => {
       return {
         ...initialState,
         loading: false,
+        errorMessage: action.error,
+      };
+
+    case "GET_SHOP_LIST":
+      return {
+        ...initialState,
+        loading: false,
+      };
+
+    case "GET_SHOP_LIST_SUCCESS":
+      return {
+        ...initialState,
+        shopList: action.payload,
+      };
+
+    case "GET_SHOP_LIST_ERROR":
+      return {
+        ...initialState,
         errorMessage: action.error,
       };
 
