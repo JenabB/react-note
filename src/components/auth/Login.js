@@ -9,7 +9,6 @@ const Login = (props) => {
     email: "",
     password: "",
   });
-
   const { email, password } = data;
 
   const dispatch = useAuthDispatch();
