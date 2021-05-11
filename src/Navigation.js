@@ -35,20 +35,23 @@ const Navigation = () => {
   return (
     <Router>
       {isLogin ? (
-        <div className="sticky top-0 flex justify-between bg-green-500 text-white p-4">
+        <nav className="sticky top-0 z-10 shadow-lg flex justify-between bg-green-500 text-white p-4">
           <div>
             <Link to="/user/login" onClick={handleLogout}>
               Logout
             </Link>
           </div>
           <div>
+            <Link to="/user">Home</Link>
+          </div>
+          <div>
             <Link>
               <img src={cart} alt="cart" width="30px" />
             </Link>
           </div>
-        </div>
+        </nav>
       ) : (
-        <div className="sticky top-0 z-10 flex justify-between bg-green-500 text-white p-4">
+        <nav className="sticky top-0 z-10 shadow-lg flex justify-between bg-green-500 text-white p-4">
           <div>
             <Link to="/">NOTE</Link>
           </div>
@@ -64,7 +67,7 @@ const Navigation = () => {
               <Link to="/user/login">Login</Link>
             </div>
           </div>
-        </div>
+        </nav>
       )}
 
       <Switch>

@@ -19,7 +19,6 @@ const GetShopProduct = ({ id }) => {
       });
   });
 
-  console.log(setProductList);
   return (
     <div className="lg:w-2/3 mx-auto sm:w-full">
       {productList.length > 0 ? (

@@ -14,7 +14,8 @@
 
 .jumbotron-detail {
   height: 400px;
-  background-image: url("../src/images/detailShop.webp");
+  background-image: url("./images/detailShop.webp");
+  filter: grayscale(90%);
   background-size: cover;
   background-position: center center;
 }
