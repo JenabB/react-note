@@ -43,7 +43,7 @@ const Login = (props) => {
   return (
     <div className="mt-10 w-2/3 mx-auto">
       <h4 className="text-muted text-center mb-2">Login</h4>
-      <div className="py-2 px-1">
+      <div className="py-2 px-1 lg:w-2/5 mx-auto">
         <form className="text-center">
           <div className="mt-4">
             <h1>Email</h1>
