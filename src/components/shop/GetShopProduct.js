@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuthState } from "../../hook";
+import Skeleton from "react-loading-skeleton";
 
 const GetShopProduct = ({ id }) => {
   const user = useAuthState();
@@ -31,7 +32,7 @@ const GetShopProduct = ({ id }) => {
           ))}
         </div>
       ) : (
-        <h1 className="text-center py-12">No Product Yet</h1>
+        <Skeleton count={5} />
       )}
     </div>
   );

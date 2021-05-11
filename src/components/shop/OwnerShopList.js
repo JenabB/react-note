@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import Skeleton from "react-loading-skeleton";
 import { useAuthState } from "../../hook";
 
 const OwnerShopList = () => {
@@ -37,7 +37,7 @@ const OwnerShopList = () => {
           ))}
         </div>
       ) : (
-        <h1 className="text-center py-12">No Shop Yet</h1>
+        <Skeleton count={5} />
       )}
     </div>
   );

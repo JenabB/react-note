@@ -51,14 +51,14 @@ const OwnerShopDetails = (props) => {
       </div>
 
       <Router>
-        <nav className="bg-green-400 font-bold flex justify-between px-8 py-2 text-white">
-          <div>
+        <nav className="bg-green-400 font-bold flex justify-center px-8 py-2 text-white">
+          <div className="mx-4">
             <Link to={`/user/shop/detail/${shopId}/product`}>Product</Link>
           </div>
-          <div>
+          <div className="mx-4">
             <Link to={`/user/shop/detail/${shopId}/invoice`}>invoice</Link>
           </div>
-          <div>
+          <div className="mx-4">
             <Link to={`/user/shop/detail/${shopId}/details`}>Details</Link>
           </div>
         </nav>
