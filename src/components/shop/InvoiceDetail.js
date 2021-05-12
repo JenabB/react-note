@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import { useAuthState } from "../../hook";
 
 const InvoiceDetail = () => {
-    return (
-        <div>
+  const [invoiceDetail, setinvoiceDetail] = useState([]);
+  return (
+    <div>
+      <h1>Ini invoice kau</h1>
+    </div>
+  );
+};
 
-        </div>
-    )
-}
-
-export default InvoiceDetail
+export default InvoiceDetail;

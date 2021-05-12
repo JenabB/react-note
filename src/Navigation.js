@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
 import { useAuthDispatch, logout, useAuthState } from "./hook";
 
 import LandingPage from "./pages/LandingPage";
@@ -16,16 +15,16 @@ const Navigation = () => {
   const [isLogin, SetIsLogin] = useState(false);
 
   const dispatch = useAuthDispatch();
-  const userDetails = useAuthState();
+  const user = useAuthState();
 
   useEffect(() => {
-    let token = userDetails.token;
+    let token = user.token;
     if (token) {
       SetIsLogin(true);
     } else {
       SetIsLogin(false);
     }
-  }, [userDetails.token]);
+  }, [user.token]);
 
   const handleLogout = () => {
     logout(dispatch);
@@ -45,7 +44,7 @@ const Navigation = () => {
             <Link to="/user">Home</Link>
           </div>
           <div>
-            <Link>
+            <Link to={`/user/shop/${user.shopId}/invoice/${user.inovoiceId}`}>
               <img src={cart} alt="cart" width="30px" />
             </Link>
           </div>

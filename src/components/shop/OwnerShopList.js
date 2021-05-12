@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
+
 import { ownerShopList, useAuthDispatch } from "../../hook";
 
 const OwnerShopList = () => {
@@ -33,7 +33,7 @@ const OwnerShopList = () => {
           ))}
         </div>
       ) : (
-        <Skeleton count={5} />
+        <h1>Loading...</h1>
       )}
     </div>
   );

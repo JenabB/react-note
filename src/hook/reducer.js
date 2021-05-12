@@ -14,6 +14,7 @@ export const initialState = {
   shopId: "",
   shopDetails: [],
   shopProduct: [],
+  invoice: [],
   loading: false,
   errorMessage: null,
 };

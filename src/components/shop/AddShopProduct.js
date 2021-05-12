@@ -56,7 +56,7 @@ const AddShopProduct = ({ id }) => {
     <div>
       <div className="mt-4">
         <button
-          className="bg-green-500 p-2 rounded-lg hover:px-5"
+          className="bg-green-500 p-2 rounded-lg hover:px-5 text-white"
           onClick={handleOpenModal}
         >
           Add Product
