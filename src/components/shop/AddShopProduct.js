@@ -62,7 +62,7 @@ const AddShopProduct = ({ id }) => {
         <Modal isOpen={showModal}>
           <div>
             <button onClick={handleCloseModal}>Close</button>
-            <h4 className="text-muted text-center mb-2">Add Product</h4>
+            <h4 className="text-center mb-2 text-white">Add Product</h4>
             <div className="card py-2 px-5 shadow">
               <form className="text-center">
                 <div className="my-2">

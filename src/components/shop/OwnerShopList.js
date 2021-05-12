@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
-import { useAuthState } from "../../hook";
+import { ownerShopList, useAuthState } from "../../hook";
 
 const OwnerShopList = () => {
   const [shopList, setShopList] = useState([]);

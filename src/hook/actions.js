@@ -1,6 +1,6 @@
 const HOST = "https://warm-earth-68639.herokuapp.com";
 
-export async function ownerShopList(dispatch, headers) {
+export async function ownerShopList(dispatch) {
   try {
     dispatch({ type: "GET_SHOP_LIST" });
     let response = await fetch(`${HOST}/v1/shop`, {
@@ -15,7 +15,6 @@ export async function ownerShopList(dispatch, headers) {
     if (data) {
       console.log("shoplist response", data);
       dispatch({ type: "GET_SHOP_LIST_SUCCESS", payload: data });
-
       return data;
     }
 
