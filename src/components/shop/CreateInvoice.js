@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { useAuthState } from "../../hook";
 
 const CreateInvoice = () => {
+  const user = useAuthState();
+  console.log(user);
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState({
     invoiceCode: "",
@@ -71,16 +74,21 @@ const CreateInvoice = () => {
           className="bg-green-500 p-2 rounded-lg text-white hover:px-5"
           onClick={handleOpenModal}
         >
-          Create Shop
+          Create Invoice
         </button>
         <Modal isOpen={showModal}>
           <div>
             <button onClick={handleCloseModal}>Close</button>
-            <h4 className="text-muted text-center mb-2">Create Shop</h4>
+            <h4 className="text-muted text-center mb-2">Create Invoice</h4>
             <div className="card py-2 px-5 shadow">
               <form className="text-center">
+                {user.shopProduct.map((product, index) => (
+                  <div key={index}>
+                    <h1>{product.ProductName}</h1>
+                  </div>
+                ))}
                 <div className="my-2">
-                  <h1>Shop name</h1>
+                  <h1>Customer name</h1>
                   <input
                     className="bg-blue-200 px-2 py-1"
                     type="name"

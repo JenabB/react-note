@@ -45,9 +45,7 @@ const Navigation = () => {
             <Link to="/user">Home</Link>
           </div>
           <div>
-            <Link to={`/user/shop/${user.shopId}/invoice/${user.inovoiceId}`}>
-              <img src={cart} alt="cart" width="30px" />
-            </Link>
+            <h1 className="text-green-500"> A</h1>
           </div>
         </nav>
       ) : (
