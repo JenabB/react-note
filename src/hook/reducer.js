@@ -12,6 +12,7 @@ export const initialState = {
   token: "" || token,
   shopList: [],
   shopId: "",
+  shopProduct: [],
   loading: false,
   errorMessage: null,
 };
@@ -79,6 +80,12 @@ export const AuthReducer = (initialState, action) => {
       return {
         ...initialState,
         errorMessage: action.error,
+      };
+
+    case "GET_SHOP_ID":
+      return {
+        ...initialState,
+        shopId: action.payload,
       };
 
     default:

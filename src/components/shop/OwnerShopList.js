@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
-import { ownerShopList, useAuthDispatch, useAuthState } from "../../hook";
+import { ownerShopList, useAuthDispatch } from "../../hook";
 
 const OwnerShopList = () => {
   const [shopList, setShopList] = useState([]);
-
   const dispatch = useAuthDispatch();
 
   useEffect(() => {

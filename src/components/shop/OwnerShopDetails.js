@@ -3,7 +3,7 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import moment from "moment";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
+import { useAuthDispatch } from "../../hook";
 import ShopInvoiceList from "./ShopInvoiceList";
 import CreateInvoice from "./CreateInvoice";
 import AddShopProduct from "./AddShopProduct";
@@ -12,6 +12,8 @@ import GetShopProduct from "./GetShopProduct";
 const OwnerShopDetails = (props) => {
   const [detail, setDetail] = useState([]);
   const shopId = props.match.params.id;
+
+  const dispatch = useAuthDispatch();
 
   let history = useHistory();
   function goBack() {
@@ -25,13 +27,15 @@ const OwnerShopDetails = (props) => {
       .get(`https://warm-earth-68639.herokuapp.com/v1/shop/${shopId}`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
         },
       })
       .then((result) => {
         setDetail(result.data.data);
+        console.log(result);
+        dispatch({ type: "GET_SHOP_ID", payload: shopId });
       });
-  }, [shopId]);
+  }, [dispatch, shopId]);
 
   console.log(detail);
   return (

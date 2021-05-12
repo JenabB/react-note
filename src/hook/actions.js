@@ -1,5 +1,5 @@
 const HOST = "https://warm-earth-68639.herokuapp.com";
-console.log(JSON.parse(localStorage.getItem("token")));
+
 export async function ownerShopList(dispatch) {
   try {
     dispatch({ type: "GET_SHOP_LIST" });
