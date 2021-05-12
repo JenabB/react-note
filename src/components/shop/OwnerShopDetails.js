@@ -55,31 +55,34 @@ const OwnerShopDetails = (props) => {
       <Router>
         <nav className="bg-green-400 font-bold flex justify-center px-8 py-2 text-white">
           <div className="mx-4">
-            <Link to={`/user/shop/detail/${shopId}/product`}>Product</Link>
+            <Link to={`/user/shop/${shopId}/detail`}>Details</Link>
           </div>
           <div className="mx-4">
-            <Link to={`/user/shop/detail/${shopId}/invoice`}>invoice</Link>
+            <Link to={`/user/shop/${shopId}/detail/product`}>Product</Link>
           </div>
           <div className="mx-4">
-            <Link to={`/user/shop/detail/${shopId}/details`}>Details</Link>
+            <Link to={`/user/shop/${shopId}/detail/invoice`}>invoice</Link>
           </div>
         </nav>
         <Switch>
-          <Route exact path="/user/shop/detail/:id/product">
+          <Route path="/user/shop/:id/detail/product">
             <div className="px-4">
               <AddShopProduct id={shopId} />
               <GetShopProduct id={shopId} />
             </div>
           </Route>
-          <Route path="/user/shop/detail/:id/invoice">
+          <Route path="/user/shop/:id/detail/invoice">
             <div className="px-4">
               <CreateInvoice />
               <ShopInvoiceList id={shopId} />
             </div>
           </Route>
-          <Route path="/user/shop/detail/:id/detail">
+          <Route path="/user/shop/:id/detail">
             <div className="px-4">
-              <h1>Ini detail</h1>
+              <h1 className="font-bold text-lg">{detail.shopName}</h1>
+              <h2>{detail.addressDetail}</h2>
+              <h3>Created: {moment(detail.createdAt).format(dateFormat)}</h3>
+              <p>{detail.contactNumber}</p>
             </div>
           </Route>
         </Switch>

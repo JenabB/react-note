@@ -6,6 +6,7 @@ import LandingPage from "./pages/LandingPage";
 import Home from "./pages/Home";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
+import ShopInvoiceList from "./components/shop/ShopInvoiceList";
 import InvoiceDetail from "./components/shop/InvoiceDetail";
 import OwnerShopDetails from "./components/shop/OwnerShopDetails";
 
@@ -76,10 +77,14 @@ const Navigation = () => {
         <Route exact path="/user/login" component={Login} />
         <Route
           exact
-          path="/user/shop/detail/:id"
+          path="/user/shop/:id/detail"
           component={OwnerShopDetails}
         />
-        <Route exact path="/user/shop/:id/invoice" component={InvoiceDetail} />
+        <Route
+          exact
+          path="/user/shop/:id/invoice"
+          component={ShopInvoiceList}
+        />
         <Route
           exact
           path="/user/shop/:id/invoice/:id"

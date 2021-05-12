@@ -61,13 +61,12 @@ const Register = (props) => {
       </Helmet>
       <div className="mt-10 w-2/3 mx-auto">
         <h4 className="mt-10 text-muted text-center mb-2">Create an account</h4>
-
         <div className="card py-2 px-1 lg:w-2/5 mx-auto">
           <form className="text-center">
             <div className="mt-4">
               <h1>Email</h1>
               <input
-                className="p-2 w-full"
+                className="p-2 bg-blue-100 w-full"
                 type="email"
                 name="email"
                 value={email}
@@ -78,7 +77,7 @@ const Register = (props) => {
             <div className="mt-4">
               <h1>Password</h1>
               <input
-                className="p-2 w-full"
+                className="p-2 bg-blue-100 focus:border-blue-300 w-full"
                 type="password"
                 name="password"
                 value={password}

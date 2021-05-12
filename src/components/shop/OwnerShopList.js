@@ -23,7 +23,7 @@ const OwnerShopList = () => {
       {shopList ? (
         <div>
           {shopList.map((shop, index) => (
-            <Link to={`user/shop/detail/${shop.shopId}`}>
+            <Link to={`user/shop/${shop.shopId}/detail`}>
               <div key={index} className="shadow-lg m-3 p-3">
                 <h1 className="font-bold">{shop.shopName}</h1>
                 <h2>{shop.addressDetail}</h2>
