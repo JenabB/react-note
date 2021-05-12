@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
+import { useAuthState } from "../../hook";
 import Swal from "sweetalert2";
 import axios from "axios";
 
@@ -10,6 +11,7 @@ const AddShopProduct = ({ id }) => {
     productPrice: "",
   });
   const { productName, productPrice } = data;
+  const user = useAuthState();
 
   const handleOpenModal = () => {
     setShowModal(true);
@@ -35,7 +37,7 @@ const AddShopProduct = ({ id }) => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${user.token}`,
           },
         }
       );

@@ -12,7 +12,6 @@ import GetShopProduct from "./GetShopProduct";
 const OwnerShopDetails = (props) => {
   const [detail, setDetail] = useState([]);
   const shopId = props.match.params.id;
-
   const dispatch = useAuthDispatch();
 
   let history = useHistory();
@@ -32,12 +31,11 @@ const OwnerShopDetails = (props) => {
       })
       .then((result) => {
         setDetail(result.data.data);
-        console.log(result);
+        dispatch({ type: "GET_SHOP_DETAIL", payload: result.data.data });
         dispatch({ type: "GET_SHOP_ID", payload: shopId });
       });
   }, [dispatch, shopId]);
 
-  console.log(detail);
   return (
     <div>
       <button
@@ -77,6 +75,11 @@ const OwnerShopDetails = (props) => {
             <div className="px-4">
               <CreateInvoice />
               <ShopInvoiceList id={shopId} />
+            </div>
+          </Route>
+          <Route path="/user/shop/detail/:id/detail">
+            <div className="px-4">
+              <h1>Ini detail</h1>
             </div>
           </Route>
         </Switch>

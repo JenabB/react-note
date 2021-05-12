@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useAuthState } from "../../hook";
+import { useAuthDispatch, useAuthState } from "../../hook";
 import Skeleton from "react-loading-skeleton";
 
 const GetShopProduct = ({ id }) => {
   const user = useAuthState();
+  const dispatch = useAuthDispatch();
   const [productList, setProductList] = useState([]);
 
   useEffect(() => {
@@ -17,12 +18,13 @@ const GetShopProduct = ({ id }) => {
       })
       .then((result) => {
         setProductList(result.data.data);
+        dispatch({ type: "GET_SHOP_PRODUCT", payload: result.data.data });
       });
   });
 
   return (
     <div className="lg:w-2/3 mx-auto sm:w-full">
-      {productList.length > 0 ? (
+      {productList ? (
         <div className="grid grid-cols-3">
           {productList.map((product, index) => (
             <div key={index} className="shadow-lg m-3 p-3">
