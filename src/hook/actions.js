@@ -1,5 +1,5 @@
 const HOST = "https://warm-earth-68639.herokuapp.com";
-
+console.log(JSON.parse(localStorage.getItem("token")));
 export async function ownerShopList(dispatch) {
   try {
     dispatch({ type: "GET_SHOP_LIST" });
@@ -7,7 +7,7 @@ export async function ownerShopList(dispatch) {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
       },
     });
     let data = response.json();

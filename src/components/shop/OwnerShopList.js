@@ -2,29 +2,27 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
-import { ownerShopList, useAuthState } from "../../hook";
+import { ownerShopList, useAuthDispatch, useAuthState } from "../../hook";
 
 const OwnerShopList = () => {
   const [shopList, setShopList] = useState([]);
 
-  const user = useAuthState();
+  const dispatch = useAuthDispatch();
 
   useEffect(() => {
-    axios
-      .get(`https://warm-earth-68639.herokuapp.com/v1/shop`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
-        },
-      })
-      .then((result) => {
-        setShopList(result.data.data);
+    try {
+      ownerShopList(dispatch).then((response) => {
+        setShopList(response.data);
+        dispatch({ type: "GET_SHOP_LIST_SUCCESS", payload: response.data });
       });
-  });
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
 
   return (
     <div className="lg:w-2/3 mx-auto sm:w-full">
-      {shopList.length > 0 ? (
+      {shopList ? (
         <div>
           {shopList.map((shop, index) => (
             <Link to={`user/shop/detail/${shop.shopId}`}>
