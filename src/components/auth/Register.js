@@ -121,8 +121,9 @@ const Register = (props) => {
             <p className="mt-3 text-center">
               Already a user?{" "}
               <button>
-                {" "}
-                <Link to="/user/login">Login</Link>
+                <Link to="/user/login">
+                  <h1 className="text-green-500 font-bold">Login</h1>
+                </Link>
               </button>
             </p>
           </form>
