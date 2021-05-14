@@ -26,7 +26,7 @@ const ShopInvoiceList = ({ id }) => {
       {invoiceList ? (
         <div>
           {invoiceList.map((invoice, index) => (
-            <Link to={`user/shop/${id}/detail/${invoice.invoiceId}`}>
+            <Link to={`invoice/${invoice.invoiceId}`}>
               <div key={index} className="shadow-lg m-3 p-3">
                 <h1 className="font-bold">{invoice.customerName}</h1>
                 <h2>{moment(invoice.createdAt).startOf("hour").fromNow()}</h2>

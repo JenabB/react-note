@@ -6,9 +6,11 @@ import "./App.css";
 
 function App() {
   return (
-    <GlobalProvider>
-      <Navigation />
-    </GlobalProvider>
+    <div className="App">
+      <GlobalProvider>
+        <Navigation />
+      </GlobalProvider>
+    </div>
   );
 }
 

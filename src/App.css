@@ -1,3 +1,7 @@
+.App {
+  background-color: #f0efdf;
+}
+
 .landing-header {
   height: 400px;
   background-image: url("./images/landing.webp");
@@ -21,5 +25,5 @@
 }
 
 .ReactModal__Content {
-  height: 400px;
+  margin-top: 50px;
 }

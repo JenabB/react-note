@@ -24,7 +24,7 @@ const OwnerShopList = () => {
         <div>
           {shopList.map((shop, index) => (
             <Link to={`user/shop/${shop.shopId}/detail`}>
-              <div key={index} className="shadow-lg m-3 p-3">
+              <div key={index} tabofindex={index} className="shadow-lg m-3 p-3">
                 <h1 className="font-bold">{shop.shopName}</h1>
                 <h2>{shop.addressDetail}</h2>
                 <h3>{shop.contactNumber}</h3>

@@ -37,9 +37,9 @@ const OwnerShopDetails = (props) => {
   }, [dispatch, shopId]);
 
   return (
-    <div>
+    <div className="lg:w-3/5 mx-auto sm:w-full bg-white h-screen">
       <button
-        className="absolute top-20 left-3 bg-green-400 text-white px-2 py-1 rounded-lg"
+        className="absolute top-20 z-10 left-3 bg-green-400 text-white px-2 py-1 rounded-lg"
         onClick={goBack}
       >
         Back

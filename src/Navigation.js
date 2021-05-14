@@ -10,8 +10,6 @@ import ShopInvoiceList from "./components/shop/ShopInvoiceList";
 import InvoiceDetail from "./components/shop/InvoiceDetail";
 import OwnerShopDetails from "./components/shop/OwnerShopDetails";
 
-import cart from "./images/cart.png";
-
 const Navigation = () => {
   const [isLogin, SetIsLogin] = useState(false);
 

@@ -82,11 +82,14 @@ const CreateInvoice = () => {
             <h4 className="text-muted text-center mb-2">Create Invoice</h4>
             <div className="card py-2 px-5 shadow">
               <form className="text-center">
-                {user.shopProduct.map((product, index) => (
-                  <div key={index}>
-                    <h1>{product.ProductName}</h1>
-                  </div>
-                ))}
+                <div className="grid grid-cols-4">
+                  {user.shopProduct.map((product, index) => (
+                    <div key={index} className="m-2 shadow rounded p-2">
+                      <h1>{product.productName}</h1>
+                      <h2>{product.productPrice}</h2>
+                    </div>
+                  ))}
+                </div>
                 <div className="my-2">
                   <h1>Customer name</h1>
                   <input
