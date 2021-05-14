@@ -54,7 +54,7 @@ const Register = (props) => {
   };
 
   return (
-    <div>
+    <div className="h-screen">
       <Helmet>
         <meta charSet="utf-8" />
         <title>Register</title>

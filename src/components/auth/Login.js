@@ -41,7 +41,7 @@ const Login = (props) => {
   };
 
   return (
-    <div className="mt-10 w-2/3 mx-auto">
+    <div className="mt-10 w-2/3 mx-auto h-screen">
       <Helmet>
         <meta charSet="utf-8" />
         <title>Login</title>

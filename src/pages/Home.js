@@ -10,7 +10,7 @@ const Home = (props) => {
     props.history.push("/user/login");
   }
   return (
-    <div className="lg:w-3/5 mx-auto sm:w-full bg-white">
+    <div className="lg:w-3/5 mx-auto sm:w-full bg-white h-screen">
       <Helmet>
         <meta charSet="utf-8" />
         <title>{userDetails.user.fullName}</title>

@@ -8,7 +8,7 @@ import Footer from "../components/Footer";
 
 const LandingPage = () => {
   return (
-    <div className="lg:w-3/5 mx-auto sm:w-full bg-white">
+    <div className="lg:w-3/5 mx-auto sm:w-full bg-white h-screen">
       <Helmet>
         <meta charSet="utf-8" />
         <title>Landing Page</title>
