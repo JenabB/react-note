@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
+import { useAuthState, useAuthDispatch } from "../../hook";
 import { Link } from "react-router-dom";
 
 const ShopInvoiceList = ({ id }) => {
-  const [invoiceList, setInvoiceList] = useState([]);
+  const dispatch = useAuthDispatch();
+  const user = useAuthState();
+  const shopInvoice = user.shopInvoice;
 
   useEffect(() => {
     axios
@@ -15,17 +18,15 @@ const ShopInvoiceList = ({ id }) => {
         },
       })
       .then((result) => {
-        console.log(result);
-        setInvoiceList(result.data.data);
+        dispatch({ type: "GET_SHOP_INVOICE", payload: result.data.data });
       });
-  }, [id]);
+  });
 
-  console.log(invoiceList);
   return (
     <div className="lg:w-2/3 mx-auto sm:w-full">
-      {invoiceList ? (
+      {shopInvoice ? (
         <div>
-          {invoiceList.map((invoice, index) => (
+          {shopInvoice.map((invoice, index) => (
             <Link to={`invoice/${invoice.invoiceId}`}>
               <div key={index} className="shadow-lg m-3 p-3">
                 <h1 className="font-bold">{invoice.customerName}</h1>
