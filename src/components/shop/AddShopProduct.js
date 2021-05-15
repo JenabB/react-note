@@ -11,6 +11,7 @@ const AddShopProduct = ({ id }) => {
     productPrice: "",
   });
   const { productName, productPrice } = data;
+
   const user = useAuthState();
 
   const handleOpenModal = () => {
@@ -41,7 +42,6 @@ const AddShopProduct = ({ id }) => {
           },
         }
       );
-      console.log(res);
       Swal.fire({
         icon: "success",
         text: res.data.message,

@@ -59,7 +59,6 @@ const CreateShop = () => {
           },
         }
       );
-      console.log(res);
       Swal.fire({
         icon: "success",
         text: res.data.message,

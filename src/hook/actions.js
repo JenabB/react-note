@@ -13,7 +13,6 @@ export async function ownerShopList(dispatch) {
     let data = response.json();
 
     if (data) {
-      console.log("shoplist response", data);
       dispatch({ type: "GET_SHOP_LIST_SUCCESS", payload: data });
       return data;
     }
@@ -43,7 +42,6 @@ export async function registerUser(dispatch, registerPayload) {
     let data = await response.json();
 
     if (data) {
-      console.log("register response", data);
       dispatch({ type: "REGISTER_SUCCESS", payload: data });
 
       return data;
@@ -71,7 +69,6 @@ export async function loginUser(dispatch, loginPayload) {
     let data = await response.json();
 
     if (data) {
-      console.log("data", data);
       dispatch({ type: "LOGIN_SUCCESS", payload: data.data });
       localStorage.setItem("token", JSON.stringify(data.data.token));
       return data;

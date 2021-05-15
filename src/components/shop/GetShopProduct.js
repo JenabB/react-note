@@ -41,7 +41,7 @@ const GetShopProduct = ({ id }) => {
           </div>
         </div>
       ) : (
-        <h1>Loading...</h1>
+        <h1>No Product Yet</h1>
       )}
     </div>
   );
