@@ -10,6 +10,7 @@ const OwnerShopList = () => {
   useEffect(() => {
     try {
       ownerShopList(dispatch).then((response) => {
+        console.log(response);
         setShopList(response.data);
         dispatch({ type: "GET_SHOP_LIST_SUCCESS", payload: response.data });
       });
