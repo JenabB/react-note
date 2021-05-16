@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useAuthDispatch, useAuthState } from "../../hook";
+import { useAuthState } from "../../hook";
 import Modal from "react-modal";
 import Swal from "sweetalert2";
 import axios from "axios";
 import Select from "react-select";
 
 const CreateShop = () => {
-  const dispatch = useAuthDispatch();
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState({
     shopName: "",
