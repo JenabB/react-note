@@ -1,11 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import Swal from "sweetalert2";
 import axios from "axios";
 import Select from "react-select";
-import { useAuthState } from "../../hook";
+import { useAuthDispatch, useAuthState } from "../../hook";
 
 const CreateInvoice = () => {
+  const HOST = "https://warm-earth-68639.herokuapp.com";
+  const dispatch = useAuthDispatch();
+  useEffect(() => {
+    axios
+      .get(`${HOST}/v1/shop`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      })
+      .then((result) => {
+        dispatch({ type: "GET_SHOP_LIST_SUCCESS", payload: result.data.data });
+      });
+  });
   const user = useAuthState();
 
   const [showModal, setShowModal] = useState(false);
@@ -96,14 +110,18 @@ const CreateInvoice = () => {
                   />
                 </div>
                 <Select options={options} onChange={handleInsertMode} />
-                <div className="grid grid-cols-4">
-                  {user.shopProduct.map((product, index) => (
-                    <div key={index} className="m-2 shadow rounded p-2">
-                      <h1>{product.productName}</h1>
-                      <h2>{product.productPrice}</h2>
-                    </div>
-                  ))}
-                </div>
+                {productInsertMode === "inside" ? (
+                  <div className="grid grid-cols-4">
+                    {user.shopProduct.map((product, index) => (
+                      <div key={index} className="m-2 shadow rounded p-2">
+                        <h1>{product.productName}</h1>
+                        <h2>{product.productPrice}</h2>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div>Yare</div>
+                )}
                 <div className="text-center">
                   <button
                     className="btn bg-green-500 text-white px-3 py-1 rounded-lg"
