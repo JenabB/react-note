@@ -10,6 +10,12 @@ let token = localStorage.getItem("token")
 export const initialState = {
   user: "" || user,
   token: "" || token,
+  allCountries: [],
+  allProvinces: [],
+  allDistricts: [],
+  countryId: "",
+  provinceId: "",
+  districtId: "",
   shopList: [],
   shopId: "",
   shopDetails: [],
@@ -106,6 +112,42 @@ export const AuthReducer = (initialState, action) => {
       return {
         ...initialState,
         shopInvoice: action.payload,
+      };
+
+    case "GET_ALL_COUNTRIES":
+      return {
+        ...initialState,
+        allCountries: action.payload,
+      };
+
+    case "GET_COUNTRY_ID":
+      return {
+        ...initialState,
+        countryId: action.payload,
+      };
+
+    case "GET_ALL_PROVINCES":
+      return {
+        ...initialState,
+        allProvinces: action.payload,
+      };
+
+    case "GET_PROVINCE_ID":
+      return {
+        ...initialState,
+        provinceId: action.payload,
+      };
+
+    case "GET_ALL_DISTRICTS":
+      return {
+        ...initialState,
+        allDistricts: action.payload,
+      };
+
+    case "GET_DISTRICT_ID":
+      return {
+        ...initialState,
+        districtId: action.payload,
       };
 
     default:
