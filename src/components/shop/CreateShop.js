@@ -10,9 +10,6 @@ const CreateShop = () => {
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState({
     shopName: "",
-    countryId: 1,
-    provinceId: 1,
-    districtId: 1,
     addressDetail: "",
     contactNumber: "",
   });
@@ -20,11 +17,10 @@ const CreateShop = () => {
   const [allCountries, setAllCounties] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("100");
   const [allProvincies, setAllProvincies] = useState([]);
-  const [selectedProvince, setSelectedProvince] = useState("11");
+  const [selectedProvince, setSelectedProvince] = useState("9");
   const [allDistricts, setAllDistricts] = useState([]);
-  const [selectedDistrict, setSelectedDistrict] = useState("1");
+  const [selectedDistrict, setSelectedDistrict] = useState("10");
 
-  console.log(allProvincies);
   const host = "https://warm-earth-68639.herokuapp.com";
   useEffect(() => {
     fetch(`${host}/v1/area/country`)
@@ -36,7 +32,12 @@ const CreateShop = () => {
       .then((response) => response.json())
       .then((data) => setAllProvincies(data.data))
       .catch((error) => console.log(error));
-  }, [data, selectedCountry]);
+
+    fetch(`${host}/v1/area/district?provinceId=${selectedProvince}`)
+      .then((response) => response.json())
+      .then((data) => setAllDistricts(data.data))
+      .catch((error) => console.log(error));
+  }, [data, selectedCountry, selectedProvince]);
 
   const user = useAuthState();
 
@@ -50,19 +51,25 @@ const CreateShop = () => {
     label: c.provinceName,
   }));
 
-  const {
-    shopName,
-    countryId,
-    provinceId,
-    districtId,
-    addressDetail,
-    contactNumber,
-  } = data;
+  const districtsOptions = allDistricts.map((c) => ({
+    value: c.districtId,
+    label: c.districtName,
+  }));
+
+  const { shopName, addressDetail, contactNumber } = data;
 
   const handleSelectCountry = (e) => {
     setSelectedCountry(e.value);
   };
-  console.log(selectedCountry);
+
+  const handleSelectProvince = (e) => {
+    setSelectedProvince(e.value);
+  };
+
+  const handleSelectDistrict = (e) => {
+    setSelectedDistrict(e.value);
+  };
+
   const handleOpenModal = () => {
     setShowModal(true);
   };
@@ -83,9 +90,9 @@ const CreateShop = () => {
         "https://warm-earth-68639.herokuapp.com/v1/shop",
         {
           shopName: shopName,
-          countryId: countryId,
-          provinceId: provinceId,
-          districtId: districtId,
+          countryId: selectedCountry,
+          provinceId: selectedProvince,
+          districtId: selectedDistrict,
           addressDetail: addressDetail,
           contactNumber: contactNumber,
         },
@@ -139,7 +146,11 @@ const CreateShop = () => {
                 />
                 <Select
                   options={provinciesOptions}
-                  onChange={handleSelectCountry}
+                  onChange={handleSelectProvince}
+                />
+                <Select
+                  options={districtsOptions}
+                  onChange={handleSelectDistrict}
                 />
 
                 <div className="my-2">

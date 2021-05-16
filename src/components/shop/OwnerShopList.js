@@ -1,29 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-
-import { ownerShopList, useAuthDispatch } from "../../hook";
+import axios from "axios";
+import { useAuthState, useAuthDispatch } from "../../hook";
 
 const OwnerShopList = () => {
-  const [shopList, setShopList] = useState([]);
   const dispatch = useAuthDispatch();
+  const user = useAuthState();
+
+  const HOST = "https://warm-earth-68639.herokuapp.com";
 
   useEffect(() => {
-    try {
-      ownerShopList(dispatch).then((response) => {
-        console.log(response);
-        setShopList(response.data);
-        dispatch({ type: "GET_SHOP_LIST_SUCCESS", payload: response.data });
+    axios
+      .get(`${HOST}/v1/shop`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      })
+      .then((result) => {
+        console.log(result);
+        dispatch({ type: "GET_SHOP_LIST_SUCCESS", payload: result.data.data });
       });
-    } catch (error) {
-      console.log(error);
-    }
-  }, [dispatch]);
+  });
 
   return (
     <div className="lg:w-2/3 mx-auto sm:w-full">
-      {shopList ? (
+      {user.shopList ? (
         <div>
-          {shopList.map((shop, index) => (
+          {user.shopList.map((shop, index) => (
             <Link to={`user/shop/${shop.shopId}/detail`}>
               <div key={index} tabofindex={index} className="shadow-lg m-3 p-3">
                 <h1 className="font-bold">{shop.shopName}</h1>
@@ -34,7 +38,7 @@ const OwnerShopList = () => {
           ))}
         </div>
       ) : (
-        <h1>Loading...</h1>
+        <h1>No Shop Yet</h1>
       )}
     </div>
   );
