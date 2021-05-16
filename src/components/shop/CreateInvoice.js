@@ -2,26 +2,30 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import Swal from "sweetalert2";
 import axios from "axios";
+import Select from "react-select";
 import { useAuthState } from "../../hook";
 
 const CreateInvoice = () => {
   const user = useAuthState();
-  console.log(user);
+
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState({
-    invoiceCode: "",
-    productInsert: "",
     customerName: "",
   });
 
-  const {
-    shopName,
-    countryId,
-    provinceId,
-    districtId,
-    addressDetail,
-    contactNumber,
-  } = data;
+  const [invoiceCode, setInvoiceCode] = useState("1");
+  const [productInsertMode, setProductInsertMode] = useState("inside");
+
+  const [products, setProduct] = useState([]);
+
+  const options = [
+    { value: "inside", label: "inside" },
+    { value: "outside", label: "outside" },
+  ];
+  const handleInsertMode = (e) => {
+    setProductInsertMode(e.value);
+  };
+  const { customerName } = data;
 
   const handleOpenModal = () => {
     setShowModal(true);
@@ -42,12 +46,10 @@ const CreateInvoice = () => {
       const res = await axios.post(
         "https://warm-earth-68639.herokuapp.com/v1/shop",
         {
-          shopName: shopName,
-          countryId: countryId,
-          provinceId: provinceId,
-          districtId: districtId,
-          addressDetail: addressDetail,
-          contactNumber: contactNumber,
+          invoiceCode: invoiceCode,
+          productInsertMode: productInsertMode,
+          customerName: customerName,
+          products: products,
         },
         {
           headers: {
@@ -82,6 +84,18 @@ const CreateInvoice = () => {
             <h4 className="text-muted text-center mb-2">Create Invoice</h4>
             <div className="card py-2 px-5 shadow">
               <form className="text-center">
+                <div className="my-2">
+                  <h1>Customer name</h1>
+                  <input
+                    className="bg-blue-200 px-2 py-1"
+                    type="name"
+                    name="customerName"
+                    value={customerName}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <Select options={options} onChange={handleInsertMode} />
                 <div className="grid grid-cols-4">
                   {user.shopProduct.map((product, index) => (
                     <div key={index} className="m-2 shadow rounded p-2">
@@ -90,42 +104,6 @@ const CreateInvoice = () => {
                     </div>
                   ))}
                 </div>
-                <div className="my-2">
-                  <h1>Customer name</h1>
-                  <input
-                    className="bg-blue-200 px-2 py-1"
-                    type="name"
-                    name="shopName"
-                    value={shopName}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <div className="my-2">
-                  <h1>Address Detail</h1>
-                  <input
-                    className="bg-blue-200 px-2 py-1"
-                    type="name"
-                    name="addressDetail"
-                    value={addressDetail}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <div className="my-2">
-                  <h1>contactNumber</h1>
-                  <input
-                    className="bg-blue-200 px-2 py-1"
-                    type="name"
-                    name="contactNumber"
-                    value={contactNumber}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
                 <div className="text-center">
                   <button
                     className="btn bg-green-500 text-white px-3 py-1 rounded-lg"

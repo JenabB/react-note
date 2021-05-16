@@ -18,7 +18,6 @@ const OwnerShopList = () => {
         },
       })
       .then((result) => {
-        console.log(result);
         dispatch({ type: "GET_SHOP_LIST_SUCCESS", payload: result.data.data });
       });
   });
