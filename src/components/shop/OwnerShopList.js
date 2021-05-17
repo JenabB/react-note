@@ -7,7 +7,7 @@ const OwnerShopList = () => {
   const dispatch = useAuthDispatch();
   const user = useAuthState();
 
-  const HOST = "https://warm-earth-68639.herokuapp.com";
+  const HOST = "https://svc-not-e.herokuapp.com";
 
   useEffect(() => {
     axios

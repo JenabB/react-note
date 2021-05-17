@@ -1,4 +1,4 @@
-const HOST = "https://warm-earth-68639.herokuapp.com";
+const HOST = "https://svc-not-e.herokuapp.com";
 
 export async function ownerShopList(dispatch) {
   try {

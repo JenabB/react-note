@@ -1,4 +1,4 @@
-const CACHE_NAME = "note_v3";
+const CACHE_NAME = "note_v1.2";
 const urlsToCache = ["index.html", "offline.html"];
 
 const self = this;

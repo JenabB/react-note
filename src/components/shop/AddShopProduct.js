@@ -30,7 +30,7 @@ const AddShopProduct = ({ id }) => {
     try {
       setData({ ...data, error: null });
       const res = await axios.post(
-        `https://warm-earth-68639.herokuapp.com/v1/shop/${id}/product`,
+        `https://svc-not-e.herokuapp.com/v1/shop/${id}/product`,
         {
           productName: productName,
           productPrice: productPrice,

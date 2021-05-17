@@ -11,7 +11,7 @@ const ShopInvoiceList = ({ id }) => {
 
   useEffect(() => {
     axios
-      .get(`https://warm-earth-68639.herokuapp.com/v1/shop/${id}/invoice`, {
+      .get(`https://svc-not-e.herokuapp.com/v1/shop/${id}/invoice`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,

@@ -9,7 +9,7 @@ const GetShopProduct = ({ id }) => {
 
   useEffect(() => {
     axios
-      .get(`https://warm-earth-68639.herokuapp.com/v1/shop/${id}/product`, {
+      .get(`https://svc-not-e.herokuapp.com/v1/shop/${id}/product`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${user.token}`,

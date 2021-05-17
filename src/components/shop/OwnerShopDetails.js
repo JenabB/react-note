@@ -23,7 +23,7 @@ const OwnerShopDetails = (props) => {
 
   useEffect(() => {
     axios
-      .get(`https://warm-earth-68639.herokuapp.com/v1/shop/${shopId}`, {
+      .get(`https://svc-not-e.herokuapp.com/v1/shop/${shopId}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,

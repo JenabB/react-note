@@ -20,7 +20,7 @@ const CreateShop = () => {
   const [allDistricts, setAllDistricts] = useState([]);
   const [selectedDistrict, setSelectedDistrict] = useState("10");
 
-  const host = "https://warm-earth-68639.herokuapp.com";
+  const host = "https://svc-not-e.herokuapp.com";
   useEffect(() => {
     fetch(`${host}/v1/area/country`)
       .then((response) => response.json())
@@ -32,7 +32,7 @@ const CreateShop = () => {
       .then((data) => setAllProvincies(data.data))
       .catch((error) => console.log(error));
 
-    fetch(`${host}/v1/area/district?provinceId=${selectedProvince}`)
+    fetch(`${host}/v1/area/regency?provinceId=${selectedProvince}`)
       .then((response) => response.json())
       .then((data) => setAllDistricts(data.data))
       .catch((error) => console.log(error));
@@ -51,8 +51,8 @@ const CreateShop = () => {
   }));
 
   const districtsOptions = allDistricts.map((c) => ({
-    value: c.districtId,
-    label: c.districtName,
+    value: c.regencyId,
+    label: c.regencyName,
   }));
 
   const { shopName, addressDetail, contactNumber } = data;
@@ -86,12 +86,12 @@ const CreateShop = () => {
     try {
       setData({ ...data, error: null });
       const res = await axios.post(
-        "https://warm-earth-68639.herokuapp.com/v1/shop",
+        `${host}/v1/shop`,
         {
           shopName: shopName,
           countryId: selectedCountry,
           provinceId: selectedProvince,
-          districtId: selectedDistrict,
+          regencyId: selectedDistrict,
           addressDetail: addressDetail,
           contactNumber: contactNumber,
         },
@@ -102,6 +102,7 @@ const CreateShop = () => {
           },
         }
       );
+      console.log(res);
       Swal.fire({
         icon: "success",
         text: res.data.message,

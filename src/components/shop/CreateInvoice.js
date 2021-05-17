@@ -6,36 +6,53 @@ import Select from "react-select";
 import { useAuthDispatch, useAuthState } from "../../hook";
 
 const CreateInvoice = () => {
-  const HOST = "https://warm-earth-68639.herokuapp.com";
+  const HOST = "https://svc-not-e.herokuapp.com";
   const dispatch = useAuthDispatch();
-  useEffect(() => {
-    axios
-      .get(`${HOST}/v1/shop`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
-        },
-      })
-      .then((result) => {
-        dispatch({ type: "GET_SHOP_LIST_SUCCESS", payload: result.data.data });
-      });
-  });
   const user = useAuthState();
+
+  const [product, setProduct] = useState([]);
+  const [addProduct, setAddProduct] = useState({
+    productName: "",
+    productPrice: "",
+    quantity: "",
+  });
+
+  const [invoiceCode] = useState("1");
+  const [productInsertMode, setProductInsertMode] = useState("inside");
 
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState({
     customerName: "",
   });
 
-  const [invoiceCode, setInvoiceCode] = useState("1");
-  const [productInsertMode, setProductInsertMode] = useState("inside");
-
-  const [products, setProduct] = useState([]);
-
   const options = [
     { value: "inside", label: "inside" },
     { value: "outside", label: "outside" },
   ];
+
+  const handleUpdateProduct = (e) => {
+    e.preventDefault();
+    setProduct([...product, addProduct]);
+    setAddProduct({
+      productName: "",
+      productPrice: "",
+      quantity: "",
+    });
+  };
+
+  useEffect(() => {
+    axios
+      .get(`${HOST}/v1/shop/${user.shopId}/product`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      })
+      .then((result) => {
+        dispatch({ type: "GET_SHOP_PRODUCT", payload: result.data.data });
+      });
+  }, [dispatch, user.shopId, user.token]);
+
   const handleInsertMode = (e) => {
     setProductInsertMode(e.value);
   };
@@ -58,12 +75,12 @@ const CreateInvoice = () => {
     try {
       setData({ ...data, error: null });
       const res = await axios.post(
-        "https://warm-earth-68639.herokuapp.com/v1/shop",
+        `https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}/invoice`,
         {
           invoiceCode: invoiceCode,
           productInsertMode: productInsertMode,
           customerName: customerName,
-          products: products,
+          products: product,
         },
         {
           headers: {
@@ -120,7 +137,42 @@ const CreateInvoice = () => {
                     ))}
                   </div>
                 ) : (
-                  <div>Yare</div>
+                  <form onSubmit={handleUpdateProduct}>
+                    <input
+                      type="text"
+                      placeholder="product name"
+                      value={addProduct.productName}
+                      onChange={(e) =>
+                        setAddProduct({
+                          ...addProduct,
+                          productName: e.target.value,
+                        })
+                      }
+                    />
+                    <input
+                      type="text"
+                      placeholder="product price"
+                      value={addProduct.productPrice}
+                      onChange={(e) =>
+                        setAddProduct({
+                          ...addProduct,
+                          productPrice: e.target.value,
+                        })
+                      }
+                    />
+                    <input
+                      type="text"
+                      placeholder="quantity"
+                      value={addProduct.quantity}
+                      onChange={(e) =>
+                        setAddProduct({
+                          ...addProduct,
+                          quantity: e.target.value,
+                        })
+                      }
+                    />
+                    <button>Submit</button>
+                  </form>
                 )}
                 <div className="text-center">
                   <button

@@ -4,7 +4,7 @@ import axios from "axios";
 const InvoiceDetail = () => {
   useEffect(() => {
     axios
-      .get(`https://warm-earth-68639.herokuapp.com/v1/shop/42/invoice/3`, {
+      .get(`https://svc-not-e.herokuapp.comv1/shop/42/invoice/3`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,

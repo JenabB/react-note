@@ -7,6 +7,17 @@
 5. Update and delete API
 6. Prevent empty input
 
+## 2021 May 17
+
+1. Change endpoint
+2. Optimize code
+
+## 2021 May 16
+
+1. Optimize code
+2. Add react-select
+3. Add react-select for country, province and district in create shop
+
 ## 2021 May 11
 
 1. Add Context API in auth
