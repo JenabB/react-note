@@ -4,19 +4,30 @@ import Service1 from "../images/icons/001-email.png";
 import Service2 from "../images/icons/002-hosting.png";
 import Service3 from "../images/icons/003-browser.png";
 
+import Hero from "../images/landing.png";
 import Footer from "../components/Footer";
 
 const LandingPage = () => {
   return (
-    <div className="lg:w-3/5 mx-auto sm:w-full bg-white h-screen">
+    <div className="mx-auto sm:w-full bg-white h-screen">
       <Helmet>
         <meta charSet="utf-8" />
         <title>Landing Page</title>
       </Helmet>
-      <div className="landing-header">
+      {/* <div className="landing-header">
         <div className="text-center text-white py-32">
           <h1 className="text-5xl">NOTE</h1>
           <h2>Create Shop and invoice</h2>
+        </div>
+      </div> */}
+
+      <div className="hero-landing grid lg:grid-cols-2 sm:grid-cols-1 py-8">
+        <div className="w-full">
+          <img src={Hero} alt="hero" />
+        </div>
+        <div className="text-center lg:py-32 sm:py-8 w-full">
+          <h1 className="text-6xl font-bold text-blue-700">NOT E</h1>
+          <p>Ini nama aplikasinya !E</p>
         </div>
       </div>
 
