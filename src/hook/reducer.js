@@ -120,7 +120,7 @@ export const AuthReducer = (initialState, action) => {
         allCountries: action.payload,
       };
 
-    case "GET_COUNTRY_ID":
+    case "GET_COUNTRY":
       return {
         ...initialState,
         countryId: action.payload,
@@ -132,7 +132,7 @@ export const AuthReducer = (initialState, action) => {
         allProvinces: action.payload,
       };
 
-    case "GET_PROVINCE_ID":
+    case "GET_PROVINCE":
       return {
         ...initialState,
         provinceId: action.payload,
@@ -144,7 +144,7 @@ export const AuthReducer = (initialState, action) => {
         allDistricts: action.payload,
       };
 
-    case "GET_DISTRICT_ID":
+    case "GET_DISTRICT":
       return {
         ...initialState,
         districtId: action.payload,

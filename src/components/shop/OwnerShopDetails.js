@@ -22,12 +22,13 @@ const OwnerShopDetails = (props) => {
   const shopId = props.match.params.id;
   const dispatch = useAuthDispatch();
   const user = useAuthState();
+
   let { path, url } = useRouteMatch();
   let history = useHistory();
+
   function goBack() {
     history.goBack();
   }
-  console.log(detail);
   const dateFormat = "dddd, MMMM Do YYYY, h:mm:ss a";
 
   useEffect(() => {

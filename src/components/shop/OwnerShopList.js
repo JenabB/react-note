@@ -8,7 +8,7 @@ const OwnerShopList = () => {
   const user = useAuthState();
 
   const HOST = "https://svc-not-e.herokuapp.com";
-
+  console.log(user);
   useEffect(() => {
     axios
       .get(`${HOST}/v1/shop`, {
@@ -30,8 +30,7 @@ const OwnerShopList = () => {
             <Link to={`user/shop/${shop.shopId}`}>
               <div key={index} tabofindex={index} className="shadow-lg m-3 p-3">
                 <h1 className="font-bold">{shop.shopName}</h1>
-                <h2>{shop.addressDetail}</h2>
-                <h3>{shop.contactNumber}</h3>
+                <h2>{shop.Regency.regencyName}</h2>
               </div>
             </Link>
           ))}

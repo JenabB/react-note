@@ -17,8 +17,8 @@ const CreateShop = () => {
   const [selectedCountry, setSelectedCountry] = useState("100");
   const [allProvincies, setAllProvincies] = useState([]);
   const [selectedProvince, setSelectedProvince] = useState("9");
-  const [allDistricts, setAllDistricts] = useState([]);
-  const [selectedDistrict, setSelectedDistrict] = useState("10");
+  const [allRegencies, setAllRegencies] = useState([]);
+  const [selectedRegency, setSelectedRegency] = useState("10");
 
   const host = "https://svc-not-e.herokuapp.com";
   useEffect(() => {
@@ -34,7 +34,7 @@ const CreateShop = () => {
 
     fetch(`${host}/v1/area/regency?provinceId=${selectedProvince}`)
       .then((response) => response.json())
-      .then((data) => setAllDistricts(data.data))
+      .then((data) => setAllRegencies(data.data))
       .catch((error) => console.log(error));
   }, [data, selectedCountry, selectedProvince]);
 
@@ -50,7 +50,7 @@ const CreateShop = () => {
     label: c.provinceName,
   }));
 
-  const districtsOptions = allDistricts.map((c) => ({
+  const regenciesOptions = allRegencies.map((c) => ({
     value: c.regencyId,
     label: c.regencyName,
   }));
@@ -65,8 +65,8 @@ const CreateShop = () => {
     setSelectedProvince(e.value);
   };
 
-  const handleSelectDistrict = (e) => {
-    setSelectedDistrict(e.value);
+  const handleSelectRegency = (e) => {
+    setSelectedRegency(e.value);
   };
 
   const handleOpenModal = () => {
@@ -91,7 +91,7 @@ const CreateShop = () => {
           shopName: shopName,
           countryId: selectedCountry,
           provinceId: selectedProvince,
-          regencyId: selectedDistrict,
+          regencyId: selectedRegency,
           addressDetail: addressDetail,
           contactNumber: contactNumber,
         },
@@ -108,8 +108,14 @@ const CreateShop = () => {
         text: res.data.message,
         confirmButtonText: "ok",
       });
-    } catch (err) {
-      console.log(err);
+
+      setData({ ...data, shopName: "", addressDetail: "", contactNumber: "" });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        text: error.response.data.message,
+        confirmButtonText: "ok",
+      });
     }
   };
 
@@ -149,8 +155,8 @@ const CreateShop = () => {
                   onChange={handleSelectProvince}
                 />
                 <Select
-                  options={districtsOptions}
-                  onChange={handleSelectDistrict}
+                  options={regenciesOptions}
+                  onChange={handleSelectRegency}
                 />
 
                 <div className="my-2">

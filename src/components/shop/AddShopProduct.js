@@ -42,15 +42,17 @@ const AddShopProduct = ({ id }) => {
           },
         }
       );
+
       Swal.fire({
         icon: "success",
         text: res.data.message,
         confirmButtonText: "ok",
       });
+      setData({ ...data, productName: "", productPrice: "" });
     } catch (error) {
       Swal.fire({
-        icon: "failed",
-        text: "error",
+        icon: "error",
+        text: error.response.data.message,
         confirmButtonText: "ok",
       });
     }

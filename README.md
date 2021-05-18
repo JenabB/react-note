@@ -8,11 +8,34 @@
 6. Prevent empty input
 7. Handle token expired
 
+## TASK
+
+1. tombol back taruh di logout
+2. Logout taruh di profile
+3. Nama toko tanpa create date
+4. Tambahkan info kota pada detail shop (done)
+5. Shop list hanya menampilkan nama toko dan kabupaten
+6. create shop taruh dikanan ada icon +
+7. handle empty toko kosong
+8. screen ketika membuat shop product dan invoice baru
+9. default value pada react select
+10. pemisah ribuan dan rata kanan
+11. Tambah Product langsung empty (done)
+12. error handle ketika product sudah ada
+13.
+
 ## 2021 May 18
 
-1. change color to bg-blue-700
-2. change model photo to illustration
-3.
+1. Change color to bg-blue-700
+2. Change model photo to illustration
+3. Fix some route
+4. Change much UI
+5. Add product detail but not full screen
+6. Add product and invoice total in detail shop
+7. Change District to regency
+8. Add 409 handler
+9. Empty form after success response
+10. Add location in shop detail
 
 ## 2021 May 17
 

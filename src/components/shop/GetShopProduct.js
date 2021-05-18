@@ -37,7 +37,7 @@ const GetShopProduct = ({ id }) => {
               <Link to={`product/${product.productId}`}>
                 <div key={index} className="shadow-lg m-3 p-3">
                   <h1 className="font-bold">{product.productName}</h1>
-                  <h2>{product.productPrice}</h2>
+                  <h2>Rp. {product.productPrice}</h2>
                 </div>
               </Link>
             ))}
