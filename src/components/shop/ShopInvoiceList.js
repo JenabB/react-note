@@ -24,7 +24,7 @@ const ShopInvoiceList = ({ id }) => {
 
   return (
     <div className="lg:w-2/3 mx-auto sm:w-full">
-      {shopInvoice ? (
+      {shopInvoice.length ? (
         <div>
           {shopInvoice.map((invoice, index) => (
             <Link to={`invoice/${invoice.invoiceId}`}>

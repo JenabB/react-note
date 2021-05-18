@@ -12,9 +12,9 @@
 
 1. tombol back taruh di logout
 2. Logout taruh di profile
-3. Nama toko tanpa create date
+3. Nama toko tanpa create date (done)
 4. Tambahkan info kota pada detail shop (done)
-5. Shop list hanya menampilkan nama toko dan kabupaten
+5. Shop list hanya menampilkan nama toko dan kabupaten (done)
 6. create shop taruh dikanan ada icon +
 7. handle empty toko kosong
 8. screen ketika membuat shop product dan invoice baru
@@ -36,6 +36,7 @@
 8. Add 409 handler
 9. Empty form after success response
 10. Add location in shop detail
+11. Handle empty shop, product and invoice
 
 ## 2021 May 17
 
