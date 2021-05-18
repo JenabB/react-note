@@ -6,11 +6,20 @@
 4. Add sort function in shop & invoice
 5. Update and delete API
 6. Prevent empty input
+7. Handle token expired
+
+## 2021 May 18
+
+1. change color to bg-blue-700
+2. change model photo to illustration
+3.
 
 ## 2021 May 17
 
 1. Change endpoint
 2. Optimize code
+3. Change color to blue
+4. Using illustration from Undaw.co
 
 ## 2021 May 16
 

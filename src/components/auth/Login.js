@@ -76,7 +76,7 @@ const Login = (props) => {
 
           <div className="my-5">
             <button
-              className="text-white bg-green-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 px-3 py-1 rounded-lg"
+              className="text-white bg-blue-700 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 px-3 py-1 rounded-lg"
               onClick={handleSubmit}
             >
               Login
@@ -84,7 +84,7 @@ const Login = (props) => {
           </div>
           <p className="mt-3 text-center">
             Dont have an account?
-            <button className="font-bold text-green-600 mx-2">
+            <button className="font-bold text-blue-700 mx-2">
               <Link to="/user/register">Register</Link>
             </button>
           </p>

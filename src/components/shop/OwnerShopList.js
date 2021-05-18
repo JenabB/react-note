@@ -24,10 +24,10 @@ const OwnerShopList = () => {
 
   return (
     <div className="lg:w-2/3 mx-auto sm:w-full">
-      {user.shopList ? (
+      {user.shopList.length > 0 ? (
         <div>
           {user.shopList.map((shop, index) => (
-            <Link to={`user/shop/${shop.shopId}/detail`}>
+            <Link to={`user/shop/${shop.shopId}`}>
               <div key={index} tabofindex={index} className="shadow-lg m-3 p-3">
                 <h1 className="font-bold">{shop.shopName}</h1>
                 <h2>{shop.addressDetail}</h2>

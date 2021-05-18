@@ -10,8 +10,8 @@ const AddShopProduct = ({ id }) => {
     productName: "",
     productPrice: "",
   });
-  const { productName, productPrice } = data;
 
+  const { productName, productPrice } = data;
   const user = useAuthState();
 
   const handleOpenModal = () => {
@@ -47,8 +47,12 @@ const AddShopProduct = ({ id }) => {
         text: res.data.message,
         confirmButtonText: "ok",
       });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      Swal.fire({
+        icon: "failed",
+        text: "error",
+        confirmButtonText: "ok",
+      });
     }
   };
 

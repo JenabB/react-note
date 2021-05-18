@@ -117,7 +117,7 @@ const CreateShop = () => {
     <div>
       <div className="mt-4">
         <button
-          className="bg-green-500 p-2 rounded-lg hover:px-5"
+          className="bg-blue-700 p-2 rounded-lg hover:px-5 text-white"
           onClick={handleOpenModal}
         >
           Create Shop

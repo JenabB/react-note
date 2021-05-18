@@ -10,6 +10,8 @@ import ShopInvoiceList from "./components/shop/ShopInvoiceList";
 import InvoiceDetail from "./components/shop/InvoiceDetail";
 import OwnerShopDetails from "./components/shop/OwnerShopDetails";
 
+import Ngasal from "./components/shop/Ngasal";
+
 const Navigation = () => {
   const [isLogin, SetIsLogin] = useState(false);
 
@@ -73,21 +75,19 @@ const Navigation = () => {
         <Route exact path="/user" component={Home} />
         <Route exact path="/user/register" component={Register} />
         <Route exact path="/user/login" component={Login} />
-        <Route
-          exact
-          path="/user/shop/:id/detail"
-          component={OwnerShopDetails}
-        />
+        <Route exact path="/user/shop/:id" component={OwnerShopDetails} />
         <Route
           exact
           path="/user/shop/:id/invoice"
           component={ShopInvoiceList}
         />
+
         <Route
           exact
           path="/user/shop/:id/invoice/:id"
           component={InvoiceDetail}
         />
+        <Route path="/ngasal" component={Ngasal} />
       </Switch>
     </Router>
   );

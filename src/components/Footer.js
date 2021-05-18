@@ -22,6 +22,7 @@ const Footer = () => {
         <p>FrontEnd: Yogi Surya Pranata</p>
         <p>KotaKode.com</p>
         <p>Flaticons.com</p>
+        <p>icons8.com</p>
       </div>
       <div className="my-2">
         <h1 className="font-bold">Contact</h1>

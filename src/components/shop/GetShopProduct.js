@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useAuthDispatch, useAuthState } from "../../hook";
+import { Link } from "react-router-dom";
 
 const GetShopProduct = ({ id }) => {
   const user = useAuthState();
@@ -33,10 +34,12 @@ const GetShopProduct = ({ id }) => {
           </div>
           <div className="grid grid-cols-3">
             {productList.map((product, index) => (
-              <div key={index} className="shadow-lg m-3 p-3">
-                <h1 className="font-bold">{product.productName}</h1>
-                <h2>{product.productPrice}</h2>
-              </div>
+              <Link to={`product/${product.productId}`}>
+                <div key={index} className="shadow-lg m-3 p-3">
+                  <h1 className="font-bold">{product.productName}</h1>
+                  <h2>{product.productPrice}</h2>
+                </div>
+              </Link>
             ))}
           </div>
         </div>

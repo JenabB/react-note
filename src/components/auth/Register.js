@@ -112,7 +112,7 @@ const Register = (props) => {
 
             <div className="text-center my-5">
               <button
-                className="text-white bg-green-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 px-3 py-1 rounded-lg"
+                className="text-white bg-blue-700 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 px-3 py-1 rounded-lg"
                 onClick={handleSubmit}
               >
                 Register
@@ -122,7 +122,7 @@ const Register = (props) => {
               Already a user?{" "}
               <button>
                 <Link to="/user/login">
-                  <h1 className="text-green-500 font-bold">Login</h1>
+                  <h1 className="text-blue-700 font-bold">Login</h1>
                 </Link>
               </button>
             </p>
