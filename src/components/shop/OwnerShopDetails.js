@@ -4,10 +4,8 @@ import { useHistory } from "react-router-dom";
 import moment from "moment";
 import {
   BrowserRouter as Router,
-  Switch,
   Route,
   Link,
-  useParams,
   useRouteMatch,
 } from "react-router-dom";
 import { useAuthState, useAuthDispatch } from "../../hook";
@@ -29,7 +27,7 @@ const OwnerShopDetails = (props) => {
   function goBack() {
     history.goBack();
   }
-
+  console.log(detail);
   const dateFormat = "dddd, MMMM Do YYYY, h:mm:ss a";
 
   useEffect(() => {
@@ -65,12 +63,16 @@ const OwnerShopDetails = (props) => {
               </div>
               <div className="w-2/4">
                 <h1 className="font-bold text-lg">{detail.shopName}</h1>
-                <div className="flex flex-wrap items-center">
-                  <img src={location} width="30px" alt="location" />
-                  <h2 className="mx-2">Indonesia</h2>
-                  <h3 className="mx-1">Bengkulu</h3>
-                  <h4 className="mx-2">Kota Bengkulu</h4>
-                </div>
+                {detail.Country ? (
+                  <div className="flex flex-wrap items-center">
+                    <img src={location} width="30px" alt="location" />
+                    <h2 className="mx-2">{detail.Country.niceName}</h2>
+                    <h3 className="mx-1">{detail.Province.provinceName}</h3>
+                    <h4 className="mx-2">{detail.Regency.regencyName}</h4>
+                  </div>
+                ) : (
+                  <h1>Loading...</h1>
+                )}
               </div>
             </div>
 
