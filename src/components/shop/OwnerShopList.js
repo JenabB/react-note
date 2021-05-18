@@ -8,7 +8,7 @@ const OwnerShopList = () => {
   const user = useAuthState();
 
   const HOST = "https://svc-not-e.herokuapp.com";
-  console.log(user);
+
   useEffect(() => {
     axios
       .get(`${HOST}/v1/shop`, {
