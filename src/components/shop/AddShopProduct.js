@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import { useAuthState } from "../../hook";
 import Swal from "sweetalert2";
 import axios from "axios";
+import CurrencyInput from "react-currency-input-field";
 
 const AddShopProduct = ({ id }) => {
   const [showModal, setShowModal] = useState(false);
@@ -87,14 +88,22 @@ const AddShopProduct = ({ id }) => {
 
                 <div className="my-2">
                   <h1>Product Price</h1>
-                  <input
+                  <CurrencyInput
+                    prefix="Rp"
+                    placeholder="product price"
+                    name="productPrice"
+                    onValueChange={(value, name) =>
+                      setData({ ...data, productPrice: value })
+                    }
+                  />
+                  {/* <input
                     className="bg-blue-200 px-2 py-1"
                     type="number"
                     name="productPrice"
                     value={productPrice}
                     onChange={handleChange}
                     required
-                  />
+                  /> */}
                 </div>
 
                 <div className="text-center">
