@@ -4,6 +4,7 @@ import { useAuthState } from "../../hook";
 import Swal from "sweetalert2";
 import axios from "axios";
 import CurrencyInput from "react-currency-input-field";
+import add1 from "../../images/icons/add1.png";
 
 const AddShopProduct = ({ id }) => {
   const [showModal, setShowModal] = useState(false);
@@ -60,13 +61,10 @@ const AddShopProduct = ({ id }) => {
   };
 
   return (
-    <div>
+    <div className="lg:w-2/3 mx-auto sm:w-full">
       <div className="mt-4">
-        <button
-          className="bg-green-500 p-2 rounded-lg hover:px-5 text-white"
-          onClick={handleOpenModal}
-        >
-          Add Product
+        <button className="fixed bottom-10 right-10" onClick={handleOpenModal}>
+          <img src={add1} alt="add" width="60px" />
         </button>
         <Modal isOpen={showModal}>
           <div>

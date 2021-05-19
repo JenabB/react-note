@@ -19,10 +19,14 @@
 7. handle empty toko kosong
 8. screen ketika membuat shop product dan invoice baru
 9. default value pada react select
-10. pemisah ribuan dan rata kanan
+10. pemisah ribuan dan rata kanan (done)
 11. Tambah Product langsung empty (done)
-12. error handle ketika product sudah ada
+12. error handle ketika shop dan product sudah ada (done)
 13.
+
+## 2021 May 19
+
+1. Add currency format to create product
 
 ## 2021 May 18
 
