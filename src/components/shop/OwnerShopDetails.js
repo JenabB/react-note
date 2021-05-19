@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { Switch, useHistory } from "react-router-dom";
 import moment from "moment";
 import {
   BrowserRouter as Router,
@@ -16,6 +16,7 @@ import GetShopProduct from "./GetShopProduct";
 import ProductDetails from "./ProductDetails";
 import lady from "../../images/home1.png";
 import location from "../../images/location.png";
+import back from "../../images/icons/back.png";
 
 const OwnerShopDetails = (props) => {
   const [detail, setDetail] = useState([]);
@@ -47,15 +48,22 @@ const OwnerShopDetails = (props) => {
   }, [dispatch, shopId]);
 
   return (
-    <Router>
-      <div className="mx-auto sm:w-full bg-white h-screen">
-        <button
-          className="absolute top-20 z-10 left-3 bg-green-400 text-white px-2 py-1 rounded-lg"
-          onClick={goBack}
-        >
-          Back
-        </button>
+    <div>
+      <nav className="sticky top-0 z-10 shadow-lg flex justify-between bg-blue-700 text-white p-4">
+        <div>
+          <button onClick={goBack}>
+            <img src={back} alt="back" width="30px" />
+          </button>
+        </div>
+        <div>
+          <Link to="/user">Home</Link>
+        </div>
+        <div>
+          <h1 className="text-green-500"> A</h1>
+        </div>
+      </nav>
 
+      <div className="mx-auto sm:w-full bg-white h-screen">
         <div className="p-10">
           <div className=" mt-5 flex justify-between shadow-lg px-10 h-2/6">
             <div className="flex">
@@ -115,38 +123,42 @@ const OwnerShopDetails = (props) => {
           </div>
         </nav>
 
-        <Route exact path={`${path}/`}>
-          <Link to="/ngasal">
-            <div className="px-4">
-              <div className="lg:w-2/3 mx-auto sm:w-full">
-                <h1 className="font-bold text-lg">{detail.shopName}</h1>
-                <h2>{detail.addressDetail}</h2>
-                <h3>Created: {moment(detail.createdAt).format(dateFormat)}</h3>
-                <p>{detail.contactNumber}</p>
+        <Switch>
+          <Route exact path={`${path}/`}>
+            <Link to="/ngasal">
+              <div className="px-4">
+                <div className="lg:w-2/3 mx-auto sm:w-full">
+                  <h1 className="font-bold text-lg">{detail.shopName}</h1>
+                  <h2>{detail.addressDetail}</h2>
+                  <h3>
+                    Created: {moment(detail.createdAt).format(dateFormat)}
+                  </h3>
+                  <p>{detail.contactNumber}</p>
+                </div>
               </div>
+            </Link>
+          </Route>
+          <Route path={`${path}/product`}>
+            <div className="px-4">
+              <AddShopProduct id={shopId} />
+              <GetShopProduct id={shopId} />
             </div>
-          </Link>
-        </Route>
-        <Route exact path={`${path}/product`}>
-          <div className="px-4">
-            <AddShopProduct id={shopId} />
-            <GetShopProduct id={shopId} />
-          </div>
-        </Route>
-        <Route exact path={`${path}/invoice`}>
-          <div className="px-4">
-            <CreateInvoice />
-            <ShopInvoiceList id={shopId} />
-          </div>
-        </Route>
-
-        <Route
-          exact
-          path="/user/shop/:id/product/:id"
-          component={ProductDetails}
-        />
+          </Route>
+          <Route exact path={`${path}/invoice`}>
+            <div className="px-4">
+              <CreateInvoice />
+              <ShopInvoiceList id={shopId} />
+            </div>
+          </Route>
+          {/* 
+          <Route
+            exact
+            path="/user/shop/:id/product/:id"
+            component={ProductDetails}
+          /> */}
+        </Switch>
       </div>
-    </Router>
+    </div>
   );
 };
 
