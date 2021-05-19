@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import Select from "react-select";
 import { useAuthDispatch, useAuthState } from "../../hook";
+import add1 from "../../images/icons/add1.png";
 
 const CreateInvoice = () => {
   const HOST = "https://svc-not-e.herokuapp.com";
@@ -56,6 +57,12 @@ const CreateInvoice = () => {
   const handleInsertMode = (e) => {
     setProductInsertMode(e.value);
   };
+
+  const handleClickProduct = (e) => {
+    e.preventDefault();
+    console.log(e);
+  };
+
   const { customerName } = data;
 
   const handleOpenModal = () => {
@@ -85,7 +92,9 @@ const CreateInvoice = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${JSON.parse(
+              localStorage.getItem("token")
+            )}`,
           },
         }
       );
@@ -103,11 +112,8 @@ const CreateInvoice = () => {
   return (
     <div>
       <div className="mt-4">
-        <button
-          className="bg-green-500 p-2 rounded-lg text-white hover:px-5"
-          onClick={handleOpenModal}
-        >
-          Create Invoice
+        <button className="fixed bottom-10 right-10" onClick={handleOpenModal}>
+          <img src={add1} alt="add" width="60px" />
         </button>
         <Modal isOpen={showModal}>
           <div>
@@ -130,9 +136,23 @@ const CreateInvoice = () => {
                 {productInsertMode === "inside" ? (
                   <div className="grid grid-cols-4">
                     {user.shopProduct.map((product, index) => (
-                      <div key={index} className="m-2 shadow rounded p-2">
+                      <div
+                        key={index}
+                        className="m-2 shadow rounded p-2"
+                        onClick={handleClickProduct}
+                      >
                         <h1>{product.productName}</h1>
                         <h2>{product.productPrice}</h2>
+                        <input
+                          placeholder="0"
+                          value={addProduct.quantity}
+                          onChange={(e) =>
+                            setAddProduct({
+                              ...addProduct,
+                              quantity: e.target.value,
+                            })
+                          }
+                        />
                       </div>
                     ))}
                   </div>
@@ -171,7 +191,7 @@ const CreateInvoice = () => {
                         })
                       }
                     />
-                    <button>Submit</button>
+                    <button>Add</button>
                   </form>
                 )}
                 <div className="text-center">

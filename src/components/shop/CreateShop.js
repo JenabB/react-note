@@ -185,7 +185,7 @@ const CreateShop = () => {
 
                 <div className="text-center">
                   <button
-                    className="btn bg-green-500 text-white px-3 py-1 rounded-lg w-full"
+                    className="btn bg-blue-700 text-white px-3 py-1 rounded-lg w-full"
                     onClick={handleSubmit}
                   >
                     Create
