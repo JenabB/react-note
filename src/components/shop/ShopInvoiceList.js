@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 const ShopInvoiceList = ({ id }) => {
   const dispatch = useAuthDispatch();
   const user = useAuthState();
-  const shopInvoice = user.shopInvoice;
 
   useEffect(() => {
     axios
@@ -24,9 +23,9 @@ const ShopInvoiceList = ({ id }) => {
 
   return (
     <div className="lg:w-2/3 mx-auto sm:w-full">
-      {shopInvoice.length ? (
+      {user.shopInvoice && user.shopInvoice.length > 0 ? (
         <div>
-          {shopInvoice.map((invoice, index) => (
+          {user.shopInvoice.map((invoice, index) => (
             <Link to={`invoice/${invoice.invoiceId}`}>
               <div key={index} className="shadow-lg m-3 p-3">
                 <h1 className="font-bold">{invoice.customerName}</h1>

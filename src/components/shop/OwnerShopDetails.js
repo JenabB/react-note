@@ -80,15 +80,24 @@ const OwnerShopDetails = (props) => {
             <div>
               <div className="rounded shadow-lg inline-block p-2 text-center">
                 <h1>Products</h1>
-                <h2 className="text-blue-700 font-bold">
-                  {user.shopProduct.length}
-                </h2>
+                {user.shopProduct ? (
+                  <h2 className="text-blue-700 font-bold">
+                    {user.shopProduct.length}
+                  </h2>
+                ) : (
+                  <h2 className="text-blue-700 font-bold">0</h2>
+                )}
               </div>
+
               <div className="rounded shadow-lg inline-block p-2 text-center">
                 <h1>Invoices</h1>
-                <h2 className="text-blue-700 font-bold">
-                  {user.shopInvoice.length}
-                </h2>
+                {user.shopInvoice ? (
+                  <h2 className="text-blue-700 font-bold">
+                    {user.shopInvoice.length}
+                  </h2>
+                ) : (
+                  <h2 className="text-blue-700 font-bold">0</h2>
+                )}
               </div>
             </div>
           </div>
