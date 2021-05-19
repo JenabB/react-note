@@ -1,29 +1,3 @@
-.App {
-  background-color: #f0efdf;
-}
-
-.landing-header {
-  height: 400px;
-  background-image: url("./images/landing.webp");
-  background-size: cover;
-  background-position: center center;
-  filter: grayscale(90%);
-}
-.jumbotron {
-  height: 400px;
-  background-image: url("../src/images/home.webp");
-  background-size: cover;
-  background-position: center center;
-}
-
-.jumbotron-detail {
-  height: 400px;
-  background-image: url("./images/detailShop.webp");
-  filter: grayscale(90%);
-  background-size: cover;
-  background-position: center center;
-}
-
 .ReactModal__Content {
   margin-top: 50px;
 }

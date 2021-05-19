@@ -1,25 +1,64 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Service1 from "../images/icons/001-email.png";
 import Service2 from "../images/icons/002-hosting.png";
 import Service3 from "../images/icons/003-browser.png";
-
+import { useAuthState } from "../hook";
+import { Link } from "react-router-dom";
 import Hero from "../images/landing.png";
 import Footer from "../components/Footer";
 
 const LandingPage = () => {
+  const [isLogin, SetIsLogin] = useState(false);
+  const user = useAuthState();
+
+  useEffect(() => {
+    let token = user.token;
+    if (token) {
+      SetIsLogin(true);
+    } else {
+      SetIsLogin(false);
+    }
+  }, [user.token]);
+
   return (
     <div className="mx-auto sm:w-full bg-white h-screen">
       <Helmet>
         <meta charSet="utf-8" />
         <title>Landing Page</title>
       </Helmet>
-      {/* <div className="landing-header">
-        <div className="text-center text-white py-32">
-          <h1 className="text-5xl">NOTE</h1>
-          <h2>Create Shop and invoice</h2>
-        </div>
-      </div> */}
+
+      {isLogin ? (
+        <nav className="sticky top-0 z-10 shadow-lg flex justify-between bg-blue-700 text-white p-4">
+          <div></div>
+          <div>
+            <Link to="/user">Home</Link>
+          </div>
+          <div>
+            <h1 className="text-green-500"> A</h1>
+          </div>
+        </nav>
+      ) : (
+        <nav className="sticky top-0 z-10 shadow-lg flex justify-between bg-blue-700 text-white p-4">
+          <div>
+            <Link to="/">
+              <h1 className="font-bold text-xl">NOT E</h1>
+            </Link>
+          </div>
+          <div className="flex">
+            <div className="mr-5">
+              <Link to="/user/register">
+                <h1 className="bg-white text-blue-600 px-1 rounded">
+                  Register
+                </h1>
+              </Link>
+            </div>
+            <div>
+              <Link to="/user/login">Login</Link>
+            </div>
+          </div>
+        </nav>
+      )}
 
       <div className="hero-landing grid lg:grid-cols-2 sm:grid-cols-1 py-8">
         <div className="w-full">

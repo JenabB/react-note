@@ -2,18 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Switch, useHistory } from "react-router-dom";
 import moment from "moment";
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  useRouteMatch,
-} from "react-router-dom";
+import { BrowserRouter as Route, Link, useRouteMatch } from "react-router-dom";
 import { useAuthState, useAuthDispatch } from "../../hook";
 import ShopInvoiceList from "./ShopInvoiceList";
 import CreateInvoice from "./CreateInvoice";
 import AddShopProduct from "./AddShopProduct";
 import GetShopProduct from "./GetShopProduct";
-import ProductDetails from "./ProductDetails";
+// import ProductDetails from "./ProductDetails";
 import lady from "../../images/home1.png";
 import location from "../../images/location.png";
 import back from "../../images/icons/back.png";
@@ -58,9 +53,7 @@ const OwnerShopDetails = (props) => {
         <div>
           <Link to="/user">Home</Link>
         </div>
-        <div>
-          <h1 className="text-green-500"> A</h1>
-        </div>
+        <div></div>
       </nav>
 
       <div className="mx-auto sm:w-full bg-white h-screen">

@@ -1,12 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import CreateShop from "../components/shop/CreateShop";
 import OwnerShopList from "../components/shop/OwnerShopList";
 import { Helmet } from "react-helmet";
 import { logout, useAuthDispatch, useAuthState } from "../hook";
 import home from "../images/home.png";
-import { useHistory, Link } from "react-router-dom";
-
-import back from "../images/icons/back.png";
+import { Link } from "react-router-dom";
 
 const Home = (props) => {
   const user = useAuthState();
@@ -15,22 +13,7 @@ const Home = (props) => {
     props.history.push("/user/login");
   }
 
-  const history = useHistory();
-
-  function goBack() {
-    history.goBack();
-  }
-
-  const [isLogin, SetIsLogin] = useState(false);
-
-  useEffect(() => {
-    let token = user.token;
-    if (token) {
-      SetIsLogin(true);
-    } else {
-      SetIsLogin(false);
-    }
-  }, [user.token]);
+  const [SetIsLogin] = useState(false);
 
   const handleLogout = () => {
     logout(dispatch);
@@ -44,17 +27,11 @@ const Home = (props) => {
       </Helmet>
 
       <nav className="sticky top-0 z-10 shadow-lg flex justify-between bg-blue-700 text-white p-4">
-        <div>
-          <button onClick={goBack}>
-            <img src={back} alt="back" width="30px" />
-          </button>
-        </div>
+        <div></div>
         <div>
           <Link to="/user">Home</Link>
         </div>
-        <div>
-          <h1 className="text-green-500"> A</h1>
-        </div>
+        <div></div>
       </nav>
 
       <div className="hero-landing grid lg:grid-cols-2 sm:grid-cols-1 py-8">
