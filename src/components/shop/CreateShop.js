@@ -172,7 +172,7 @@ const CreateShop = () => {
                 </div>
 
                 <div className="my-2">
-                  <h1>contactNumber</h1>
+                  <h1>Contact Number</h1>
                   <input
                     className="bg-blue-200 px-2 py-1 w-full"
                     type="name"

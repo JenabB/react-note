@@ -99,7 +99,7 @@ const Register = (props) => {
             </div>
 
             <div className="mt-4">
-              <h1>contactNumber</h1>
+              <h1>Contact Number</h1>
               <input
                 className="bg-green-200 p-2 w-full"
                 type="number"
