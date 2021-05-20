@@ -30,6 +30,7 @@ const Login = (props) => {
           confirmButtonText: "ok",
         });
         props.history.push("/user");
+        // window.location.reload();
       } else {
         Swal.fire({
           icon: "error",

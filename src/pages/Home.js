@@ -1,26 +1,20 @@
-import { useState } from "react";
 import CreateShop from "../components/shop/CreateShop";
 import OwnerShopList from "../components/shop/OwnerShopList";
 import { Helmet } from "react-helmet";
-import { logout, useAuthDispatch, useAuthState } from "../hook";
+import { useAuthState } from "../hook";
 import home from "../images/home.png";
 import { Link } from "react-router-dom";
+import gear from "../images/icons/setting.png";
 
 const Home = (props) => {
   const user = useAuthState();
-  const dispatch = useAuthDispatch();
+
   if (!user.token) {
     props.history.push("/user/login");
   }
 
-  const [SetIsLogin] = useState(false);
-
-  const handleLogout = () => {
-    logout(dispatch);
-    SetIsLogin(false);
-  };
   return (
-    <div className="mx-auto sm:w-full bg-white h-screen">
+    <div className="mx-auto sm:w-full h-screen">
       <Helmet>
         <meta charSet="utf-8" />
         <title>{user.user.fullName}</title>
@@ -31,7 +25,11 @@ const Home = (props) => {
         <div>
           <Link to="/user">Home</Link>
         </div>
-        <div></div>
+        <div>
+          <Link to="/user/setting">
+            <img src={gear} alt="setting" width="32px" />
+          </Link>
+        </div>
       </nav>
 
       <div className="hero-landing grid lg:grid-cols-2 sm:grid-cols-1 py-8">
@@ -50,7 +48,6 @@ const Home = (props) => {
         </div>
       </div>
 
-      <button onClick={handleLogout}>Logout</button>
       <div className="mt-4 lg:w-3/5 mx-auto">
         <h1 className="mt-2 ml-4 font-bold">Your Shop</h1>
         <OwnerShopList />

@@ -8,6 +8,7 @@ import Login from "./components/auth/Login";
 // import InvoiceDetail from "./components/shop/InvoiceDetail";
 import OwnerShopDetails from "./components/shop/OwnerShopDetails";
 import ProductDetails from "./components/shop/ProductDetails";
+import Setting from "./pages/Setting";
 
 // import AddShopProduct from "./components/shop/AddShopProduct";
 // import GetShopProduct from "./components/shop/GetShopProduct";
@@ -21,6 +22,9 @@ const Navigation = () => {
         <Route exact path="/user/register" component={Register} />
         <Route exact path="/user/login" component={Login} />
         <Route path="/user/shop/:id" component={OwnerShopDetails} />
+        <Router path="/user/setting">
+          <Setting />
+        </Router>
       </Switch>
 
       <Route
