@@ -30,7 +30,6 @@ const AddShopProduct = ({ id }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setData({ ...data, error: null });
       const res = await axios.post(
         `https://svc-not-e.herokuapp.com/v1/shop/${id}/product`,
         {
@@ -90,18 +89,10 @@ const AddShopProduct = ({ id }) => {
                     prefix="Rp"
                     placeholder="product price"
                     name="productPrice"
-                    onValueChange={(value, name) =>
+                    onValueChange={(value) =>
                       setData({ ...data, productPrice: value })
                     }
                   />
-                  {/* <input
-                    className="bg-blue-200 px-2 py-1"
-                    type="number"
-                    name="productPrice"
-                    value={productPrice}
-                    onChange={handleChange}
-                    required
-                  /> */}
                 </div>
 
                 <div className="text-center">

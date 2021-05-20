@@ -21,22 +21,24 @@ const Login = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await loginUser(dispatch, { email, password });
+      const res = await loginUser(dispatch, { email, password });
 
-      Swal.fire({
-        icon: "success",
-        text: "login success",
-        confirmButtonText: "ok",
-      });
-
-      props.history.push("/user");
-      window.location.reload();
+      if (res) {
+        Swal.fire({
+          icon: "success",
+          text: "login success",
+          confirmButtonText: "ok",
+        });
+        props.history.push("/user");
+      } else {
+        Swal.fire({
+          icon: "error",
+          text: "email/password invalid",
+          confirmButtonText: "ok",
+        });
+      }
     } catch (error) {
-      Swal.fire({
-        icon: "error",
-        text: error.response.data.message,
-        confirmButtonText: "ok",
-      });
+      console.log(error);
     }
   };
 

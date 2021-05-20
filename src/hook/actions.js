@@ -68,23 +68,21 @@ export async function loginUser(dispatch, loginPayload) {
     let response = await fetch(`${HOST}/v1/user/login/owner`, requestOptions);
     let data = await response.json();
 
-    if (data) {
+    if (data.status === 200) {
       dispatch({ type: "LOGIN_SUCCESS", payload: data.data });
       localStorage.setItem("token", JSON.stringify(data.data.token));
       return data;
+    } else {
+      dispatch({ type: "LOGIN_ERROR", error: data.error });
     }
 
-    dispatch({ type: "LOGIN_ERROR", error: data.error });
-    console.log(data.error);
     return;
   } catch (error) {
     dispatch({ type: "LOGIN_ERROR", error: error });
-    console.log(error);
   }
 }
 
 export async function logout(dispatch) {
   dispatch({ type: "LOGOUT" });
   localStorage.removeItem("token");
-  window.location.reload();
 }
