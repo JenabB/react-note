@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import Swal from "sweetalert2";
 import axios from "axios";
 import Select from "react-select";
+import add from "../../images/icons/add1.png";
 
 const CreateShop = () => {
   const [showModal, setShowModal] = useState(false);
@@ -122,11 +123,8 @@ const CreateShop = () => {
   return (
     <div>
       <div className="mt-4">
-        <button
-          className="bg-blue-700 p-2 rounded-lg hover:px-5 text-white"
-          onClick={handleOpenModal}
-        >
-          Create Shop
+        <button className="fixed bottom-4 right-4" onClick={handleOpenModal}>
+          <img src={add} alt="add" width="60px" />
         </button>
         <Modal isOpen={showModal}>
           <div>

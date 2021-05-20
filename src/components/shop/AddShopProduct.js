@@ -62,7 +62,7 @@ const AddShopProduct = ({ id }) => {
   return (
     <div className="lg:w-2/3 mx-auto sm:w-full">
       <div className="mt-4">
-        <button className="fixed bottom-8 right-8" onClick={handleOpenModal}>
+        <button className="fixed bottom-4 right-4" onClick={handleOpenModal}>
           <img src={add1} alt="add" width="60px" />
         </button>
         <Modal isOpen={showModal}>

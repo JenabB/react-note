@@ -44,7 +44,6 @@ const Home = (props) => {
             </span>
           </h1>
           <p>Ini nama aplikasinya !E</p>
-          <CreateShop />
         </div>
       </div>
 
@@ -52,6 +51,8 @@ const Home = (props) => {
         <h1 className="mt-2 ml-4 font-bold">Your Shop</h1>
         <OwnerShopList />
       </div>
+
+      <CreateShop />
     </div>
   );
 };
