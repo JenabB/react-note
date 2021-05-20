@@ -148,6 +148,7 @@ const CreateShop = () => {
 
                 <Select
                   options={countriesOptions}
+                  placeholder="Indonesia"
                   onChange={handleSelectCountry}
                 />
                 <Select
