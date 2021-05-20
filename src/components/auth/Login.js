@@ -52,7 +52,7 @@ const Login = (props) => {
 
       <h4 className="text-muted text-center mb-2">Login</h4>
       <div className="py-2 px-1 lg:w-2/5 mx-auto">
-        <form className="text-center">
+        <form className="text-center" onSubmit={handleSubmit}>
           <div className="mt-4">
             <h1>Email</h1>
             <input
@@ -78,12 +78,11 @@ const Login = (props) => {
           </div>
 
           <div className="my-5">
-            <button
+            <input
+              type="submit"
+              value="login"
               className="text-white bg-blue-700 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 px-3 py-1 rounded-lg"
-              onClick={handleSubmit}
-            >
-              Login
-            </button>
+            />
           </div>
           <p className="mt-3 text-center">
             Dont have an account?

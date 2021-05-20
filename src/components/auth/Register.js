@@ -62,7 +62,7 @@ const Register = (props) => {
       <div className="mt-10 w-2/3 mx-auto">
         <h4 className="mt-10 text-muted text-center mb-2">Create an account</h4>
         <div className="card py-2 px-1 lg:w-2/5 mx-auto">
-          <form className="text-center">
+          <form className="text-center" onSubmit={handleSubmit}>
             <div className="mt-4">
               <h1>Email</h1>
               <input
@@ -102,7 +102,7 @@ const Register = (props) => {
               <h1>contactNumber</h1>
               <input
                 className="bg-green-200 p-2 w-full"
-                type="name"
+                type="number"
                 name="contactNumber"
                 value={contactNumber}
                 onChange={handleChange}
@@ -111,12 +111,11 @@ const Register = (props) => {
             </div>
 
             <div className="text-center my-5">
-              <button
+              <input
+                type="submit"
+                value="register"
                 className="text-white bg-blue-700 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 px-3 py-1 rounded-lg"
-                onClick={handleSubmit}
-              >
-                Register
-              </button>
+              />
             </div>
             <p className="mt-3 text-center">
               Already a user?{" "}

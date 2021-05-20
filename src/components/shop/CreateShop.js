@@ -133,7 +133,7 @@ const CreateShop = () => {
             <button onClick={handleCloseModal}>Close</button>
             <h4 className="text-muted text-center mb-2">Create Shop</h4>
             <div className="card py-2 px-5 shadow">
-              <form className="text-center">
+              <form className="text-center" onSubmit={handleSubmit}>
                 <div className="my-2">
                   <h1>Shop name</h1>
                   <input
@@ -184,12 +184,11 @@ const CreateShop = () => {
                 </div>
 
                 <div className="text-center">
-                  <button
-                    className="btn bg-blue-700 text-white px-3 py-1 rounded-lg w-full"
-                    onClick={handleSubmit}
-                  >
-                    Create
-                  </button>
+                  <input
+                    type="submit"
+                    value="create"
+                    className="text-white bg-blue-700 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 px-3 py-1 rounded-lg"
+                  />
                 </div>
               </form>
             </div>
