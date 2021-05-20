@@ -112,7 +112,7 @@ const CreateInvoice = () => {
   return (
     <div>
       <div className="mt-4">
-        <button className="fixed bottom-10 right-10" onClick={handleOpenModal}>
+        <button className="fixed bottom-8 right-8" onClick={handleOpenModal}>
           <img src={add1} alt="add" width="60px" />
         </button>
         <Modal isOpen={showModal}>
