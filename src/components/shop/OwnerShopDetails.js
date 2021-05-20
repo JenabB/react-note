@@ -58,7 +58,7 @@ const OwnerShopDetails = (props) => {
 
       <div className="mx-auto sm:w-full bg-white h-screen">
         <div className="p-10">
-          <div className=" mt-5 flex justify-between shadow-lg px-10 h-2/6">
+          <div className=" mt-5 flex justify-between shadow-lg lg:px-10 sm:px-0 h-2/6">
             <div className="flex">
               <div className="w-2/4">
                 <img src={lady} alt="lady" width="200px" />
