@@ -42,14 +42,17 @@ const Setting = () => {
       </nav>
 
       <div>
-        <div className="">
-          <div className="lg:grid grid-cols-3 ">
-            <div></div>
-            <div className="py-12 px-12">
-              <img src={profile} alt="profile" className="" />
-            </div>
-            <div></div>
+        <div className="lg:grid grid-cols-3 ">
+          <div></div>
+          <div className="py-12 px-12">
+            <img
+              src={profile}
+              alt="profile"
+              height="200px"
+              className="profile-picture"
+            />
           </div>
+          <div></div>
         </div>
         <h1 className="text-center font-bold">{user.user.fullName}</h1>
         <h2>Contact number: {user.user.contactNumber}</h2>
