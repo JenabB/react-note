@@ -48,7 +48,7 @@ const Setting = () => {
             <img
               src={profile}
               alt="profile"
-              height="200px"
+              height="100px"
               className="profile-picture"
             />
           </div>
