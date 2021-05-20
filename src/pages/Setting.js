@@ -1,9 +1,12 @@
-import React from "react";
+import { useState } from "react";
 import { logout, useAuthDispatch, useAuthState } from "../hook";
 import { useHistory } from "react-router-dom";
 import back from "../images/icons/back.png";
 import profile from "../images/ziva.jpeg";
-const Setting = (props) => {
+import Modal from "react-modal";
+
+const Setting = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const dispatch = useAuthDispatch();
   const user = useAuthState();
   console.log(user);
@@ -18,8 +21,16 @@ const Setting = (props) => {
     logout(dispatch);
     goBack();
   };
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
   return (
-    <div className="h-screen">
+    <div>
       <nav className="sticky top-0 z-10 shadow-lg flex justify-between bg-blue-700 text-white p-4">
         <div>
           <button onClick={goBack}>
@@ -31,13 +42,13 @@ const Setting = (props) => {
       </nav>
 
       <div>
-        <div className="py-20">
-          <div className="w-3/4 mx-auto">
-            <img
-              src={profile}
-              alt="profile"
-              // className="rounded-full h-44 w-44"
-            />
+        <div className="">
+          <div className="lg:grid grid-cols-3 ">
+            <div></div>
+            <div className="py-12 px-12">
+              <img src={profile} alt="profile" className="" />
+            </div>
+            <div></div>
           </div>
         </div>
         <h1 className="text-center font-bold">{user.user.fullName}</h1>
@@ -54,11 +65,32 @@ const Setting = (props) => {
       <div className="text-center">
         <button
           className="bg-red-600 py-2 px-4 w-full text-white"
-          onClick={handleLogout}
+          // onClick={handleLogout}
+          onClick={openModal}
         >
           Logout
         </button>
       </div>
+
+      <Modal isOpen={isOpen} onRequestClose={closeModal}>
+        <div className="py-20">
+          <h1 className="text-center text-2xl py-8">Logout?</h1>
+          <div className="flex justify-center">
+            <button
+              className="bg-red-600 text-white mx-1 px-4 py-2 rounded"
+              onClick={handleLogout}
+            >
+              Yes
+            </button>
+            <button
+              className="shadow-lg bg-gray-200 px-4 py-2 rounded"
+              onClick={closeModal}
+            >
+              No
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };

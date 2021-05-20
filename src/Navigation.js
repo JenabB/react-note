@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+import { useAuthState } from "./hook";
 import LandingPage from "./pages/LandingPage";
 import Home from "./pages/Home";
 import Register from "./components/auth/Register";
@@ -14,6 +14,8 @@ import Setting from "./pages/Setting";
 // import GetShopProduct from "./components/shop/GetShopProduct";
 
 const Navigation = () => {
+  const user = useAuthState();
+
   return (
     <Router>
       <Switch>
@@ -22,16 +24,10 @@ const Navigation = () => {
         <Route exact path="/user/register" component={Register} />
         <Route exact path="/user/login" component={Login} />
         <Route path="/user/shop/:id" component={OwnerShopDetails} />
-        <Router path="/user/setting">
+        <Route path="/user/setting">
           <Setting />
-        </Router>
+        </Route>
       </Switch>
-
-      <Route
-        exact
-        path="/user/shop/:id/product/:id"
-        component={ProductDetails}
-      />
     </Router>
   );
 };

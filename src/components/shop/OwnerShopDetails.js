@@ -8,7 +8,7 @@ import ShopInvoiceList from "./ShopInvoiceList";
 import CreateInvoice from "./CreateInvoice";
 import AddShopProduct from "./AddShopProduct";
 import GetShopProduct from "./GetShopProduct";
-// import ProductDetails from "./ProductDetails";
+import ProductDetails from "./ProductDetails";
 import lady from "../../images/home1.png";
 import location from "../../images/location.png";
 import back from "../../images/icons/back.png";
@@ -118,7 +118,7 @@ const OwnerShopDetails = (props) => {
 
         <Switch>
           <Route exact path={`${path}/`}>
-            <Link to="/ngasal">
+            <Link to="/user/setting">
               <div className="px-4">
                 <div className="lg:w-2/3 mx-auto sm:w-full">
                   <h1 className="font-bold text-lg">{detail.shopName}</h1>
@@ -143,12 +143,12 @@ const OwnerShopDetails = (props) => {
               <ShopInvoiceList id={shopId} />
             </div>
           </Route>
-          {/* 
+
           <Route
             exact
             path="/user/shop/:id/product/:id"
             component={ProductDetails}
-          /> */}
+          />
         </Switch>
       </div>
     </div>
