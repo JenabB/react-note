@@ -27,7 +27,7 @@ const Home = (props) => {
         </div>
         <div>
           <Link to="/user/setting">
-            <img src={gear} alt="setting" width="32px" />
+            <img src={gear} alt="setting" width="28px" />
           </Link>
         </div>
       </nav>

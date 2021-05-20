@@ -47,7 +47,7 @@ const OwnerShopDetails = (props) => {
       <nav className="sticky top-0 z-10 shadow-lg flex justify-between bg-blue-700 text-white p-4">
         <div>
           <button onClick={goBack}>
-            <img src={back} alt="back" width="30px" />
+            <img src={back} alt="back" width="18px" />
           </button>
         </div>
         <div>
