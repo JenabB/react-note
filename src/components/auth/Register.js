@@ -13,6 +13,7 @@ const Register = (props) => {
     contactNumber: "",
   });
 
+  const [loading, setLoading] = useState("register");
   const dispatch = useAuthDispatch();
 
   const { email, password, fullName, contactNumber } = data;
@@ -22,6 +23,7 @@ const Register = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading("loading...");
     try {
       const res = await registerUser(dispatch, {
         email: email,
@@ -36,6 +38,7 @@ const Register = (props) => {
           text: res.message,
           confirmButtonText: "ok",
         });
+        setLoading("register");
         props.history.push("/user/login");
       } else {
         Swal.fire({
@@ -43,6 +46,7 @@ const Register = (props) => {
           text: res.message,
           confirmButtonText: "ok",
         });
+        setLoading("register");
       }
     } catch (error) {
       Swal.fire({
@@ -50,6 +54,7 @@ const Register = (props) => {
         text: error.response.data.message,
         confirmButtonText: "ok",
       });
+      setLoading("register");
     }
   };
 
@@ -113,7 +118,7 @@ const Register = (props) => {
             <div className="text-center my-5">
               <input
                 type="submit"
-                value="register"
+                value={loading}
                 className="text-white bg-blue-700 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 px-3 py-1 rounded-lg"
               />
             </div>

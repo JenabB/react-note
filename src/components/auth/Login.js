@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { loginUser, useAuthDispatch } from "../../hook";
-
 import Swal from "sweetalert2";
 
 const Login = (props) => {
@@ -10,6 +9,7 @@ const Login = (props) => {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState("login");
   const { email, password } = data;
 
   const dispatch = useAuthDispatch();
@@ -20,6 +20,7 @@ const Login = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading("loading...");
     try {
       const res = await loginUser(dispatch, { email, password });
 
@@ -30,7 +31,6 @@ const Login = (props) => {
           confirmButtonText: "ok",
         });
         props.history.push("/user");
-        // window.location.reload();
       } else {
         Swal.fire({
           icon: "error",
@@ -80,7 +80,7 @@ const Login = (props) => {
           <div className="my-5">
             <input
               type="submit"
-              value="login"
+              value={loading}
               className="text-white bg-blue-700 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 px-3 py-1 rounded-lg"
             />
           </div>
