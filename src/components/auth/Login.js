@@ -38,7 +38,9 @@ const Login = (props) => {
           confirmButtonText: "ok",
         });
       }
+      setLoading("login");
     } catch (error) {
+      setLoading("login");
       console.log(error);
     }
   };

@@ -24,7 +24,7 @@ const OwnerShopList = () => {
 
   return (
     <div className="lg:w-2/3 mx-auto sm:w-full">
-      {user.shopList.length > 0 ? (
+      {user.shopList ? (
         <div>
           {user.shopList.map((shop, index) => (
             <Link to={`user/shop/${shop.shopId}`}>
