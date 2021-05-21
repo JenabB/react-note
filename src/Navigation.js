@@ -9,7 +9,8 @@ import Login from "./components/auth/Login";
 import OwnerShopDetails from "./components/shop/OwnerShopDetails";
 // import ProductDetails from "./components/shop/ProductDetails";
 import Setting from "./pages/Setting";
-import EditProfile from "./components/auth/EditProfile";
+
+import ChangePassword from "./components/auth/ChangePassword";
 
 // import AddShopProduct from "./components/shop/AddShopProduct";
 // import GetShopProduct from "./components/shop/GetShopProduct";
@@ -25,12 +26,13 @@ const Navigation = () => {
         <Route exact path="/user/register" component={Register} />
         <Route exact path="/user/login" component={Login} />
         <Route path="/user/shop/:id" component={OwnerShopDetails} />
+
         <Route exact path="/user/setting">
           <Setting />
         </Route>
 
-        <Route exact path="/user/setting/edit-profile">
-          <EditProfile />
+        <Route exact path="/user/setting/change-password">
+          <ChangePassword />
         </Route>
       </Switch>
     </Router>

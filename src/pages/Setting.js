@@ -54,8 +54,8 @@ const Setting = () => {
       </div>
       <div className="fixed bottom-0 w-screen">
         <div className="text-center">
-          <Link to="/user/setting/edit-profile">
-            <button className="py-2 px-4 w-full">Edit Profile</button>
+          <Link to="/user/setting/change-password">
+            <button className="py-2 px-4 w-full">Change Password</button>
           </Link>
         </div>
 

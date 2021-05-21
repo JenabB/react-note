@@ -12,6 +12,7 @@ import ProductDetails from "./ProductDetails";
 import lady from "../../images/home1.png";
 import location from "../../images/location.png";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import Product from "./Product";
 
 const OwnerShopDetails = (props) => {
   const [detail, setDetail] = useState([]);
@@ -132,10 +133,7 @@ const OwnerShopDetails = (props) => {
             </Link>
           </Route>
           <Route path={`${path}/product`}>
-            <div className="px-4">
-              <AddShopProduct id={shopId} />
-              <GetShopProduct id={shopId} />
-            </div>
+            <Product />
           </Route>
           <Route exact path={`${path}/invoice`}>
             <div className="px-4">

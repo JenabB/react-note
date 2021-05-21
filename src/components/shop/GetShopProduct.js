@@ -23,7 +23,7 @@ const GetShopProduct = ({ id }) => {
 
   return (
     <div className="lg:w-2/3 mx-auto sm:w-full">
-      {productList.length > 0 ? (
+      {productList ? (
         <div>
           <div className="text-center m-4">
             <input
