@@ -6,8 +6,7 @@ import { BrowserRouter as Route, Link, useRouteMatch } from "react-router-dom";
 import { useAuthState, useAuthDispatch } from "../../hook";
 import ShopInvoiceList from "./ShopInvoiceList";
 import CreateInvoice from "./CreateInvoice";
-import AddShopProduct from "./AddShopProduct";
-import GetShopProduct from "./GetShopProduct";
+
 import ProductDetails from "./ProductDetails";
 import lady from "../../images/home1.png";
 import location from "../../images/location.png";

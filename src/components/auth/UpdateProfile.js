@@ -6,14 +6,14 @@ import NavWithBack from "../NavWithBack";
 import axios from "axios";
 import Modal from "react-modal";
 
-const ChangePassword = (props) => {
+const UpdateProfile = (props) => {
   const [data, setData] = useState({
-    email: "",
-    password: "",
-    newPassword: "",
+    fullName: "",
+    contactNumber: "",
   });
+
   const [loading, setLoading] = useState("change");
-  const { email, password, newPassword } = data;
+  const { fullName, contactNumber } = data;
   const [isOpen, setIsOpen] = useState(false);
 
   const user = useAuthState();
@@ -37,9 +37,8 @@ const ChangePassword = (props) => {
     try {
       await axios
         .put(`https://svc-not-e.herokuapp.com/v1/user/change-password/owner`, {
-          email: email,
-          password: password,
-          newPassword: newPassword,
+          fullName: fullName,
+          contactNumber: contactNumber,
         })
         .then((result) => {
           console.log("result", result);
@@ -72,44 +71,34 @@ const ChangePassword = (props) => {
     <div className="">
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Change Password</title>
+        <title>Update Profile</title>
       </Helmet>
 
       <NavWithBack />
-      <h4 className="text-muted text-center mt-10 mb-2">Change Password</h4>
+      <h4 className="text-muted text-center mt-10 mb-2">Update Profile</h4>
       <div className="py-2 px-1 lg:w-2/5 mx-auto">
         <form className="text-center" onSubmit={handleSubmit}>
           <div className="mt-4">
-            <h1>Email</h1>
+            <h1>Full name</h1>
             <input
-              className="p-2 bg-green-400 w-full"
-              type="email"
-              name="email"
-              value={user.emailUser}
-              placeholder={user.emailUser}
-              required
-            />
-          </div>
-
-          <div className="mt-4">
-            <h1>Password</h1>
-            <input
-              className="p-2 bg-green-400 w-full"
-              type="password"
-              name="password"
-              value={password}
+              className="p-2 placeholder-black bg-green-400 w-full"
+              type="name"
+              placeholder={` old: ${user.user.fullName}`}
+              name="fullName"
+              value={fullName}
               onChange={handleChange}
               required
             />
           </div>
 
           <div className="mt-4">
-            <h1>New Password</h1>
+            <h1>Contact Number</h1>
             <input
-              className="p-2 bg-green-400 w-full"
-              type="password"
-              name="newPassword"
-              value={newPassword}
+              className="p-2 placeholder-black bg-green-400 w-full"
+              type="number"
+              placeholder={` old: ${user.user.contactNumber}`}
+              name="contactNumber"
+              value={contactNumber}
               onChange={handleChange}
               required
             />
@@ -148,4 +137,4 @@ const ChangePassword = (props) => {
   );
 };
 
-export default ChangePassword;
+export default UpdateProfile;

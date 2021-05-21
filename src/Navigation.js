@@ -11,6 +11,7 @@ import OwnerShopDetails from "./components/shop/OwnerShopDetails";
 import Setting from "./pages/Setting";
 
 import ChangePassword from "./components/auth/ChangePassword";
+import UpdateProfile from "./components/auth/UpdateProfile";
 
 // import AddShopProduct from "./components/shop/AddShopProduct";
 // import GetShopProduct from "./components/shop/GetShopProduct";
@@ -33,6 +34,9 @@ const Navigation = () => {
 
         <Route exact path="/user/setting/change-password">
           <ChangePassword />
+        </Route>
+        <Route exact path="/user/setting/update-profile">
+          <UpdateProfile />
         </Route>
       </Switch>
     </Router>

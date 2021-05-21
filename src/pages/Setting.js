@@ -47,12 +47,17 @@ const Setting = () => {
           <div></div>
         </div>
         <h1 className="text-center font-bold">{user.user.fullName}</h1>
-        <h2>Contact number: {user.user.contactNumber}</h2>
-        <h2>
-          Address: {user.user.Address ? user.user.Address : <h1>empty</h1>}
-        </h2>
+        <div className="w-3/4 mx-auto">
+          <h2>Contact number: {user.user.contactNumber}</h2>
+          <h2>Address: {user.user.Address}</h2>
+        </div>
       </div>
-      <div className="fixed bottom-0 w-screen">
+      <div className="bottom-0 w-screen">
+        <div className="text-center">
+          <Link to="/user/setting/update-profile">
+            <button className="py-2 px-4 w-full">Update Profile</button>
+          </Link>
+        </div>
         <div className="text-center">
           <Link to="/user/setting/change-password">
             <button className="py-2 px-4 w-full">Change Password</button>
