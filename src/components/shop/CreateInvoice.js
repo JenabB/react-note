@@ -120,7 +120,7 @@ const CreateInvoice = () => {
           <div>
             <button onClick={handleCloseModal}>Close</button>
             <h4 className="text-muted text-center mb-2">Create Invoice</h4>
-            <div className="card py-2 px-5 shadow">
+            <div className="card py-2 px-5">
               <form className="text-center" onSubmit={handleSubmit}>
                 <div className="my-2">
                   <h1>Customer name</h1>
@@ -198,7 +198,7 @@ const CreateInvoice = () => {
                     /> */}
                     <input
                       type="number"
-                      className="w-4/5 bg-blue-100 px-2 py-2 my-2 mr-2"
+                      className="text-right w-4/5 bg-blue-100 px-2 py-2 my-2 mr-2"
                       placeholder="quantity"
                       value={addProduct.quantity}
                       onChange={(e) =>
