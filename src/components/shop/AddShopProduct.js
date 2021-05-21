@@ -12,7 +12,7 @@ const AddShopProduct = ({ id }) => {
     productName: "",
     productPrice: "",
   });
-
+  const [loading, setLoading] = useState("create");
   const { productName, productPrice } = data;
   const user = useAuthState();
 
@@ -29,6 +29,7 @@ const AddShopProduct = ({ id }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading("Loading...");
     try {
       const res = await axios.post(
         `https://svc-not-e.herokuapp.com/v1/shop/${id}/product`,
@@ -43,7 +44,7 @@ const AddShopProduct = ({ id }) => {
           },
         }
       );
-
+      setLoading("create");
       Swal.fire({
         icon: "success",
         text: res.data.message,
@@ -51,6 +52,7 @@ const AddShopProduct = ({ id }) => {
       });
       setData({ ...data, productName: "", productPrice: "" });
     } catch (error) {
+      setLoading("create");
       Swal.fire({
         icon: "error",
         text: error.response.data.message,
@@ -74,7 +76,7 @@ const AddShopProduct = ({ id }) => {
                 <div className="my-2">
                   <h1>Product Name</h1>
                   <input
-                    className="bg-blue-200 px-2 py-1"
+                    className="bg-blue-200 px-2 py-1 w-full"
                     type="name"
                     name="productName"
                     value={productName}
@@ -86,6 +88,7 @@ const AddShopProduct = ({ id }) => {
                 <div className="my-2">
                   <h1>Product Price</h1>
                   <CurrencyInput
+                    className="w-full"
                     prefix="Rp"
                     placeholder="product price"
                     name="productPrice"
@@ -98,7 +101,7 @@ const AddShopProduct = ({ id }) => {
                 <div className="text-center">
                   <input
                     type="submit"
-                    value="create"
+                    value={loading}
                     className="text-white bg-blue-700 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 px-3 py-1 rounded-lg"
                   />
                 </div>

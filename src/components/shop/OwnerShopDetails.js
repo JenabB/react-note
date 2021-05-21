@@ -57,7 +57,7 @@ const OwnerShopDetails = (props) => {
       </nav>
 
       <div className="mx-auto sm:w-full bg-white h-screen">
-        <div className="p-10">
+        <div className="lg:p-10 sm:p-2 py-5">
           <div className=" mt-5 flex justify-between shadow-lg lg:px-10 sm:px-0 h-2/6">
             <div className="flex">
               <div className="w-2/4">

@@ -14,6 +14,8 @@ const CreateShop = () => {
     contactNumber: "",
   });
 
+  const [loading, setLoading] = useState("create");
+
   const [allCountries, setAllCounties] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("100");
   const [allProvincies, setAllProvincies] = useState([]);
@@ -84,6 +86,7 @@ const CreateShop = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading("Loading...");
     try {
       setData({ ...data, error: null });
       const res = await axios.post(
@@ -109,9 +112,11 @@ const CreateShop = () => {
         text: res.data.message,
         confirmButtonText: "ok",
       });
+      setLoading("create");
 
       setData({ ...data, shopName: "", addressDetail: "", contactNumber: "" });
     } catch (error) {
+      setLoading("create");
       Swal.fire({
         icon: "error",
         text: error.response.data.message,
@@ -130,7 +135,7 @@ const CreateShop = () => {
           <div>
             <button onClick={handleCloseModal}>Close</button>
             <h4 className="text-muted text-center mb-2">Create Shop</h4>
-            <div className="card py-2 px-5 shadow">
+            <div className="card py-2">
               <form className="text-center" onSubmit={handleSubmit}>
                 <div className="my-2">
                   <h1>Shop name</h1>
@@ -174,7 +179,7 @@ const CreateShop = () => {
                   <h1>Contact Number</h1>
                   <input
                     className="bg-blue-200 px-2 py-1 w-full"
-                    type="name"
+                    type="number"
                     name="contactNumber"
                     value={contactNumber}
                     onChange={handleChange}
@@ -185,7 +190,7 @@ const CreateShop = () => {
                 <div className="text-center">
                   <input
                     type="submit"
-                    value="create"
+                    value={loading}
                     className="text-white bg-blue-700 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 px-3 py-1 rounded-lg"
                   />
                 </div>
