@@ -5,6 +5,7 @@ import axios from "axios";
 import Select from "react-select";
 import { useAuthDispatch, useAuthState } from "../../hook";
 import add1 from "../../images/icons/add1.png";
+import CurrencyInput from "react-currency-input-field";
 
 const CreateInvoice = () => {
   const HOST = "https://svc-not-e.herokuapp.com";
@@ -124,7 +125,7 @@ const CreateInvoice = () => {
                 <div className="my-2">
                   <h1>Customer name</h1>
                   <input
-                    className="bg-blue-200 px-2 py-1"
+                    className="bg-blue-200 px-2 py-1 w-full"
                     type="name"
                     name="customerName"
                     value={customerName}
@@ -157,9 +158,10 @@ const CreateInvoice = () => {
                     ))}
                   </div>
                 ) : (
-                  <form onSubmit={handleUpdateProduct}>
+                  <form onSubmit={handleUpdateProduct} className="my-4">
                     <input
-                      type="text"
+                      className="w-full text-center bg-blue-100 px-2 py-2 my-2"
+                      type="name"
                       placeholder="product name"
                       value={addProduct.productName}
                       onChange={(e) =>
@@ -170,7 +172,19 @@ const CreateInvoice = () => {
                       }
                       required
                     />
-                    <input
+                    <CurrencyInput
+                      className="w-full bg-blue-100 text-right my-2 px-2 py-1"
+                      prefix="Rp"
+                      placeholder="product price"
+                      name="productPrice"
+                      onValueChange={(value) =>
+                        setAddProduct({
+                          ...addProduct,
+                          productPrice: value,
+                        })
+                      }
+                    />
+                    {/* <input
                       type="text"
                       placeholder="product price"
                       value={addProduct.productPrice}
@@ -181,9 +195,10 @@ const CreateInvoice = () => {
                         })
                       }
                       required
-                    />
+                    /> */}
                     <input
-                      type="text"
+                      type="number"
+                      className="w-4/5 bg-blue-100 px-2 py-2 my-2 mr-2"
                       placeholder="quantity"
                       value={addProduct.quantity}
                       onChange={(e) =>
@@ -194,7 +209,11 @@ const CreateInvoice = () => {
                       }
                       required
                     />
-                    <input type="submit" />
+                    <input
+                      type="submit"
+                      value="add"
+                      className="text-white bg-blue-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 px-3 py-1 rounded-lg"
+                    />
                   </form>
                 )}
                 <div className="text-center">
