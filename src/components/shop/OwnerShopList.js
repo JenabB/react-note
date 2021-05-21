@@ -36,7 +36,7 @@ const OwnerShopList = () => {
           ))}
         </div>
       ) : (
-        <h1>No Shop Yet</h1>
+        <h1 className="text-center py-20">No Shop Yet</h1>
       )}
     </div>
   );
