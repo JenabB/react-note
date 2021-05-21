@@ -76,7 +76,7 @@ const AddShopProduct = ({ id }) => {
                 <div className="my-2">
                   <h1>Product Name</h1>
                   <input
-                    className="bg-blue-200 px-2 py-1 w-full"
+                    className=" text-center bg-blue-200 px-2 py-1 w-full"
                     type="name"
                     name="productName"
                     value={productName}
@@ -88,7 +88,7 @@ const AddShopProduct = ({ id }) => {
                 <div className="my-2">
                   <h1>Product Price</h1>
                   <CurrencyInput
-                    className="w-full"
+                    className="w-full text-right p-2"
                     prefix="Rp"
                     placeholder="product price"
                     name="productPrice"
