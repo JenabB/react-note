@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { logout, useAuthDispatch, useAuthState } from "../hook";
 import { useHistory } from "react-router-dom";
-import back from "../images/icons/back.png";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import profile from "../images/ziva.jpeg";
 import Modal from "react-modal";
 
@@ -34,7 +34,7 @@ const Setting = () => {
       <nav className="sticky top-0 z-10 shadow-lg flex justify-between bg-blue-700 text-white p-4">
         <div>
           <button onClick={goBack}>
-            <img src={back} alt="back" width="18px" />
+            <AiOutlineArrowLeft size="28px" />
           </button>
         </div>
         <div></div>

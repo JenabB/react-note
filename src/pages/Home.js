@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 import { useAuthState } from "../hook";
 import home from "../images/home.png";
 import { Link } from "react-router-dom";
-import gear from "../images/icons/setting.png";
+import { BsGear } from "react-icons/bs";
 
 const Home = (props) => {
   const user = useAuthState();
@@ -27,7 +27,7 @@ const Home = (props) => {
         </div>
         <div>
           <Link to="/user/setting">
-            <img src={gear} alt="setting" width="28px" />
+            <BsGear size="28px" />
           </Link>
         </div>
       </nav>
