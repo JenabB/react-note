@@ -71,7 +71,7 @@ const AddShopProduct = ({ id }) => {
           <div>
             <button onClick={handleCloseModal}>Close</button>
             <h4 className="text-center mb-2 text-white">Add Product</h4>
-            <div className="card py-2 px-5 shadow">
+            <div className="card py-2 px-5">
               <form className="text-center" onSubmit={handleSubmit}>
                 <div className="my-2">
                   <h1>Product Name</h1>
