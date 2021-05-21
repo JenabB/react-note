@@ -10,6 +10,7 @@ let token = localStorage.getItem("token")
 export const initialState = {
   user: "" || user,
   token: "" || token,
+  emailUser: "",
   allCountries: [],
   allProvinces: [],
   allDistricts: [],
@@ -45,6 +46,12 @@ export const AuthReducer = (initialState, action) => {
         errorMessage: action.error,
       };
 
+    case "GET_EMAIL_USER":
+      return {
+        ...initialState,
+        emailUser: action.payload,
+      };
+
     case "REQUEST_LOGIN":
       return {
         ...initialState,
@@ -53,6 +60,7 @@ export const AuthReducer = (initialState, action) => {
     case "LOGIN_SUCCESS":
       return {
         ...initialState,
+
         user: jwt(action.payload.token),
         token: action.payload.token,
         loading: false,
