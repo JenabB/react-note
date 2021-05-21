@@ -90,7 +90,7 @@ const AddShopProduct = ({ id }) => {
                   <CurrencyInput
                     className="w-full text-right p-2"
                     prefix="Rp"
-                    placeholder="product price"
+                    placeholder="0"
                     name="productPrice"
                     onValueChange={(value) =>
                       setData({ ...data, productPrice: value })

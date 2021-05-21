@@ -172,10 +172,11 @@ const CreateInvoice = () => {
                       }
                       required
                     />
+
                     <CurrencyInput
                       className="w-full bg-blue-100 text-right my-2 px-2 py-1"
                       prefix="Rp"
-                      placeholder="product price"
+                      placeholder="0"
                       name="productPrice"
                       onValueChange={(value) =>
                         setAddProduct({
@@ -196,6 +197,7 @@ const CreateInvoice = () => {
                       }
                       required
                     /> */}
+
                     <input
                       type="number"
                       className="text-right w-4/5 bg-blue-100 px-2 py-2 my-2 mr-2"
