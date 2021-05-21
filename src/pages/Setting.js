@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { logout, useAuthDispatch, useAuthState } from "../hook";
-import { useHistory } from "react-router-dom";
-import { AiOutlineArrowLeft } from "react-icons/ai";
+import { Link, useHistory } from "react-router-dom";
 import profile from "../images/ziva.jpeg";
 import Modal from "react-modal";
+import NavWithBack from "../components/NavWithBack";
 
 const Setting = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,15 +31,7 @@ const Setting = () => {
   };
   return (
     <div className="h-screen">
-      <nav className="sticky top-0 z-10 shadow-lg flex justify-between bg-blue-700 text-white p-4">
-        <div>
-          <button onClick={goBack}>
-            <AiOutlineArrowLeft size="28px" />
-          </button>
-        </div>
-        <div></div>
-        <div></div>
-      </nav>
+      <NavWithBack />
 
       <div className="pb-20">
         <div className="lg:grid grid-cols-3 ">
@@ -62,7 +54,9 @@ const Setting = () => {
       </div>
       <div className="fixed bottom-0 w-screen">
         <div className="text-center">
-          <button className="py-2 px-4 w-full">Change Password</button>
+          <Link to="/user/setting/edit-profile">
+            <button className="py-2 px-4 w-full">Edit Profile</button>
+          </Link>
         </div>
 
         <div className="text-center">
