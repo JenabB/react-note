@@ -1,35 +1,42 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import { useAuthState } from "../../hook";
-// import Swal from "sweetalert2";
+import { logout, useAuthDispatch, useAuthState } from "../../hook";
+import Swal from "sweetalert2";
 import NavWithBack from "../NavWithBack";
 import axios from "axios";
-import Modal from "react-modal";
+// import Modal from "react-modal";
+import { useHistory } from "react-router-dom";
 
 const ChangePassword = (props) => {
   const [data, setData] = useState({
-    email: "",
     password: "",
     newPassword: "",
   });
-  const [loading, setLoading] = useState("change");
-  const { email, password, newPassword } = data;
-  const [isOpen, setIsOpen] = useState(false);
 
+  const [loading, setLoading] = useState("change");
+  const { password, newPassword } = data;
+  console.log("data", data);
+  // const [isOpen, setIsOpen] = useState(false);
+
+  const dispatch = useAuthDispatch();
   const user = useAuthState();
 
-  console.log(user);
+  let history = useHistory();
+
+  // function goBack() {
+  //   history.goBack(-3);
+  // }
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  const openModal = () => {
-    setIsOpen(true);
-  };
+  // const openModal = () => {
+  //   setIsOpen(true);
+  // };
 
-  const closeModal = () => {
-    setIsOpen(false);
-  };
+  // const closeModal = () => {
+  //   setIsOpen(false);
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,34 +44,36 @@ const ChangePassword = (props) => {
     try {
       await axios
         .put(`https://svc-not-e.herokuapp.com/v1/user/change-password/owner`, {
-          email: email,
+          email: user.emailUser,
           password: password,
           newPassword: newPassword,
         })
         .then((result) => {
           console.log("result", result);
-          localStorage.removeItem("token");
-          props.history.push("/user/login");
+          logout(dispatch);
+          history.push("/user");
+          Swal.fire({
+            icon: "success",
+            text: result.data.message,
+            confirmButtonText: "ok",
+          });
         });
 
       // if (res) {
-      //   Swal.fire({
-      //     icon: "success",
-      //     text: "login success",
-      //     confirmButtonText: "ok",
-      //   });
+
       //   props.history.push("/user");
       // } else {
-      //   Swal.fire({
-      //     icon: "error",
-      //     text: "email/password invalid",
-      //     confirmButtonText: "ok",
-      //   });
+
       // }
       setLoading("change");
     } catch (error) {
-      setLoading("change");
       console.log(error.response);
+      setLoading("change");
+      Swal.fire({
+        icon: "error",
+        text: "email/password invalid",
+        confirmButtonText: "ok",
+      });
     }
   };
 
@@ -85,7 +94,7 @@ const ChangePassword = (props) => {
               className="p-2 bg-green-400 w-full"
               type="email"
               name="email"
-              value={user.emailUser}
+              defaultValue={user.emailUser}
               placeholder={user.emailUser}
               required
             />
@@ -115,24 +124,23 @@ const ChangePassword = (props) => {
             />
           </div>
 
-          <div className="my-5">
+          <input type="submit" value={loading} />
+          {/* <div className="my-5">
             <button
               onClick={openModal}
               className="text-white bg-blue-700 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 px-3 py-1 rounded-lg"
             >
               Change
             </button>
-          </div>
+          </div> */}
 
-          <Modal isOpen={isOpen} onRequestClose={closeModal}>
+          {/* <Modal isOpen={isOpen} onRequestClose={closeModal}>
             <div className="py-20">
               <h1 className="text-center text-2xl py-8">Change Password</h1>
               <div className="flex justify-center">
-                <input
-                  type="submit"
-                  value={loading}
-                  className="text-white bg-blue-700 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 px-3 py-1 rounded-lg"
-                />
+                <button className="text-white bg-blue-700 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 px-3 py-1 rounded-lg">
+                  {loading}
+                </button>
                 <button
                   className="shadow-lg bg-gray-200 px-4 py-2 rounded"
                   onClick={closeModal}
@@ -141,7 +149,7 @@ const ChangePassword = (props) => {
                 </button>
               </div>
             </div>
-          </Modal>
+          </Modal> */}
         </form>
       </div>
     </div>
