@@ -23,7 +23,7 @@ const Home = (props) => {
       .then((result) => {
         setUserProfile(result.data.data);
       });
-  });
+  }, [user.token]);
 
   if (!user.token) {
     props.history.push("/user/login");

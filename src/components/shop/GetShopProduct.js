@@ -10,7 +10,7 @@ const GetShopProduct = ({ id }) => {
 
   useEffect(() => {
     axios
-      .get(`https://svc-not-e.herokuapp.com/v1/shop/${id}/product`, {
+      .get(`https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}/product`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${user.token}`,

@@ -15,7 +15,7 @@ const AddShopProduct = ({ id }) => {
   const [loading, setLoading] = useState("create");
   const { productName, productPrice } = data;
   const user = useAuthState();
-
+  console.log(user);
   const handleOpenModal = () => {
     setShowModal(true);
   };
@@ -32,7 +32,7 @@ const AddShopProduct = ({ id }) => {
     setLoading("Loading...");
     try {
       const res = await axios.post(
-        `https://svc-not-e.herokuapp.com/v1/shop/${id}/product`,
+        `https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}/product`,
         {
           productName: productName,
           productPrice: productPrice,
@@ -44,6 +44,7 @@ const AddShopProduct = ({ id }) => {
           },
         }
       );
+      console.log(res);
       setLoading("create");
       Swal.fire({
         icon: "success",
@@ -52,6 +53,7 @@ const AddShopProduct = ({ id }) => {
       });
       setData({ ...data, productName: "", productPrice: "" });
     } catch (error) {
+      console.log(error.response);
       setLoading("create");
       Swal.fire({
         icon: "error",
