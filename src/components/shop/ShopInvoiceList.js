@@ -30,7 +30,11 @@ const ShopInvoiceList = ({ id }) => {
               <div key={index} className="shadow-lg m-3 p-3">
                 <h1 className="font-bold">{invoice.customerName}</h1>
                 <h2>{moment(invoice.createdAt).startOf("hour").fromNow()}</h2>
-                <h3>{invoice.totalPrice}</h3>
+                {Intl.NumberFormat("id-ID", {
+                  style: "currency",
+                  currency: "IDR",
+                  minimumFractionDigits: 0,
+                }).format(invoice.totalPrice)}
               </div>
             </Link>
           ))}

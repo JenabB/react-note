@@ -29,39 +29,46 @@ const UpdateProfile = () => {
     e.preventDefault();
     setLoading("loading...");
     try {
-      const res = await axios.put(
-        `https://svc-not-e.herokuapp.com/v1/user/profile`,
-        {
-          fullName: fullName,
-          contactNumber: contactNumber,
-          address: address,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
+      await axios
+        .put(
+          `https://svc-not-e.herokuapp.com/v1/user/profile`,
+          {
+            fullName: fullName,
+            contactNumber: contactNumber,
+            address: address,
           },
-        }
-      );
-
-      if (res) {
-        Swal.fire({
-          icon: "success",
-          text: res.data.message,
-          confirmButtonText: "ok",
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        )
+        .then((result) => {
+          Swal.fire({
+            icon: "success",
+            text: result.data.message,
+            confirmButtonText: "ok",
+          });
+          goBack();
         });
-        goBack();
-      } else {
-        Swal.fire({
-          icon: "error",
-          text: "email/password invalid",
-          confirmButtonText: "ok",
-        });
-      }
       setLoading("update");
     } catch (error) {
       setLoading("update");
-      console.log(error.response);
+      if (error.response.data.status === 401) {
+        Swal.fire({
+          icon: "error",
+          text: error.response.data.message,
+          confirmButtonText: "ok",
+        });
+        history.push("/user/login");
+      } else {
+        Swal.fire({
+          icon: "error",
+          text: error.response.data.message,
+          confirmButtonText: "ok",
+        });
+      }
     }
   };
 
