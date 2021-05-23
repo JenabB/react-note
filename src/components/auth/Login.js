@@ -25,7 +25,6 @@ const Login = (props) => {
       const res = await loginUser(dispatch, { email, password });
 
       if (res) {
-        dispatch({ type: "GET_EMAIL_USER", payload: email });
         Swal.fire({
           icon: "success",
           text: "login success",

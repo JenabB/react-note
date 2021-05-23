@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import profile from "../images/ziva.jpeg";
 import Modal from "react-modal";
 import NavWithBack from "../components/NavWithBack";
+import UserProfile from "../components/auth/UserProfile";
 
 const Setting = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,11 +47,7 @@ const Setting = () => {
           </div>
           <div></div>
         </div>
-        <h1 className="text-center font-bold">{user.user.fullName}</h1>
-        <div className="w-3/4 mx-auto">
-          <h2>Contact number: {user.user.contactNumber}</h2>
-          <h2>Address: {user.user.Address}</h2>
-        </div>
+        <UserProfile />
       </div>
       <div className="bottom-0 w-screen">
         <div className="text-center">

@@ -10,7 +10,7 @@ const CreateShop = () => {
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState({
     shopName: "",
-    addressDetail: "",
+    address: "",
     contactNumber: "",
   });
 
@@ -58,7 +58,7 @@ const CreateShop = () => {
     label: c.regencyName,
   }));
 
-  const { shopName, addressDetail, contactNumber } = data;
+  const { shopName, address, contactNumber } = data;
 
   const handleSelectCountry = (e) => {
     setSelectedCountry(e.value);
@@ -96,7 +96,7 @@ const CreateShop = () => {
           countryId: selectedCountry,
           provinceId: selectedProvince,
           regencyId: selectedRegency,
-          addressDetail: addressDetail,
+          address: address,
           contactNumber: contactNumber,
         },
         {
@@ -168,8 +168,8 @@ const CreateShop = () => {
                   <input
                     className="bg-blue-200 px-2 py-1 w-full"
                     type="name"
-                    name="addressDetail"
-                    value={addressDetail}
+                    name="address"
+                    value={address}
                     onChange={handleChange}
                     required
                   />

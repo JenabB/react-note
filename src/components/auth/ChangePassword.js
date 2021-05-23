@@ -14,7 +14,6 @@ const ChangePassword = () => {
 
   const [loading, setLoading] = useState("change");
   const { password, newPassword } = data;
-  console.log("data", data);
 
   const dispatch = useAuthDispatch();
   const user = useAuthState();
@@ -35,7 +34,6 @@ const ChangePassword = () => {
           newPassword: newPassword,
         })
         .then((result) => {
-          console.log("result", result);
           logout(dispatch);
           history.push("/user");
           Swal.fire({
@@ -47,7 +45,6 @@ const ChangePassword = () => {
 
       setLoading("change");
     } catch (error) {
-      console.log(error.response);
       setLoading("change");
       Swal.fire({
         icon: "error",
@@ -74,8 +71,8 @@ const ChangePassword = () => {
               className="p-2 bg-green-400 w-full"
               type="email"
               name="email"
-              defaultValue={user.emailUser}
-              placeholder={user.emailUser}
+              defaultValue={user.userProfile.email}
+              placeholder={user.userProfile.email}
               required
             />
           </div>

@@ -1,68 +1,66 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
+import { useHistory } from "react-router-dom";
 import { useAuthState } from "../../hook";
-// import Swal from "sweetalert2";
+import Swal from "sweetalert2";
 import NavWithBack from "../NavWithBack";
 import axios from "axios";
-import Modal from "react-modal";
 
-const UpdateProfile = (props) => {
+const UpdateProfile = () => {
   const [data, setData] = useState({
     fullName: "",
     contactNumber: "",
+    address: "",
   });
-
-  const [loading, setLoading] = useState("change");
-  const { fullName, contactNumber } = data;
-  const [isOpen, setIsOpen] = useState(false);
+  let history = useHistory();
+  function goBack() {
+    history.goBack();
+  }
+  const [loading, setLoading] = useState("update");
+  const { fullName, contactNumber, address } = data;
 
   const user = useAuthState();
 
-  console.log(user);
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
-  };
-
-  const openModal = () => {
-    setIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading("loading...");
     try {
-      await axios
-        .put(`https://svc-not-e.herokuapp.com/v1/user/change-password/owner`, {
+      const res = await axios.put(
+        `https://svc-not-e.herokuapp.com/v1/user/profile`,
+        {
           fullName: fullName,
           contactNumber: contactNumber,
-        })
-        .then((result) => {
-          console.log("result", result);
-          localStorage.removeItem("token");
-          props.history.push("/user/login");
-        });
+          address: address,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
 
-      // if (res) {
-      //   Swal.fire({
-      //     icon: "success",
-      //     text: "login success",
-      //     confirmButtonText: "ok",
-      //   });
-      //   props.history.push("/user");
-      // } else {
-      //   Swal.fire({
-      //     icon: "error",
-      //     text: "email/password invalid",
-      //     confirmButtonText: "ok",
-      //   });
-      // }
-      setLoading("change");
+      if (res) {
+        Swal.fire({
+          icon: "success",
+          text: res.data.message,
+          confirmButtonText: "ok",
+        });
+        goBack();
+      } else {
+        Swal.fire({
+          icon: "error",
+          text: "email/password invalid",
+          confirmButtonText: "ok",
+        });
+      }
+      setLoading("update");
     } catch (error) {
-      setLoading("change");
+      setLoading("update");
       console.log(error.response);
     }
   };
@@ -83,9 +81,20 @@ const UpdateProfile = (props) => {
             <input
               className="p-2 placeholder-black bg-green-400 w-full"
               type="name"
-              placeholder={` old: ${user.user.fullName}`}
               name="fullName"
               value={fullName}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="mt-4">
+            <h1>Address Detail</h1>
+            <input
+              className="p-2 placeholder-black bg-green-400 w-full"
+              type="name"
+              name="address"
+              value={address}
               onChange={handleChange}
               required
             />
@@ -96,7 +105,6 @@ const UpdateProfile = (props) => {
             <input
               className="p-2 placeholder-black bg-green-400 w-full"
               type="number"
-              placeholder={` old: ${user.user.contactNumber}`}
               name="contactNumber"
               value={contactNumber}
               onChange={handleChange}
@@ -104,33 +112,13 @@ const UpdateProfile = (props) => {
             />
           </div>
 
-          <div className="my-5">
-            <button
-              onClick={openModal}
+          <div className="mt-4">
+            <input
+              type="submit"
+              value={loading}
               className="text-white bg-blue-700 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 px-3 py-1 rounded-lg"
-            >
-              Change
-            </button>
+            />
           </div>
-
-          <Modal isOpen={isOpen} onRequestClose={closeModal}>
-            <div className="py-20">
-              <h1 className="text-center text-2xl py-8">Change Password</h1>
-              <div className="flex justify-center">
-                <input
-                  type="submit"
-                  value={loading}
-                  className="text-white bg-blue-700 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 px-3 py-1 rounded-lg"
-                />
-                <button
-                  className="shadow-lg bg-gray-200 px-4 py-2 rounded"
-                  onClick={closeModal}
-                >
-                  No
-                </button>
-              </div>
-            </div>
-          </Modal>
         </form>
       </div>
     </div>

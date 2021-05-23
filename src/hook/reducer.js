@@ -10,7 +10,7 @@ let token = localStorage.getItem("token")
 export const initialState = {
   user: "" || user,
   token: "" || token,
-  emailUser: "",
+  userProfile: [],
   allCountries: [],
   allProvinces: [],
   allDistricts: [],
@@ -46,12 +46,6 @@ export const AuthReducer = (initialState, action) => {
         errorMessage: action.error,
       };
 
-    case "GET_EMAIL_USER":
-      return {
-        ...initialState,
-        emailUser: action.payload,
-      };
-
     case "REQUEST_LOGIN":
       return {
         ...initialState,
@@ -71,6 +65,20 @@ export const AuthReducer = (initialState, action) => {
         ...initialState,
         user: "",
         token: "",
+        userProfile: [],
+        allCountries: [],
+        allProvinces: [],
+        allDistricts: [],
+        countryId: "",
+        provinceId: "",
+        districtId: "",
+        shopList: [],
+        shopId: "",
+        shopDetails: [],
+        shopProduct: [],
+        shopInvoice: [],
+        loading: false,
+        errorMessage: null,
       };
 
     case "LOGIN_ERROR":
@@ -156,6 +164,12 @@ export const AuthReducer = (initialState, action) => {
       return {
         ...initialState,
         districtId: action.payload,
+      };
+
+    case "GET_USER_PROFILE":
+      return {
+        ...initialState,
+        userProfile: action.payload,
       };
 
     default:

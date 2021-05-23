@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import CreateShop from "../components/shop/CreateShop";
 import OwnerShopList from "../components/shop/OwnerShopList";
 import { Helmet } from "react-helmet";
@@ -5,9 +6,24 @@ import { useAuthState } from "../hook";
 import home from "../images/home.png";
 import { Link } from "react-router-dom";
 import { BsGear } from "react-icons/bs";
+import axios from "axios";
 
 const Home = (props) => {
+  const [userProfile, setUserProfile] = useState([]);
+  console.log(userProfile);
   const user = useAuthState();
+  useEffect(() => {
+    axios
+      .get(`https://svc-not-e.herokuapp.com/v1/user/profile`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      })
+      .then((result) => {
+        setUserProfile(result.data.data);
+      });
+  });
 
   if (!user.token) {
     props.history.push("/user/login");
@@ -40,7 +56,7 @@ const Home = (props) => {
           <h1 className="text-lg">
             Welcome
             <span className="text-4xl font-bold text-blue-700">
-              {user.user.fullName}
+              {userProfile.fullName}
             </span>
           </h1>
           <p>Ini nama aplikasinya !E</p>
