@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 import Select from "react-select";
 import { useAuthDispatch, useAuthState } from "../../hook";
 import add1 from "../../images/icons/add1.png";
@@ -11,7 +12,7 @@ const CreateInvoice = () => {
   const HOST = "https://svc-not-e.herokuapp.com";
   const dispatch = useAuthDispatch();
   const user = useAuthState();
-
+  let history = useHistory();
   const [product, setProduct] = useState([]);
   const [addProduct, setAddProduct] = useState({
     productName: "",
@@ -105,8 +106,21 @@ const CreateInvoice = () => {
         text: res.data.message,
         confirmButtonText: "ok",
       });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      if (error.response.data.status === 401) {
+        Swal.fire({
+          icon: "error",
+          text: error.response.data.message,
+          confirmButtonText: "ok",
+        });
+        history.push("/user/login");
+      } else {
+        Swal.fire({
+          icon: "error",
+          text: error.response.data.message,
+          confirmButtonText: "ok",
+        });
+      }
     }
   };
 

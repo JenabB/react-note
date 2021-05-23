@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "../../hook";
 import Modal from "react-modal";
+import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
 import Select from "react-select";
@@ -13,7 +14,7 @@ const CreateShop = () => {
     address: "",
     contactNumber: "",
   });
-
+  let history = useHistory();
   const [loading, setLoading] = useState("create");
 
   const [allCountries, setAllCounties] = useState([]);
@@ -117,11 +118,20 @@ const CreateShop = () => {
       setData({ ...data, shopName: "", addressDetail: "", contactNumber: "" });
     } catch (error) {
       setLoading("create");
-      Swal.fire({
-        icon: "error",
-        text: error.response.data.message,
-        confirmButtonText: "ok",
-      });
+      if (error.response.data.status === 401) {
+        Swal.fire({
+          icon: "error",
+          text: error.response.data.message,
+          confirmButtonText: "ok",
+        });
+        history.push("/user/login");
+      } else {
+        Swal.fire({
+          icon: "error",
+          text: error.response.data.message,
+          confirmButtonText: "ok",
+        });
+      }
     }
   };
 

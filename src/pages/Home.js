@@ -1,17 +1,17 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import CreateShop from "../components/shop/CreateShop";
 import OwnerShopList from "../components/shop/OwnerShopList";
 import { Helmet } from "react-helmet";
-import { useAuthState } from "../hook";
+import { useAuthState, useAuthDispatch } from "../hook";
 import home from "../images/home.png";
 import { Link } from "react-router-dom";
 import { BsGear } from "react-icons/bs";
 import axios from "axios";
 
 const Home = (props) => {
-  const [userProfile, setUserProfile] = useState([]);
-  console.log(userProfile);
   const user = useAuthState();
+  const dispatch = useAuthDispatch();
+
   useEffect(() => {
     axios
       .get(`https://svc-not-e.herokuapp.com/v1/user/profile`, {
@@ -21,9 +21,9 @@ const Home = (props) => {
         },
       })
       .then((result) => {
-        setUserProfile(result.data.data);
+        dispatch({ type: "GET_USER_PROFILE", payload: result.data.data });
       });
-  }, [user.token]);
+  }, [dispatch, user.token]);
 
   if (!user.token) {
     props.history.push("/user/login");
@@ -33,7 +33,7 @@ const Home = (props) => {
     <div className="mx-auto sm:w-full h-screen">
       <Helmet>
         <meta charSet="utf-8" />
-        <title>{user.user.fullName}</title>
+        <title>{user.userProfile.fullName}</title>
       </Helmet>
 
       <nav className="sticky top-0 z-10 shadow-lg flex justify-between bg-blue-700 text-white p-4">
@@ -56,7 +56,7 @@ const Home = (props) => {
           <h1 className="text-lg">
             Welcome
             <span className="text-4xl font-bold text-blue-700">
-              {userProfile.fullName}
+              {user.userProfile.fullName}
             </span>
           </h1>
           <p>Ini nama aplikasinya !E</p>

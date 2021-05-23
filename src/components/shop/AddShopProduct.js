@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Modal from "react-modal";
 import { useAuthState } from "../../hook";
 import Swal from "sweetalert2";
@@ -15,7 +16,7 @@ const AddShopProduct = ({ id }) => {
   const [loading, setLoading] = useState("create");
   const { productName, productPrice } = data;
   const user = useAuthState();
-  console.log(user);
+  let history = useHistory();
   const handleOpenModal = () => {
     setShowModal(true);
   };
@@ -44,7 +45,7 @@ const AddShopProduct = ({ id }) => {
           },
         }
       );
-      console.log(res);
+
       setLoading("create");
       Swal.fire({
         icon: "success",
@@ -53,13 +54,21 @@ const AddShopProduct = ({ id }) => {
       });
       setData({ ...data, productName: "", productPrice: "" });
     } catch (error) {
-      console.log(error.response);
       setLoading("create");
-      Swal.fire({
-        icon: "error",
-        text: error.response.data.message,
-        confirmButtonText: "ok",
-      });
+      if (error.response.data.status === 401) {
+        Swal.fire({
+          icon: "error",
+          text: error.response.data.message,
+          confirmButtonText: "ok",
+        });
+        history.push("/user/login");
+      } else {
+        Swal.fire({
+          icon: "error",
+          text: error.response.data.message,
+          confirmButtonText: "ok",
+        });
+      }
     }
   };
 
