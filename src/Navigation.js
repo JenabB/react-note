@@ -31,13 +31,13 @@ const Navigation = () => {
         <Route exact path="/user/setting">
           <Setting />
         </Route>
-
         <Route exact path="/user/setting/change-password">
           <ChangePassword />
         </Route>
         <Route exact path="/user/setting/update-profile">
           <UpdateProfile />
         </Route>
+        {/* <Route path="/user/shop/:id/product/:id" children={<h1>ya</h1>} /> */}
       </Switch>
     </Router>
   );

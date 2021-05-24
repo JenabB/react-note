@@ -7,7 +7,7 @@ const GetShopProduct = ({ id }) => {
   const user = useAuthState();
   const dispatch = useAuthDispatch();
   const productList = user.shopProduct;
-
+  // let { path, url } = useRouteMatch();
   useEffect(() => {
     axios
       .get(`https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}/product`, {
@@ -34,7 +34,9 @@ const GetShopProduct = ({ id }) => {
           </div>
           <div className="grid grid-cols-3">
             {productList.map((product, index) => (
-              <Link to={`/product/${product.productId}`}>
+              <Link
+                to={`/user/shop/${user.shopId}/product/${product.productId}`}
+              >
                 <div key={index} className="shadow-lg m-3 p-3">
                   <h1 className="font-bold">{product.productName}</h1>
                   {Intl.NumberFormat("id-ID", {

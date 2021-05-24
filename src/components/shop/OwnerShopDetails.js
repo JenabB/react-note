@@ -7,7 +7,7 @@ import { useAuthState, useAuthDispatch } from "../../hook";
 import ShopInvoiceList from "./ShopInvoiceList";
 import CreateInvoice from "./CreateInvoice";
 
-import ProductDetails from "./ProductDetails";
+// import ProductDetails from "./ProductDetails";
 import lady from "../../images/home1.png";
 import location from "../../images/location.png";
 import { AiOutlineArrowLeft } from "react-icons/ai";
@@ -131,7 +131,7 @@ const OwnerShopDetails = (props) => {
               </div>
             </Link>
           </Route>
-          <Route path={`${path}/product`}>
+          <Route exact path={`${path}/product`}>
             <Product />
           </Route>
           <Route exact path={`${path}/invoice`}>
@@ -140,12 +140,6 @@ const OwnerShopDetails = (props) => {
               <ShopInvoiceList id={shopId} />
             </div>
           </Route>
-
-          <Route
-            exact
-            path="/user/shop/:id/product/:id"
-            component={ProductDetails}
-          />
         </Switch>
       </div>
     </div>

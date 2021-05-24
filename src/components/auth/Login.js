@@ -23,25 +23,18 @@ const Login = (props) => {
     setLoading("loading...");
     try {
       const res = await loginUser(dispatch, { email, password });
-
-      if (res) {
+      console.log("res", res);
+      setLoading("login");
+      if (res.status === 200) {
         Swal.fire({
           icon: "success",
           text: "login success",
           confirmButtonText: "ok",
         });
         props.history.push("/user");
-      } else {
-        Swal.fire({
-          icon: "error",
-          text: "email/password invalid",
-          confirmButtonText: "ok",
-        });
       }
-      setLoading("login");
     } catch (error) {
       setLoading("login");
-      console.log(error);
     }
   };
 

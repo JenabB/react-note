@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 const HOST = "https://svc-not-e.herokuapp.com";
 
 export async function ownerShopList(dispatch) {
@@ -73,11 +74,23 @@ export async function loginUser(dispatch, loginPayload) {
       localStorage.setItem("token", JSON.stringify(data.data.token));
       return data;
     } else {
+      console.log("err", data);
+      Swal.fire({
+        icon: "error",
+        text: data.message,
+        confirmButtonText: "ok",
+      });
       dispatch({ type: "LOGIN_ERROR", error: data.error });
     }
 
     return;
   } catch (error) {
+    console.log("error", error);
+    Swal.fire({
+      icon: "error",
+      text: error.response.message,
+      confirmButtonText: "ok",
+    });
     dispatch({ type: "LOGIN_ERROR", error: error });
   }
 }
