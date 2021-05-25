@@ -106,6 +106,8 @@ const AddShopProduct = ({ id }) => {
                     onValueChange={(value) =>
                       setData({ ...data, productPrice: value })
                     }
+
+                    required
                   />
                 </div>
 
