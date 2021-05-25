@@ -7,20 +7,23 @@ import NavWithBack from "../NavWithBack";
 import axios from "axios";
 
 const UpdateProfile = () => {
+  const user = useAuthState();
   const [data, setData] = useState({
-    fullName: "",
-    contactNumber: "",
-    address: "",
+    fullName: user.userProfile.fullName,
+    contactNumber: user.userProfile.contactNumber,
+    address: user.userProfile.address,
   });
+
   let history = useHistory();
   function goBack() {
     history.goBack();
   }
+
   const [loading, setLoading] = useState("update");
   const { fullName, contactNumber, address } = data;
 
-  const user = useAuthState();
-
+ 
+console.log(data)
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -86,7 +89,7 @@ const UpdateProfile = () => {
           <div className="mt-4">
             <h1>Full name</h1>
             <input
-              className="p-2 placeholder-black bg-green-400 w-full"
+              className="p-2 placeholder-black bg-blue-400 w-full"
               type="name"
               name="fullName"
               value={fullName}
@@ -98,7 +101,7 @@ const UpdateProfile = () => {
           <div className="mt-4">
             <h1>Address Detail</h1>
             <input
-              className="p-2 placeholder-black bg-green-400 w-full"
+              className="p-2 placeholder-black bg-blue-400 w-full"
               type="name"
               name="address"
               value={address}
@@ -110,7 +113,7 @@ const UpdateProfile = () => {
           <div className="mt-4">
             <h1>Contact Number</h1>
             <input
-              className="p-2 placeholder-black bg-green-400 w-full"
+              className="p-2 placeholder-black bg-blue-400 w-full"
               type="number"
               name="contactNumber"
               value={contactNumber}
