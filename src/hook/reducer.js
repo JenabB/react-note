@@ -68,10 +68,10 @@ export const AuthReducer = (initialState, action) => {
         userProfile: [],
         allCountries: [],
         allProvinces: [],
-        allDistricts: [],
+        allRegencies: [],
         countryId: "",
         provinceId: "",
-        districtId: "",
+        regencyId: "",
         shopList: [],
         shopId: "",
         shopDetails: [],
@@ -136,7 +136,7 @@ export const AuthReducer = (initialState, action) => {
         allCountries: action.payload,
       };
 
-    case "GET_COUNTRY":
+    case "GET_COUNTRY_ID":
       return {
         ...initialState,
         countryId: action.payload,
@@ -148,22 +148,22 @@ export const AuthReducer = (initialState, action) => {
         allProvinces: action.payload,
       };
 
-    case "GET_PROVINCE":
+    case "GET_PROVINCE_ID":
       return {
         ...initialState,
         provinceId: action.payload,
       };
 
-    case "GET_ALL_DISTRICTS":
+    case "GET_ALL_REGENCIES":
       return {
         ...initialState,
-        allDistricts: action.payload,
+        allRegencies: action.payload,
       };
 
-    case "GET_DISTRICT":
+    case "GET_REGENCY_ID":
       return {
         ...initialState,
-        districtId: action.payload,
+        regencyId: action.payload,
       };
 
     case "GET_USER_PROFILE":

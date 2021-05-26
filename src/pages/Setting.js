@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { logout, useAuthDispatch, useAuthState } from "../hook";
+import { logout, useAuthDispatch } from "../hook";
 import { Link, useHistory } from "react-router-dom";
 import profile from "../images/ziva.jpeg";
 import Modal from "react-modal";
@@ -9,8 +9,6 @@ import UserProfile from "../components/auth/UserProfile";
 const Setting = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useAuthDispatch();
-  const user = useAuthState();
-  console.log(user);
 
   let history = useHistory();
 

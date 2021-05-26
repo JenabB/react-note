@@ -34,9 +34,7 @@ const LandingPage = () => {
           <div>
             <Link to="/user">Home</Link>
           </div>
-          <div>
-            <h1 className="text-green-500"> A</h1>
-          </div>
+          <div></div>
         </nav>
       ) : (
         <nav className="sticky top-0 z-10 shadow-lg flex justify-between bg-blue-700 text-white p-4">
