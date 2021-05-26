@@ -1,46 +1,36 @@
-import { useEffect, useState } from "react";
-import { useAuthDispatch, useAuthState } from "../../hook";
-import Modal from "react-modal";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import Swal from "sweetalert2";
+import { useAuthState, useAuthDispatch } from "../../hook";
 import axios from "axios";
+import { AiFillDelete } from "react-icons/ai";
 import Select from "react-select";
-import add from "../../images/icons/add1.png";
+import Swal from "sweetalert2";
 
-const CreateShop = () => {
-  const user = useAuthState();
+const ChangeShop = () => {
   const dispatch = useAuthDispatch();
-  const [showModal, setShowModal] = useState(false);
+  const user = useAuthState();
   const [data, setData] = useState({
     shopName: "",
     address: "",
     contactNumber: "",
   });
+  const { shopName, address, contactNumber } = data;
 
   let history = useHistory();
-  const [loading, setLoading] = useState("create");
 
-  const [selectedCountry, setSelectedCountry] = useState("100");
-  const [selectedProvince, setSelectedProvince] = useState("9");
+  const [selectedCountry, setSelectedCountry] = useState(
+    user.shopDetails.countryId
+  );
+  const [selectedProvince, setSelectedProvince] = useState(
+    user.shopDetails.provinceId
+  );
   const [allRegencies, setAllRegencies] = useState([]);
-  const [selectedRegency, setSelectedRegency] = useState("10");
+  const [selectedRegency, setSelectedRegency] = useState(
+    user.shopDetails.regencyId
+  );
 
   const host = "https://svc-not-e.herokuapp.com";
   useEffect(() => {
-    fetch(`${host}/v1/area/country`)
-      .then((response) => response.json())
-      .then((data) => {
-        dispatch({ type: "GET_ALL_COUNTRIES", payload: data.data });
-      })
-      .catch((error) => console.log(error));
-
-    fetch(`${host}/v1/area/province?countryId=${selectedCountry}`)
-      .then((response) => response.json())
-      .then((data) => {
-        dispatch({ type: "GET_ALL_PROVINCES", payload: data.data });
-      })
-      .catch((error) => console.log(error));
-
     fetch(`${host}/v1/area/regency?provinceId=${selectedProvince}`)
       .then((response) => response.json())
       .then((data) => {
@@ -48,7 +38,7 @@ const CreateShop = () => {
         dispatch({ type: "GET_ALL_REGENCIES", payload: data.data });
       })
       .catch((error) => console.log(error));
-  }, [data, dispatch, selectedCountry, selectedProvince]);
+  }, [dispatch, selectedProvince]);
 
   const countriesOptions = user.allCountries.map((c) => ({
     value: c.countryId,
@@ -60,102 +50,103 @@ const CreateShop = () => {
     label: c.provinceName,
   }));
 
-  const regenciesOptions = allRegencies.map((c) => ({
-    value: c.regencyId,
-    label: c.regencyName,
-  }));
-
-  const { shopName, address, contactNumber } = data;
+  const regenciesOptions =
+    allRegencies &&
+    allRegencies.map((c) => ({
+      value: c.regencyId,
+      label: c.regencyName,
+    }));
 
   const handleSelectCountry = (e) => {
     setSelectedCountry(e.value);
-    dispatch({ type: "GET_COUNTRY_ID", payload: e.value });
   };
 
   const handleSelectProvince = (e) => {
     setSelectedProvince(e.value);
-    dispatch({ type: "GET_PROVINCE_ID", payload: e.value });
   };
 
   const handleSelectRegency = (e) => {
     setSelectedRegency(e.value);
-    dispatch({ type: "GET_REGENCY_ID", payload: e.value });
-  };
-
-  const handleOpenModal = () => {
-    setShowModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
   };
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading("Loading...");
-    try {
-      setData({ ...data, error: null });
-      const res = await axios.post(
-        `${host}/v1/shop`,
-        {
-          shopName: shopName,
-          countryId: selectedCountry,
-          provinceId: selectedProvince,
-          regencyId: selectedRegency,
-          address: address,
-          contactNumber: contactNumber,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
-          },
-        }
-      );
+  const [loading, setLoading] = useState("change");
 
+  const handleShopChange = (e) => {
+    e.preventDefault();
+    setLoading("loading...");
+
+    try {
+      axios
+        .put(
+          `https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}`,
+          {
+            shopName: shopName,
+            countryId: selectedCountry,
+            provinceId: selectedProvince,
+            regencyId: selectedRegency,
+            address: address,
+            contactNumber: contactNumber,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        )
+        .then((result) => {
+          setLoading("change");
+
+          Swal.fire({
+            icon: "success",
+            text: result.data.message,
+            confirmButtonText: "ok",
+          });
+
+          history.goBack();
+        });
+    } catch (error) {
+      setLoading("change");
       Swal.fire({
         icon: "success",
-        text: res.data.message,
+        text: error.response.data.message,
         confirmButtonText: "ok",
       });
-      setLoading("create");
-
-      setData({ ...data, shopName: "", addressDetail: "", contactNumber: "" });
-    } catch (error) {
-      setLoading("create");
-      if (error.response.data.status === 401) {
-        Swal.fire({
-          icon: "error",
-          text: error.response.data.message,
-          confirmButtonText: "ok",
-        });
-        history.push("/user/login");
-      } else {
-        Swal.fire({
-          icon: "error",
-          text: error.response.data.message,
-          confirmButtonText: "ok",
-        });
-      }
     }
   };
 
+  const handleShopDelete = () => {
+    const res = axios.delete(
+      `https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
+
+    if (res) {
+      console.log("delete", res);
+    }
+  };
   return (
     <div>
-      <div className="mt-4">
-        <button className="fixed bottom-4 right-4" onClick={handleOpenModal}>
-          <img src={add} alt="add" width="60px" />
+      <div>
+        <button onClick={handleShopDelete}>
+          <AiFillDelete />
         </button>
-        <Modal isOpen={showModal}>
+      </div>
+      <div>
+        <div className="mt-4">
           <div>
-            <button onClick={handleCloseModal}>Close</button>
             <h4 className="text-muted text-center mb-2">Create Shop</h4>
             <div className="card py-2">
-              <form className="text-center" onSubmit={handleSubmit}>
+              <form className="text-center" onSubmit={handleShopChange}>
                 <div className="my-2">
                   <h1>Shop name</h1>
                   <input
@@ -216,10 +207,10 @@ const CreateShop = () => {
               </form>
             </div>
           </div>
-        </Modal>
+        </div>
       </div>
     </div>
   );
 };
 
-export default CreateShop;
+export default ChangeShop;

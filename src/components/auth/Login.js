@@ -23,7 +23,6 @@ const Login = (props) => {
     setLoading("loading...");
     try {
       const res = await loginUser(dispatch, { email, password });
-      console.log("res", res);
       setLoading("login");
       if (res.status === 200) {
         Swal.fire({
@@ -51,7 +50,7 @@ const Login = (props) => {
           <div className="mt-4">
             <h1>Email</h1>
             <input
-              className="p-2 bg-green-400 w-full"
+              className="p-2 bg-blue-400 w-full"
               type="email"
               name="email"
               value={email}
@@ -63,7 +62,7 @@ const Login = (props) => {
           <div className="mt-4">
             <h1>Password</h1>
             <input
-              className="p-2 bg-green-400 w-full"
+              className="p-2 bg-blue-400 w-full"
               type="password"
               name="password"
               value={password}

@@ -71,7 +71,7 @@ const Register = (props) => {
             <div className="mt-4">
               <h1>Email</h1>
               <input
-                className="p-2 bg-blue-100 w-full"
+                className="p-2 bg-blue-400 w-full"
                 type="email"
                 name="email"
                 value={email}
@@ -82,7 +82,7 @@ const Register = (props) => {
             <div className="mt-4">
               <h1>Password</h1>
               <input
-                className="p-2 bg-blue-100 focus:border-blue-300 w-full"
+                className="p-2 bg-blue-400 focus:border-blue-300 w-full"
                 type="password"
                 name="password"
                 value={password}
@@ -94,7 +94,7 @@ const Register = (props) => {
             <div className="mt-4">
               <h1>Name</h1>
               <input
-                className="bg-green-200 p-2 w-full"
+                className="bg-green-400 p-2 w-full"
                 type="name"
                 name="fullName"
                 value={fullName}
@@ -106,7 +106,7 @@ const Register = (props) => {
             <div className="mt-4">
               <h1>Contact Number</h1>
               <input
-                className="bg-green-200 p-2 w-full"
+                className="bg-green-400 p-2 w-full"
                 type="number"
                 name="contactNumber"
                 value={contactNumber}

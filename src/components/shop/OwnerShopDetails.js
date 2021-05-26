@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Switch, useHistory } from "react-router-dom";
-import moment from "moment";
-import { BrowserRouter as Route, Link, useRouteMatch } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { BrowserRouter as Link, useRouteMatch } from "react-router-dom";
 import { useAuthState, useAuthDispatch } from "../../hook";
-import ShopInvoiceList from "./ShopInvoiceList";
-import CreateInvoice from "./CreateInvoice";
-
-// import ProductDetails from "./ProductDetails";
 import lady from "../../images/home1.png";
 import location from "../../images/location.png";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import Product from "./Product";
+import ShopDetailBottom from "./ShopDetailBottom";
 
 const OwnerShopDetails = (props) => {
   const [detail, setDetail] = useState([]);
@@ -19,14 +14,12 @@ const OwnerShopDetails = (props) => {
   const dispatch = useAuthDispatch();
   const user = useAuthState();
 
-  let { path, url } = useRouteMatch();
+  let { url } = useRouteMatch();
   let history = useHistory();
 
   function goBack() {
     history.goBack();
   }
-  const dateFormat = "dddd, MMMM Do YYYY, h:mm:ss a";
-
   useEffect(() => {
     axios
       .get(`https://svc-not-e.herokuapp.com/v1/shop/${shopId}`, {
@@ -56,7 +49,7 @@ const OwnerShopDetails = (props) => {
         <div></div>
       </nav>
 
-      <div className="mx-auto sm:w-full bg-white h-screen">
+      <div className="mx-auto sm:w-full bg-white">
         <div className="lg:p-10 sm:p-2 py-5">
           <div className=" mt-5 flex justify-between shadow-lg lg:px-10 sm:px-0 h-2/6">
             <div className="flex">
@@ -65,6 +58,10 @@ const OwnerShopDetails = (props) => {
               </div>
               <div className="w-2/4">
                 <h1 className="font-bold text-lg">{detail.shopName}</h1>
+                <Link to={`${url}/change`}>
+                  <button>Change</button>
+                </Link>
+
                 {detail.Country ? (
                   <div className="flex flex-wrap items-center">
                     <img src={location} width="30px" alt="location" />
@@ -103,45 +100,9 @@ const OwnerShopDetails = (props) => {
             </div>
           </div>
         </div>
-
-        <nav className="bg-blue-400 font-bold flex justify-center px-8 py-2 text-white">
-          <div className="mx-4">
-            <Link to={`${url}/`}>Details</Link>
-          </div>
-          <div className="mx-4">
-            <Link to={`${url}/product`}>Product</Link>
-          </div>
-          <div className="mx-4">
-            <Link to={`${url}/invoice`}>invoice</Link>
-          </div>
-        </nav>
-
-        <Switch>
-          <Route exact path={`${path}/`}>
-            <Link to="/user/setting">
-              <div className="px-4">
-                <div className="lg:w-2/3 mx-auto sm:w-full">
-                  <h1 className="font-bold text-lg">{detail.shopName}</h1>
-                  <h2>{detail.addressDetail}</h2>
-                  <h3>
-                    Created: {moment(detail.createdAt).format(dateFormat)}
-                  </h3>
-                  <p>{detail.contactNumber}</p>
-                </div>
-              </div>
-            </Link>
-          </Route>
-          <Route exact path={`${path}/product`}>
-            <Product />
-          </Route>
-          <Route exact path={`${path}/invoice`}>
-            <div className="px-4">
-              <CreateInvoice />
-              <ShopInvoiceList id={shopId} />
-            </div>
-          </Route>
-        </Switch>
       </div>
+
+      <ShopDetailBottom />
     </div>
   );
 };

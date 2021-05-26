@@ -68,7 +68,7 @@ const ChangePassword = () => {
           <div className="mt-4">
             <h1>Email</h1>
             <input
-              className="p-2 bg-green-400 w-full"
+              className="p-2 bg-blue-400 w-full"
               type="email"
               name="email"
               defaultValue={user.userProfile.email}
@@ -80,7 +80,7 @@ const ChangePassword = () => {
           <div className="mt-4">
             <h1>Password</h1>
             <input
-              className="p-2 bg-green-400 w-full"
+              className="p-2 bg-blue-400 w-full"
               type="password"
               name="password"
               value={password}
@@ -92,7 +92,7 @@ const ChangePassword = () => {
           <div className="mt-4">
             <h1>New Password</h1>
             <input
-              className="p-2 bg-green-400 w-full"
+              className="p-2 bg-blue-400 w-full"
               type="password"
               name="newPassword"
               value={newPassword}
