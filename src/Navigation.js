@@ -1,25 +1,15 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-// import { useAuthState } from "./hook";
 import LandingPage from "./pages/LandingPage";
 import Home from "./pages/Home";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
-// import ShopInvoiceList from "./components/shop/ShopInvoiceList";
-// import InvoiceDetail from "./components/shop/InvoiceDetail";
 import OwnerShopDetails from "./components/shop/OwnerShopDetails";
-// import ProductDetails from "./components/shop/ProductDetails";
 import Setting from "./pages/Setting";
 
 import ChangePassword from "./components/auth/ChangePassword";
 import UpdateProfile from "./components/auth/UpdateProfile";
 import ChangeShop from "./components/shop/ChangeShop";
-
-// import AddShopProduct from "./components/shop/AddShopProduct";
-// import GetShopProduct from "./components/shop/GetShopProduct";
-
 const Navigation = () => {
-  // const user = useAuthState();
-
   return (
     <Router>
       <Switch>

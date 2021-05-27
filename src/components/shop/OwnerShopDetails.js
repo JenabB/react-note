@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { BrowserRouter as Link, useRouteMatch } from "react-router-dom";
+
+// eslint-disable-next-line no-unused-vars
+import { BrowserRouter as Route, Link, useRouteMatch } from "react-router-dom";
 import { useAuthState, useAuthDispatch } from "../../hook";
 import lady from "../../images/home1.png";
 import location from "../../images/location.png";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import ShopDetailBottom from "./ShopDetailBottom";
 
 const OwnerShopDetails = (props) => {
   const [detail, setDetail] = useState([]);
@@ -20,6 +21,7 @@ const OwnerShopDetails = (props) => {
   function goBack() {
     history.goBack();
   }
+
   useEffect(() => {
     axios
       .get(`https://svc-not-e.herokuapp.com/v1/shop/${shopId}`, {
@@ -49,7 +51,7 @@ const OwnerShopDetails = (props) => {
         <div></div>
       </nav>
 
-      <div className="mx-auto sm:w-full bg-white">
+      <div className="mx-auto sm:w-full bg-white h-screen">
         <div className="lg:p-10 sm:p-2 py-5">
           <div className=" mt-5 flex justify-between shadow-lg lg:px-10 sm:px-0 h-2/6">
             <div className="flex">
@@ -61,7 +63,6 @@ const OwnerShopDetails = (props) => {
                 <Link to={`${url}/change`}>
                   <button>Change</button>
                 </Link>
-
                 {detail.Country ? (
                   <div className="flex flex-wrap items-center">
                     <img src={location} width="30px" alt="location" />
@@ -101,8 +102,6 @@ const OwnerShopDetails = (props) => {
           </div>
         </div>
       </div>
-
-      <ShopDetailBottom />
     </div>
   );
 };
