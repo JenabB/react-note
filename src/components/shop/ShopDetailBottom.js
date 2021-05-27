@@ -1,6 +1,8 @@
 import React from "react";
+
 import {
-  BrowserRouter as Link,
+  BrowserRouter as Router,
+  Link,
   Switch,
   Route,
   useRouteMatch,
@@ -14,7 +16,7 @@ const ShopDetailBottom = () => {
   const user = useAuthState();
   let { path, url } = useRouteMatch();
   return (
-    <div>
+    <Router>
       <nav className="bg-blue-400 font-bold flex justify-center px-8 py-2 text-white">
         <div className="mx-4">
           <Link to={`${url}/`}>Details</Link>
@@ -48,7 +50,7 @@ const ShopDetailBottom = () => {
           <Invoice />
         </Route>
       </Switch>
-    </div>
+    </Router>
   );
 };
 

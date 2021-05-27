@@ -8,6 +8,7 @@ import { useAuthState, useAuthDispatch } from "../../hook";
 import lady from "../../images/home1.png";
 import location from "../../images/location.png";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import ShopDetailBottom from "./ShopDetailBottom";
 
 const OwnerShopDetails = (props) => {
   const [detail, setDetail] = useState([]);
@@ -51,7 +52,7 @@ const OwnerShopDetails = (props) => {
         <div></div>
       </nav>
 
-      <div className="mx-auto sm:w-full bg-white h-screen">
+      <div className="mx-auto sm:w-full bg-white">
         <div className="lg:p-10 sm:p-2 py-5">
           <div className=" mt-5 flex justify-between shadow-lg lg:px-10 sm:px-0 h-2/6">
             <div className="flex">
@@ -102,6 +103,8 @@ const OwnerShopDetails = (props) => {
           </div>
         </div>
       </div>
+
+      <ShopDetailBottom />
     </div>
   );
 };
