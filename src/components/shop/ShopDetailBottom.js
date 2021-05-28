@@ -46,6 +46,9 @@ const ShopDetailBottom = () => {
         <Route exact path={`${path}/product`}>
           <Product />
         </Route>
+        <Route exact path={`${path}/product/:id`}>
+          <h1>IIII</h1>
+        </Route>
         <Route exact path={`${path}/invoice`}>
           <Invoice />
         </Route>

@@ -5,14 +5,15 @@ import axios from "axios";
 import { AiFillDelete } from "react-icons/ai";
 import Select from "react-select";
 import Swal from "sweetalert2";
+import NavWithBack from "../../components/NavWithBack";
 
 const ChangeShop = () => {
   const dispatch = useAuthDispatch();
   const user = useAuthState();
   const [data, setData] = useState({
-    shopName: "",
-    address: "",
-    contactNumber: "",
+    shopName: user.shopDetails.shopName,
+    address: user.shopDetails.address,
+    contactNumber: user.shopDetails.contactNumber,
   });
   const { shopName, address, contactNumber } = data;
 
@@ -24,13 +25,23 @@ const ChangeShop = () => {
   const [selectedProvince, setSelectedProvince] = useState(
     user.shopDetails.provinceId
   );
+
+  const [allProvinces, setAllProvinces] = useState([]);
   const [allRegencies, setAllRegencies] = useState([]);
   const [selectedRegency, setSelectedRegency] = useState(
     user.shopDetails.regencyId
   );
 
   const host = "https://svc-not-e.herokuapp.com";
+
   useEffect(() => {
+    fetch(`${host}/v1/area/province?countryId=${selectedCountry}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setAllProvinces(data.data);
+      })
+      .catch((error) => console.log(error));
+
     fetch(`${host}/v1/area/regency?provinceId=${selectedProvince}`)
       .then((response) => response.json())
       .then((data) => {
@@ -38,17 +49,19 @@ const ChangeShop = () => {
         dispatch({ type: "GET_ALL_REGENCIES", payload: data.data });
       })
       .catch((error) => console.log(error));
-  }, [dispatch, selectedProvince]);
+  }, [dispatch, selectedCountry, selectedProvince]);
 
   const countriesOptions = user.allCountries.map((c) => ({
     value: c.countryId,
     label: c.niceName,
   }));
 
-  const provinciesOptions = user.allProvinces.map((c) => ({
-    value: c.provinceId,
-    label: c.provinceName,
-  }));
+  const provincesOptions =
+    allProvinces &&
+    allProvinces.map((c) => ({
+      value: c.provinceId,
+      label: c.provinceName,
+    }));
 
   const regenciesOptions =
     allRegencies &&
@@ -112,7 +125,7 @@ const ChangeShop = () => {
     } catch (error) {
       setLoading("change");
       Swal.fire({
-        icon: "success",
+        icon: "error",
         text: error.response.data.message,
         confirmButtonText: "ok",
       });
@@ -120,31 +133,40 @@ const ChangeShop = () => {
   };
 
   const handleShopDelete = () => {
-    const res = axios.delete(
-      `https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
-        },
-      }
-    );
+    try {
+      axios
+        .delete(`https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+        })
+        .then((result) => {
+          Swal.fire({
+            icon: "success",
+            text: result.data.message,
+            confirmButtonText: "ok",
+          });
 
-    if (res) {
-      console.log("delete", res);
+          history.push("/user");
+        });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        text: error.response.data.message,
+        confirmButtonText: "ok",
+      });
     }
   };
   return (
     <div>
-      <div>
-        <button onClick={handleShopDelete}>
-          <AiFillDelete />
-        </button>
-      </div>
+      <NavWithBack />
       <div>
         <div className="mt-4">
           <div>
-            <h4 className="text-muted text-center mb-2">Create Shop</h4>
+            <h4 className="text-muted text-center mb-2">
+              Change Shop Information
+            </h4>
             <div className="card py-2">
               <form className="text-center" onSubmit={handleShopChange}>
                 <div className="my-2">
@@ -165,7 +187,7 @@ const ChangeShop = () => {
                   onChange={handleSelectCountry}
                 />
                 <Select
-                  options={provinciesOptions}
+                  options={provincesOptions}
                   onChange={handleSelectProvince}
                 />
                 <Select
@@ -209,6 +231,13 @@ const ChangeShop = () => {
           </div>
         </div>
       </div>
+
+      <button
+        className="bg-red-500 w-screen text-center"
+        onClick={handleShopDelete}
+      >
+        <AiFillDelete className="mx-auto" size="40px" color="white" />
+      </button>
     </div>
   );
 };
