@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 
 import Product from "./Product";
+import ProductDetails from "./ProductDetails";
 import Invoice from "./Invoice";
 import { useAuthState } from "../../hook";
 
@@ -46,9 +47,7 @@ const ShopDetailBottom = () => {
         <Route exact path={`${path}/product`}>
           <Product />
         </Route>
-        <Route exact path={`${path}/product/:id`}>
-          <h1>IIII</h1>
-        </Route>
+        <Route exact path={`${path}/product/:id`} component={ProductDetails} />
         <Route exact path={`${path}/invoice`}>
           <Invoice />
         </Route>

@@ -6,10 +6,10 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import OwnerShopDetails from "./components/shop/OwnerShopDetails";
 import Setting from "./pages/Setting";
-
 import ChangePassword from "./components/auth/ChangePassword";
 import UpdateProfile from "./components/auth/UpdateProfile";
 import ChangeShop from "./components/shop/ChangeShop";
+
 const Navigation = () => {
   return (
     <Router>
@@ -30,6 +30,8 @@ const Navigation = () => {
           <UpdateProfile />
         </Route>
         <Route path="/user/shop/:id/change" component={ChangeShop} />
+
+        <Route exact path="user/shop/:id/create-invoice" component={Setting} />
       </Switch>
     </Router>
   );
