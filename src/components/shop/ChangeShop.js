@@ -132,32 +132,45 @@ const ChangeShop = () => {
     }
   };
 
-  const handleShopDelete = () => {
-    try {
-      axios
-        .delete(`https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
-          },
-        })
-        .then((result) => {
+  const handleModalDelete = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        try {
+          axios
+            .delete(`https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}`, {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${user.token}`,
+              },
+            })
+            .then((result) => {
+              Swal.fire({
+                icon: "success",
+                text: result.data.message,
+                confirmButtonText: "ok",
+              });
+
+              history.push("/user");
+            });
+        } catch (error) {
           Swal.fire({
-            icon: "success",
-            text: result.data.message,
+            icon: "error",
+            text: error.response.data.message,
             confirmButtonText: "ok",
           });
-
-          history.push("/user");
-        });
-    } catch (error) {
-      Swal.fire({
-        icon: "error",
-        text: error.response.data.message,
-        confirmButtonText: "ok",
-      });
-    }
+        }
+      }
+    });
   };
+
   return (
     <div>
       <NavWithBack />
@@ -234,7 +247,7 @@ const ChangeShop = () => {
 
       <button
         className="bg-red-500 w-screen text-center"
-        onClick={handleShopDelete}
+        onClick={handleModalDelete}
       >
         <AiFillDelete className="mx-auto" size="40px" color="white" />
       </button>
