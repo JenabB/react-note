@@ -8,6 +8,8 @@ import Select from "react-select";
 import add from "../../images/icons/add1.png";
 
 const CreateShop = () => {
+  Modal.setAppElement("#root");
+
   const user = useAuthState();
   const dispatch = useAuthDispatch();
   const [showModal, setShowModal] = useState(false);

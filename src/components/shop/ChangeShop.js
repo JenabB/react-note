@@ -91,45 +91,45 @@ const ChangeShop = () => {
   const handleShopChange = (e) => {
     e.preventDefault();
     setLoading("loading...");
-
-    try {
-      axios
-        .put(
-          `https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}`,
-          {
-            shopName: shopName,
-            countryId: selectedCountry,
-            provinceId: selectedProvince,
-            regencyId: selectedRegency,
-            address: address,
-            contactNumber: contactNumber,
+    axios
+      .put(
+        `https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}`,
+        {
+          shopName: shopName,
+          countryId: selectedCountry,
+          provinceId: selectedProvince,
+          regencyId: selectedRegency,
+          address: address,
+          contactNumber: contactNumber,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
           },
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${user.token}`,
-            },
-          }
-        )
-        .then((result) => {
-          setLoading("change");
-
-          Swal.fire({
-            icon: "success",
-            text: result.data.message,
-            confirmButtonText: "ok",
-          });
-
-          history.goBack();
+        }
+      )
+      .then((result) => {
+        setLoading("change");
+        Swal.fire({
+          icon: "success",
+          text: result.data.message,
+          confirmButtonText: "ok",
         });
-    } catch (error) {
-      setLoading("change");
-      Swal.fire({
-        icon: "error",
-        text: error.response.data.message,
-        confirmButtonText: "ok",
+
+        history.goBack();
+      })
+      .catch((error) => {
+        setLoading("change");
+        Swal.fire({
+          icon: "error",
+          text: error.response.data.message,
+          confirmButtonText: "ok",
+        });
+        if (error.response.data.status === 401) {
+          history.push("/user/login");
+        }
       });
-    }
   };
 
   const handleModalDelete = () => {
@@ -174,7 +174,7 @@ const ChangeShop = () => {
   return (
     <div>
       <NavWithBack />
-      <div>
+      <div className="w-5/6 mx-auto">
         <div className="mt-4">
           <div>
             <h4 className="text-muted text-center mb-2">
@@ -232,25 +232,28 @@ const ChangeShop = () => {
                   />
                 </div>
 
-                <div className="text-center">
+                <div className="flex bottom-0">
                   <input
                     type="submit"
                     value={loading}
-                    className="text-white bg-blue-700 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 px-3 py-1 rounded-lg"
+                    className="text-white w-screen bg-blue-700 hover:bg-purple-700 px-3 py-1"
                   />
+                  <button
+                    className="bg-red-500 text-center w-screen"
+                    onClick={handleModalDelete}
+                  >
+                    <AiFillDelete
+                      className="mx-auto"
+                      size="40px"
+                      color="white"
+                    />
+                  </button>
                 </div>
               </form>
             </div>
           </div>
         </div>
       </div>
-
-      <button
-        className="bg-red-500 w-screen text-center"
-        onClick={handleModalDelete}
-      >
-        <AiFillDelete className="mx-auto" size="40px" color="white" />
-      </button>
     </div>
   );
 };
