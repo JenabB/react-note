@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { BrowserRouter as Route, Link, useRouteMatch } from "react-router-dom";
 import { useAuthState, useAuthDispatch } from "../../hook";
-import lady from "../../images/home1.png";
+import lady from "../../images/ziva.jpeg";
 import location from "../../images/location.png";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import ShopDetailBottom from "./ShopDetailBottom";
@@ -56,9 +56,7 @@ const OwnerShopDetails = (props) => {
         <div className="lg:p-10 sm:p-2 py-5">
           <div className=" mt-5 flex justify-between shadow-lg lg:px-10 sm:px-0 h-2/6">
             <div className="flex">
-              <div className="w-2/4">
-                <img src={lady} alt="lady" width="200px" />
-              </div>
+              <img className="profile-picture-shop" src={lady} alt="lady" />
               <div className="w-2/4">
                 <h1 className="font-bold text-lg">{detail.shopName}</h1>
                 <Link to={`${url}/change`}>

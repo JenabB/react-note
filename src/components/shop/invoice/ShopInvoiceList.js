@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import axios from "axios";
-import moment from "moment";
-import { useAuthState, useAuthDispatch } from "../../hook";
-import { Link } from "react-router-dom";
+import React, { useEffect } from 'react';
+import axios from 'axios';
+import moment from 'moment';
+import { useAuthState, useAuthDispatch } from '../../../hook';
+import { Link } from 'react-router-dom';
 
 const ShopInvoiceList = () => {
   const dispatch = useAuthDispatch();
@@ -12,12 +12,12 @@ const ShopInvoiceList = () => {
     axios
       .get(`https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}/invoice`, {
         headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('token'))}`,
         },
       })
       .then((result) => {
-        dispatch({ type: "GET_SHOP_INVOICE", payload: result.data.data });
+        dispatch({ type: 'GET_SHOP_INVOICE', payload: result.data.data });
       });
   });
 
@@ -29,10 +29,10 @@ const ShopInvoiceList = () => {
             <Link to={`invoice/${invoice.invoiceId}`}>
               <div key={index} className="shadow-lg m-3 p-3">
                 <h1 className="font-bold">{invoice.customerName}</h1>
-                <h2>{moment(invoice.createdAt).startOf("hour").fromNow()}</h2>
-                {Intl.NumberFormat("id-ID", {
-                  style: "currency",
-                  currency: "IDR",
+                <h2>{moment(invoice.createdAt).startOf('hour').fromNow()}</h2>
+                {Intl.NumberFormat('id-ID', {
+                  style: 'currency',
+                  currency: 'IDR',
                   minimumFractionDigits: 0,
                 }).format(invoice.totalPrice)}
               </div>

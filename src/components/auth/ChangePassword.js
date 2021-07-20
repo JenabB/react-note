@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import { Helmet } from "react-helmet";
-import { logout, useAuthDispatch, useAuthState } from "../../hook";
-import Swal from "sweetalert2";
-import NavWithBack from "../NavWithBack";
-import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useState } from 'react';
+import { Helmet } from 'react-helmet';
+import { logout, useAuthDispatch, useAuthState } from '../../hook';
+import Swal from 'sweetalert2';
+import NavWithBack from '../NavWithBack';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const ChangePassword = () => {
   const [data, setData] = useState({
-    password: "",
-    newPassword: "",
+    password: '',
+    newPassword: '',
   });
 
-  const [loading, setLoading] = useState("change");
+  const [loading, setLoading] = useState('change');
   const { password, newPassword } = data;
 
   const dispatch = useAuthDispatch();
@@ -25,7 +25,7 @@ const ChangePassword = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading("loading...");
+    setLoading('loading...');
     try {
       await axios
         .put(`https://svc-not-e.herokuapp.com/v1/user/change-password/owner`, {
@@ -35,21 +35,21 @@ const ChangePassword = () => {
         })
         .then((result) => {
           logout(dispatch);
-          history.push("/user");
+          history.push('/user');
           Swal.fire({
-            icon: "success",
+            icon: 'success',
             text: result.data.message,
-            confirmButtonText: "ok",
+            confirmButtonText: 'ok',
           });
         });
 
-      setLoading("change");
+      setLoading('change');
     } catch (error) {
-      setLoading("change");
+      setLoading('change');
       Swal.fire({
-        icon: "error",
-        text: "email/password invalid",
-        confirmButtonText: "ok",
+        icon: 'error',
+        text: 'email/password invalid',
+        confirmButtonText: 'ok',
       });
     }
   };
@@ -63,7 +63,7 @@ const ChangePassword = () => {
 
       <NavWithBack />
       <h4 className="text-muted text-center mt-10 mb-2">Change Password</h4>
-      <div className="py-2 px-1 lg:w-2/5 mx-auto">
+      <div className="py-2 px-1 lg:w-2/5 w-5/6 mx-auto">
         <form className="text-center" onSubmit={handleSubmit}>
           <div className="mt-4">
             <h1>Email</h1>

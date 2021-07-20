@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import axios from "axios";
-import { useAuthDispatch, useAuthState } from "../../hook";
-import { Link } from "react-router-dom";
+import React, { useEffect } from 'react';
+import axios from 'axios';
+import { useAuthDispatch, useAuthState } from '../../../hook';
+import { Link } from 'react-router-dom';
 
 const GetShopProduct = ({ id }) => {
   const user = useAuthState();
@@ -12,12 +12,12 @@ const GetShopProduct = ({ id }) => {
     axios
       .get(`https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}/product`, {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${user.token}`,
         },
       })
       .then((result) => {
-        dispatch({ type: "GET_SHOP_PRODUCT", payload: result.data.data });
+        dispatch({ type: 'GET_SHOP_PRODUCT', payload: result.data.data });
       });
   });
 
@@ -39,9 +39,9 @@ const GetShopProduct = ({ id }) => {
               >
                 <div key={index} className="shadow-lg m-3 p-3">
                   <h1 className="font-bold">{product.productName}</h1>
-                  {Intl.NumberFormat("id-ID", {
-                    style: "currency",
-                    currency: "IDR",
+                  {Intl.NumberFormat('id-ID', {
+                    style: 'currency',
+                    currency: 'IDR',
                     minimumFractionDigits: 0,
                   }).format(product.productPrice)}
                 </div>

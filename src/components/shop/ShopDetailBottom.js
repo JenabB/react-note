@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 import {
   BrowserRouter as Router,
@@ -6,12 +6,12 @@ import {
   Switch,
   Route,
   useRouteMatch,
-} from "react-router-dom";
+} from 'react-router-dom';
 
-import Product from "./Product";
-import ProductDetails from "./ProductDetails";
-import Invoice from "./Invoice";
-import { useAuthState } from "../../hook";
+import Product from './product/Product';
+import ProductDetails from './product/ProductDetails';
+import Invoice from './invoice/Invoice';
+import { useAuthState } from '../../hook';
 
 const ShopDetailBottom = () => {
   const user = useAuthState();

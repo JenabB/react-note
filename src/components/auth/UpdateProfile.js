@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { Helmet } from "react-helmet";
-import { useHistory } from "react-router-dom";
-import { useAuthState } from "../../hook";
-import Swal from "sweetalert2";
-import NavWithBack from "../NavWithBack";
-import axios from "axios";
+import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
+import { useHistory } from 'react-router-dom';
+import { useAuthState } from '../../hook';
+import Swal from 'sweetalert2';
+import NavWithBack from '../NavWithBack';
+import axios from 'axios';
 
 const UpdateProfile = () => {
   const user = useAuthState();
@@ -19,18 +19,17 @@ const UpdateProfile = () => {
     history.goBack();
   }
 
-  const [loading, setLoading] = useState("update");
+  const [loading, setLoading] = useState('update');
   const { fullName, contactNumber, address } = data;
 
- 
-console.log(data)
+  console.log(data);
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading("loading...");
+    setLoading('loading...');
     try {
       await axios
         .put(
@@ -42,34 +41,34 @@ console.log(data)
           },
           {
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
               Authorization: `Bearer ${user.token}`,
             },
           }
         )
         .then((result) => {
           Swal.fire({
-            icon: "success",
+            icon: 'success',
             text: result.data.message,
-            confirmButtonText: "ok",
+            confirmButtonText: 'ok',
           });
           goBack();
         });
-      setLoading("update");
+      setLoading('update');
     } catch (error) {
-      setLoading("update");
+      setLoading('update');
       if (error.response.data.status === 401) {
         Swal.fire({
-          icon: "error",
+          icon: 'error',
           text: error.response.data.message,
-          confirmButtonText: "ok",
+          confirmButtonText: 'ok',
         });
-        history.push("/user/login");
+        history.push('/user/login');
       } else {
         Swal.fire({
-          icon: "error",
+          icon: 'error',
           text: error.response.data.message,
-          confirmButtonText: "ok",
+          confirmButtonText: 'ok',
         });
       }
     }
@@ -84,7 +83,7 @@ console.log(data)
 
       <NavWithBack />
       <h4 className="text-muted text-center mt-10 mb-2">Update Profile</h4>
-      <div className="py-2 px-1 lg:w-2/5 mx-auto">
+      <div className="py-2 px-1 lg:w-2/5 w-5/6 mx-auto">
         <form className="text-center" onSubmit={handleSubmit}>
           <div className="mt-4">
             <h1>Full name</h1>

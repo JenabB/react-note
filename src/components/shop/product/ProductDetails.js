@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { useAuthState } from "../../hook";
-import axios from "axios";
+import { useState, useEffect } from 'react';
+import { useAuthState } from '../../../hook';
+import axios from 'axios';
 
 const ProductDetails = (props) => {
   const [product, setProduct] = useState([]);
@@ -13,9 +13,9 @@ const ProductDetails = (props) => {
         `https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}/product/${productId}`,
         {
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${JSON.parse(
-              localStorage.getItem("token")
+              localStorage.getItem('token')
             )}`,
           },
         }

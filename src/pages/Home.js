@@ -1,12 +1,12 @@
-import { useEffect } from "react";
-import CreateShop from "../components/shop/CreateShop";
-import OwnerShopList from "../components/shop/OwnerShopList";
-import { Helmet } from "react-helmet";
-import { useAuthState, useAuthDispatch } from "../hook";
-import home from "../images/home.png";
-import { Link } from "react-router-dom";
-import { BsGear } from "react-icons/bs";
-import axios from "axios";
+import { useEffect } from 'react';
+import OwnerShopList from '../components/shop/OwnerShopList';
+import { Helmet } from 'react-helmet';
+import { useAuthState, useAuthDispatch } from '../hook';
+import home from '../images/home.png';
+import { Link } from 'react-router-dom';
+import { BsGear } from 'react-icons/bs';
+import axios from 'axios';
+import FloatingCreateShopButton from '../components/shop/FloatingCreateShopButton';
 
 const Home = (props) => {
   const user = useAuthState();
@@ -16,17 +16,17 @@ const Home = (props) => {
     axios
       .get(`https://svc-not-e.herokuapp.com/v1/user/profile`, {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${user.token}`,
         },
       })
       .then((result) => {
-        dispatch({ type: "GET_USER_PROFILE", payload: result.data.data });
+        dispatch({ type: 'GET_USER_PROFILE', payload: result.data.data });
       });
   }, [dispatch, user.token]);
 
   if (!user.token) {
-    props.history.push("/user/login");
+    props.history.push('/user/login');
   }
 
   return (
@@ -39,7 +39,9 @@ const Home = (props) => {
       <nav className="sticky top-0 z-10 shadow-lg flex justify-between bg-blue-700 text-white p-4">
         <div></div>
         <div>
-          <Link to="/user">Home</Link>
+          <Link to="/user" className="text-2xl font-bold">
+            Home
+          </Link>
         </div>
         <div>
           <Link to="/user/setting">
@@ -68,7 +70,7 @@ const Home = (props) => {
         <OwnerShopList />
       </div>
 
-      <CreateShop />
+      <FloatingCreateShopButton />
     </div>
   );
 };
