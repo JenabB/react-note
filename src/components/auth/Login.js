@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { loginUser, useAuthDispatch } from "../../hook";
 import Swal from "sweetalert2";
+import { motion } from "framer-motion";
 
 const Login = (props) => {
   const [data, setData] = useState({
@@ -38,7 +39,24 @@ const Login = (props) => {
   };
 
   return (
-    <div className="mt-10 w-2/3 mx-auto h-screen">
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: {
+          scale: 0.8,
+          opacity: 0,
+        },
+        visible: {
+          scale: 1,
+          opacity: 1,
+          transition: {
+            delay: 0.9,
+          },
+        },
+      }}
+      className="mt-10 w-2/3 mx-auto"
+    >
       <Helmet>
         <meta charSet="utf-8" />
         <title>Login</title>
@@ -86,7 +104,7 @@ const Login = (props) => {
           </p>
         </form>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

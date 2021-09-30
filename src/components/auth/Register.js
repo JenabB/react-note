@@ -1,22 +1,26 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { motion } from "framer-motion";
 import { registerUser, useAuthDispatch } from "../../hook";
 
 import Swal from "sweetalert2";
 
 const Register = (props) => {
+  //state
   const [data, setData] = useState({
     email: "",
     password: "",
     fullName: "",
     contactNumber: "",
   });
-
+  const { email, password, fullName, contactNumber } = data;
   const [loading, setLoading] = useState("register");
+
+  //dispatch
   const dispatch = useAuthDispatch();
 
-  const { email, password, fullName, contactNumber } = data;
+  //action
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -59,14 +63,30 @@ const Register = (props) => {
   };
 
   return (
-    <div className="h-screen">
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: {
+          scale: 0.8,
+          opacity: 0,
+        },
+        visible: {
+          scale: 1,
+          opacity: 1,
+          transition: {
+            delay: 0.9,
+          },
+        },
+      }}
+    >
       <Helmet>
         <meta charSet="utf-8" />
         <title>Register</title>
       </Helmet>
-      <div className="mt-10 w-2/3 mx-auto">
-        <h4 className="mt-10 text-muted text-center mb-2">Create an account</h4>
-        <div className="card py-2 px-1 lg:w-2/5 mx-auto">
+      <div className="mt-24 lg:w-2/4 w-full mx-auto">
+        <h4 className="text-muted text-center mb-2">Create an account</h4>
+        <div className="card py-2 px-8 lg:w-3/5 mx-auto">
           <form className="text-center" onSubmit={handleSubmit}>
             <div className="mt-4">
               <h1>Email</h1>
@@ -94,7 +114,7 @@ const Register = (props) => {
             <div className="mt-4">
               <h1>Name</h1>
               <input
-                className="bg-green-400 p-2 w-full"
+                className="bg-blue-400 p-2 w-full"
                 type="name"
                 name="fullName"
                 value={fullName}
@@ -106,7 +126,7 @@ const Register = (props) => {
             <div className="mt-4">
               <h1>Contact Number</h1>
               <input
-                className="bg-green-400 p-2 w-full"
+                className="bg-blue-400 p-2 w-full"
                 type="number"
                 name="contactNumber"
                 value={contactNumber}
@@ -133,7 +153,7 @@ const Register = (props) => {
           </form>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
