@@ -132,7 +132,7 @@ const ChangeShop = () => {
       });
   };
 
-  const handleModalDelete = () => {
+  const handleDeleteShop = () => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -238,18 +238,14 @@ const ChangeShop = () => {
                     value={loading}
                     className="text-white w-screen bg-blue-700 hover:bg-purple-700 px-3 py-1"
                   />
-                  <button
-                    className="bg-red-500 text-center w-screen"
-                    onClick={handleModalDelete}
-                  >
-                    <AiFillDelete
-                      className="mx-auto"
-                      size="40px"
-                      color="white"
-                    />
-                  </button>
                 </div>
               </form>
+              <button
+                className="bg-red-500 text-center w-screen"
+                onClick={handleDeleteShop}
+              >
+                <AiFillDelete className="mx-auto" size="40px" color="white" />
+              </button>
             </div>
           </div>
         </div>

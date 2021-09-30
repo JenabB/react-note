@@ -1,14 +1,16 @@
-import { useState } from "react";
-import { logout, useAuthDispatch } from "../hook";
 import { Link, useHistory } from "react-router-dom";
+//components
 import profile from "../images/ziva.jpeg";
-import Modal from "react-modal";
-import Swal from "sweetalert2";
 import NavWithBack from "../components/NavWithBack";
 import UserProfile from "../components/auth/UserProfile";
 
+//lib
+import Swal from "sweetalert2";
+
+//context
+import { logout, useAuthDispatch } from "../hook";
+
 const Setting = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const dispatch = useAuthDispatch();
 
   let history = useHistory();
@@ -30,13 +32,6 @@ const Setting = () => {
     });
   };
 
-  const openModal = () => {
-    setIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
-  };
   return (
     <div className="h-screen">
       <NavWithBack />
@@ -70,33 +65,13 @@ const Setting = () => {
 
         <div className="text-center">
           <button
-            className="bg-red-600 py-2 px-4 w-full text-white"
+            className="bg-red-600 py-2 px-4 rounded-lg text-white"
             onClick={handleLogout}
           >
             Logout
           </button>
         </div>
       </div>
-
-      <Modal isOpen={isOpen} onRequestClose={closeModal}>
-        <div className="py-20">
-          <h1 className="text-center text-2xl py-8">Logout?</h1>
-          <div className="flex justify-center">
-            <button
-              className="bg-red-600 text-white mx-1 px-4 py-2 rounded"
-              onClick={handleLogout}
-            >
-              Yes
-            </button>
-            <button
-              className="shadow-lg bg-gray-200 px-4 py-2 rounded"
-              onClick={closeModal}
-            >
-              No
-            </button>
-          </div>
-        </div>
-      </Modal>
     </div>
   );
 };

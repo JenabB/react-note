@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -33,8 +32,10 @@ const Navigation = () => {
   return (
     <Router>
       <Switch>
+        {/* landing */}
         <Route exact path="/" component={LandingPage} />
 
+        {/* auth */}
         <Route path="/user/register" component={Register} />
         <Route path="/user/login" component={Login} />
         {new Date(user.user.exp) > new Date() ? (
@@ -42,14 +43,15 @@ const Navigation = () => {
         ) : (
           <Route exact path="/user" component={Home} />
         )}
-        <Route exact path="/user/shop/:id" component={OwnerShopDetails} />
-
         <Route exact path="/user/setting" component={Setting} />
         <Route
           path="/user/setting/change-password"
           component={ChangePassword}
         />
         <Route path="/user/setting/update-profile" component={UpdateProfile} />
+
+        {/* shop */}
+        <Route exact path="/user/shop/:id" component={OwnerShopDetails} />
         <Route path="/user/shop/:id/change" component={ChangeShop} />
 
         <Switch>
