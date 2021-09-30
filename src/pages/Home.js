@@ -1,12 +1,12 @@
-import { useEffect } from 'react';
-import OwnerShopList from '../components/shop/OwnerShopList';
-import { Helmet } from 'react-helmet';
-import { useAuthState, useAuthDispatch } from '../hook';
-import home from '../images/home.png';
-import { Link } from 'react-router-dom';
-import { BsGear } from 'react-icons/bs';
-import axios from 'axios';
-import FloatingCreateShopButton from '../components/shop/FloatingCreateShopButton';
+import { useEffect } from "react";
+import OwnerShopList from "../components/shop/OwnerShopList";
+import { Helmet } from "react-helmet";
+import { useAuthState, useAuthDispatch } from "../hook";
+import home from "../images/home.png";
+import { Link } from "react-router-dom";
+import { BsGear } from "react-icons/bs";
+import axios from "axios";
+import FloatingCreateShopButton from "../components/shop/FloatingCreateShopButton";
 
 const Home = (props) => {
   const user = useAuthState();
@@ -16,18 +16,14 @@ const Home = (props) => {
     axios
       .get(`https://svc-not-e.herokuapp.com/v1/user/profile`, {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${user.token}`,
         },
       })
       .then((result) => {
-        dispatch({ type: 'GET_USER_PROFILE', payload: result.data.data });
+        dispatch({ type: "GET_USER_PROFILE", payload: result.data.data });
       });
   }, [dispatch, user.token]);
-
-  if (!user.token) {
-    props.history.push('/user/login');
-  }
 
   return (
     <div className="mx-auto sm:w-full h-screen">

@@ -3,6 +3,7 @@ import { logout, useAuthDispatch } from "../hook";
 import { Link, useHistory } from "react-router-dom";
 import profile from "../images/ziva.jpeg";
 import Modal from "react-modal";
+import Swal from "sweetalert2";
 import NavWithBack from "../components/NavWithBack";
 import UserProfile from "../components/auth/UserProfile";
 
@@ -12,13 +13,21 @@ const Setting = () => {
 
   let history = useHistory();
 
-  function goBack() {
-    history.goBack();
-  }
-
   const handleLogout = () => {
-    logout(dispatch);
-    goBack();
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        history.push("/");
+        logout(dispatch);
+      }
+    });
   };
 
   const openModal = () => {
@@ -62,7 +71,7 @@ const Setting = () => {
         <div className="text-center">
           <button
             className="bg-red-600 py-2 px-4 w-full text-white"
-            onClick={openModal}
+            onClick={handleLogout}
           >
             Logout
           </button>

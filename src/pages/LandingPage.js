@@ -7,6 +7,7 @@ import { useAuthState } from "../hook";
 import { Link } from "react-router-dom";
 import Hero from "../images/landing.png";
 import Footer from "../components/Footer";
+import { motion } from "framer-motion";
 
 const LandingPage = () => {
   const [isLogin, SetIsLogin] = useState(false);
@@ -22,7 +23,23 @@ const LandingPage = () => {
   }, [user.token]);
 
   return (
-    <div className="mx-auto sm:w-full bg-white h-screen">
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: {
+          scale: 0.8,
+          opacity: 0,
+        },
+        visible: {
+          scale: 1,
+          opacity: 1,
+          transition: {
+            delay: 0.9,
+          },
+        },
+      }}
+    >
       <Helmet>
         <meta charSet="utf-8" />
         <title>Landing Page</title>
@@ -32,7 +49,9 @@ const LandingPage = () => {
         <nav className="sticky top-0 z-10 shadow-lg flex justify-between bg-blue-700 text-white p-4">
           <div></div>
           <div>
-            <Link to="/user">Home</Link>
+            <Link className="text-2xl font-bold" to="/user">
+              Home
+            </Link>
           </div>
           <div></div>
         </nav>
@@ -105,7 +124,7 @@ const LandingPage = () => {
       </div>
 
       <Footer />
-    </div>
+    </motion.div>
   );
 };
 

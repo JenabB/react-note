@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+
+//lib
 import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
-import { registerUser, useAuthDispatch } from "../../hook";
-
 import Swal from "sweetalert2";
+
+//context
+import { registerUser, useAuthDispatch } from "../../hook";
 
 const Register = (props) => {
   //state
@@ -85,10 +88,10 @@ const Register = (props) => {
         <title>Register</title>
       </Helmet>
       <div className="mt-24 lg:w-2/4 w-full mx-auto">
-        <h4 className="text-center text-2xl text-blue-500 font-bold mb-2">
+        <h1 className="text-center text-2xl text-blue-500 font-bold mb-2">
           Create an account
-        </h4>
-        <div className="card py-2 px-8 lg:w-3/5 mx-auto">
+        </h1>
+        <div className="py-2 px-8 lg:w-3/5 mx-auto">
           <form className="text-center" onSubmit={handleSubmit}>
             <div className="mt-4">
               <h1>Email</h1>
