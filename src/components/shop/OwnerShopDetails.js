@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { BrowserRouter as Route, Link, useRouteMatch } from "react-router-dom";
 import { useAuthState, useAuthDispatch } from "../../hook";
-import lady from "../../images/ziva.jpeg";
 import location from "../../images/location.png";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import ShopDetailBottom from "./ShopDetailBottom";
@@ -52,15 +51,16 @@ const OwnerShopDetails = (props) => {
         <div></div>
       </nav>
 
-      <div className="mx-auto sm:w-full bg-white">
-        <div className="lg:p-10 sm:p-2 py-5">
-          <div className=" mt-5 flex justify-between shadow-lg lg:px-10 sm:px-0 h-2/6">
-            <div className="flex">
-              <img className="profile-picture-shop" src={lady} alt="lady" />
-              <div className="w-2/4">
+      <div className="">
+        <div className="lg:p-10 sm:p-2 py-5 bg-blue-400">
+          <div className="text-white m-4 lg:px-10 sm:px-0">
+            <div className="">
+              <div className="">
                 <h1 className="font-bold text-lg">{detail.shopName}</h1>
                 <Link to={`${url}/change`}>
-                  <button>Change</button>
+                  <button className="bg-white text-blue-600 px-2 rounded-lg my-4">
+                    Edit Profile
+                  </button>
                 </Link>
                 {detail.Country ? (
                   <div className="flex flex-wrap items-center">
@@ -76,25 +76,25 @@ const OwnerShopDetails = (props) => {
             </div>
 
             <div>
-              <div className="rounded shadow-lg inline-block p-2 text-center">
+              <div className=" inline-block p-2 text-center">
                 <h1>Products</h1>
                 {user.shopProduct ? (
-                  <h2 className="text-blue-700 font-bold">
+                  <h2 className="text-blue-700 bg-white font-bold">
                     {user.shopProduct.length}
                   </h2>
                 ) : (
-                  <h2 className="text-blue-700 font-bold">0</h2>
+                  <h2 className="text-blue-700 bg-white font-bold">0</h2>
                 )}
               </div>
 
-              <div className="rounded shadow-lg inline-block p-2 text-center">
+              <div className="inline-block p-2 text-center">
                 <h1>Invoices</h1>
                 {user.shopInvoice ? (
-                  <h2 className="text-blue-700 font-bold">
+                  <h2 className="text-blue-700 bg-white font-bold">
                     {user.shopInvoice.length}
                   </h2>
                 ) : (
-                  <h2 className="text-blue-700 font-bold">0</h2>
+                  <h2 className="text-blue-700 bg-white font-bold">0</h2>
                 )}
               </div>
             </div>

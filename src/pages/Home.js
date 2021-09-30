@@ -7,8 +7,10 @@ import { Link } from "react-router-dom";
 import { BsGear } from "react-icons/bs";
 import axios from "axios";
 import FloatingCreateShopButton from "../components/shop/FloatingCreateShopButton";
+import { motion } from "framer-motion";
+import Products from "../components/shop/Products";
 
-const Home = (props) => {
+const Home = () => {
   const user = useAuthState();
   const dispatch = useAuthDispatch();
 
@@ -26,7 +28,23 @@ const Home = (props) => {
   }, [dispatch, user.token]);
 
   return (
-    <div className="mx-auto sm:w-full h-screen">
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: {
+          scale: 0.8,
+          opacity: 0,
+        },
+        visible: {
+          scale: 1,
+          opacity: 1,
+          transition: {
+            delay: 0.9,
+          },
+        },
+      }}
+    >
       <Helmet>
         <meta charSet="utf-8" />
         <title>{user.userProfile.fullName}</title>
@@ -46,28 +64,26 @@ const Home = (props) => {
         </div>
       </nav>
 
-      <div className="hero-landing grid lg:grid-cols-2 sm:grid-cols-1 py-8">
-        <div className="w-full">
-          <img src={home} alt="hero" />
-        </div>
-        <div className="lg:row-start-1 text-center lg:py-32 sm:py-8 w-full">
+      <div className=" py-8">
+        <div className="px-4">
           <h1 className="text-lg">
-            Welcome
-            <span className="text-4xl font-bold text-blue-700">
+            Hi,{" "}
+            <span className="text-2xl font-bold text-blue-700">
               {user.userProfile.fullName}
             </span>
           </h1>
-          <p>Ini nama aplikasinya !E</p>
+          <p>Have a nice day</p>
         </div>
       </div>
 
       <div className="mt-4 lg:w-3/5 mx-auto">
-        <h1 className="mt-2 ml-4 font-bold">Your Shop</h1>
+        <h1 className="mt-2 ml-4 font-bold mb-4">Your Shop</h1>
         <OwnerShopList />
+        <Products products={user.shopProduct} />
       </div>
 
       <FloatingCreateShopButton />
-    </div>
+    </motion.div>
   );
 };
 

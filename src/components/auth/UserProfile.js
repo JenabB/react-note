@@ -21,10 +21,14 @@ const UserProfile = () => {
 
   return (
     <div>
-      <h1 className="text-center font-bold">{user.userProfile.fullName}</h1>
+      <h1 className="text-center text-2xl text-blue-600 mb-8 font-bold">
+        {user.userProfile.fullName}
+      </h1>
       <div className="w-3/4 mx-auto">
-        <h2>Contact number: {user.userProfile.contactNumber}</h2>
-        <h2>Address: {user.userProfile.address}</h2>
+        <h1>Contact number</h1>
+        <p className="text-gray-400">{user.userProfile.contactNumber}</p>
+        <h1 className="mt-4">Address</h1>
+        <p className="text-gray-400">{user.userProfile.address}</p>
       </div>
     </div>
   );

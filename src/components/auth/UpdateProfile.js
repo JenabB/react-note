@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { Helmet } from 'react-helmet';
-import { useHistory } from 'react-router-dom';
-import { useAuthState } from '../../hook';
-import Swal from 'sweetalert2';
-import NavWithBack from '../NavWithBack';
-import axios from 'axios';
+import React, { useState } from "react";
+import { Helmet } from "react-helmet";
+import { useHistory } from "react-router-dom";
+import { useAuthState } from "../../hook";
+import Swal from "sweetalert2";
+import NavWithBack from "../NavWithBack";
+import axios from "axios";
+import { motion } from "framer-motion";
 
 const UpdateProfile = () => {
   const user = useAuthState();
@@ -19,7 +20,7 @@ const UpdateProfile = () => {
     history.goBack();
   }
 
-  const [loading, setLoading] = useState('update');
+  const [loading, setLoading] = useState("update");
   const { fullName, contactNumber, address } = data;
 
   console.log(data);
@@ -29,7 +30,7 @@ const UpdateProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading('loading...');
+    setLoading("loading...");
     try {
       await axios
         .put(
@@ -41,41 +42,57 @@ const UpdateProfile = () => {
           },
           {
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
               Authorization: `Bearer ${user.token}`,
             },
           }
         )
         .then((result) => {
           Swal.fire({
-            icon: 'success',
+            icon: "success",
             text: result.data.message,
-            confirmButtonText: 'ok',
+            confirmButtonText: "ok",
           });
           goBack();
         });
-      setLoading('update');
+      setLoading("update");
     } catch (error) {
-      setLoading('update');
+      setLoading("update");
       if (error.response.data.status === 401) {
         Swal.fire({
-          icon: 'error',
+          icon: "error",
           text: error.response.data.message,
-          confirmButtonText: 'ok',
+          confirmButtonText: "ok",
         });
-        history.push('/user/login');
+        history.push("/user/login");
       } else {
         Swal.fire({
-          icon: 'error',
+          icon: "error",
           text: error.response.data.message,
-          confirmButtonText: 'ok',
+          confirmButtonText: "ok",
         });
       }
     }
   };
 
   return (
-    <div className="">
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: {
+          scale: 0.8,
+          opacity: 0,
+        },
+        visible: {
+          scale: 1,
+          opacity: 1,
+          transition: {
+            delay: 0.9,
+          },
+        },
+      }}
+    >
       <Helmet>
         <meta charSet="utf-8" />
         <title>Update Profile</title>
@@ -101,7 +118,7 @@ const UpdateProfile = () => {
             <h1>Address Detail</h1>
             <input
               className="p-2 placeholder-black bg-blue-400 w-full"
-              type="name"
+              type="field"
               name="address"
               value={address}
               onChange={handleChange}
@@ -130,7 +147,7 @@ const UpdateProfile = () => {
           </div>
         </form>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -59,7 +59,7 @@ const LandingPage = () => {
         <nav className="sticky top-0 z-10 shadow-lg flex justify-between bg-blue-700 text-white p-4">
           <div>
             <Link to="/">
-              <h1 className="font-bold text-xl">NOT E</h1>
+              <h1 className="font-bold text-xl">NOTE</h1>
             </Link>
           </div>
           <div className="flex">
@@ -82,15 +82,15 @@ const LandingPage = () => {
           <img src={Hero} alt="hero" />
         </div>
         <div className="text-center lg:py-32 sm:py-8 w-full">
-          <h1 className="text-6xl font-bold text-blue-700">NOT E</h1>
+          <h1 className="text-6xl font-bold text-blue-700">NOTE</h1>
           <p>Ini nama aplikasinya !E</p>
         </div>
       </div>
 
-      <div className="py-20 mx-auto">
+      <div className="py-10 mx-auto">
         <h1 className="text-center mb-10">Our Services</h1>
-        <div className="grid grid-cols-3 text-center lg:w-3/5 w-4/5 mx-auto">
-          <div className="mx-2">
+        <div className="grid lg:grid-cols-3 text-center lg:w-3/5 w-4/5 mx-auto">
+          <div className="my-4 mx-2">
             <img
               className="mx-auto"
               src={Service1}
@@ -100,7 +100,7 @@ const LandingPage = () => {
             <h1>Service 1</h1>
             <p>Ini service pertama</p>
           </div>
-          <div className="mx-2">
+          <div className="my-4 mx-2">
             <img
               className="mx-auto"
               src={Service2}
@@ -110,7 +110,7 @@ const LandingPage = () => {
             <h1>Service 2</h1>
             <p>Ini service kedua</p>
           </div>
-          <div className="mx-2">
+          <div className="my-4 mx-2">
             <img
               className="mx-auto"
               src={Service3}

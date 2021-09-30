@@ -6,6 +6,7 @@ import UserProfile from "../components/auth/UserProfile";
 
 //lib
 import Swal from "sweetalert2";
+import { motion } from "framer-motion";
 
 //context
 import { logout, useAuthDispatch } from "../hook";
@@ -33,21 +34,29 @@ const Setting = () => {
   };
 
   return (
-    <div className="h-screen">
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: {
+          scale: 0.8,
+          opacity: 0,
+        },
+        visible: {
+          scale: 1,
+          opacity: 1,
+          transition: {
+            delay: 0.9,
+          },
+        },
+      }}
+      className="pb-10"
+    >
       <NavWithBack />
 
-      <div className="pb-20">
-        <div className="lg:grid grid-cols-3 ">
-          <div></div>
-          <div className="py-12 px-12">
-            <img
-              src={profile}
-              alt="profile"
-              height="100px"
-              className="profile-picture"
-            />
-          </div>
-          <div></div>
+      <div className="pb-10">
+        <div className="flex justify-center my-10">
+          <img src={profile} alt="profile" className="profile-picture" />
         </div>
         <UserProfile />
       </div>
@@ -72,7 +81,7 @@ const Setting = () => {
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -23,16 +23,20 @@ const OwnerShopList = () => {
   });
 
   return (
-    <div className="lg:w-2/3 mx-auto sm:w-full">
+    <div className="">
       {user.shopList ? (
         user.shopList.length > 0 ? (
-          <div>
+          <div
+            className="flex overflow-x-auto mx-auto"
+            style={{ maxWidth: "90%" }}
+          >
             {user.shopList.map((shop, index) => (
               <Link to={`user/shop/${shop.shopId}`}>
                 <div
                   key={index}
                   tabofindex={index}
-                  className="shadow-lg m-3 p-3"
+                  className="shadow-lg m-1 p-3 bg-blue-400 text-white rounded-lg"
+                  style={{ width: "250px", height: "150px" }}
                 >
                   <h1 className="font-bold">{shop.shopName}</h1>
                   <h2>{shop.Regency.regencyName}</h2>
