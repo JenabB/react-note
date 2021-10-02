@@ -1,15 +1,23 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { useAuthState, useAuthDispatch } from "../../hook";
+
+//lib
 import axios from "axios";
-import { AiFillDelete } from "react-icons/ai";
+
+//context
+import { useAuthState, useAuthDispatch } from "../../hook";
+
 import Select from "react-select";
 import Swal from "sweetalert2";
 import NavWithBack from "../../components/NavWithBack";
+import { motion } from "framer-motion";
 
 const ChangeShop = () => {
+  //context
   const dispatch = useAuthDispatch();
   const user = useAuthState();
+
+  //state
   const [data, setData] = useState({
     shopName: user.shopDetails.shopName,
     address: user.shopDetails.address,
@@ -172,7 +180,23 @@ const ChangeShop = () => {
   };
 
   return (
-    <div>
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: {
+          scale: 0.8,
+          opacity: 0,
+        },
+        visible: {
+          scale: 1,
+          opacity: 1,
+          transition: {
+            delay: 0.9,
+          },
+        },
+      }}
+    >
       <NavWithBack />
       <div className="w-5/6 mx-auto">
         <div className="mt-4">
@@ -240,17 +264,19 @@ const ChangeShop = () => {
                   />
                 </div>
               </form>
-              <button
-                className="bg-red-500 text-center w-screen"
-                onClick={handleDeleteShop}
-              >
-                <AiFillDelete className="mx-auto" size="40px" color="white" />
-              </button>
             </div>
           </div>
         </div>
+        <div>
+          <button
+            className="bg-red-500 text-white w-screen"
+            onClick={handleDeleteShop}
+          >
+            <span class="material-icons">delete</span>
+          </button>
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

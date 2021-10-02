@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { BrowserRouter as Link, useRouteMatch } from "react-router-dom";
+import { BrowserRouter as Route, Link, useRouteMatch } from "react-router-dom";
 
 import { useAuthState, useAuthDispatch } from "../../hook";
 import ShopDetailBottom from "./ShopDetailBottom";
@@ -84,7 +84,7 @@ const OwnerShopDetails = (props) => {
                 <h1 className="font-bold text-lg">{detail.shopName}</h1>
                 <Link to={`${url}/change`}>
                   <button className="bg-white text-blue-600 px-2 rounded-lg my-4">
-                    Edit Profile
+                    Edit
                   </button>
                 </Link>
                 {detail.Country ? (
