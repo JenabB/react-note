@@ -38,10 +38,11 @@ const Navigation = () => {
         {/* auth */}
         <Route path="/user/register" component={Register} />
         <Route path="/user/login" component={Login} />
-        {new Date(user.user.exp) > new Date() ? (
-          <Redirect to="/user/login" />
-        ) : (
+        {new Date().toLocaleString() >
+        new Date(user.user.exp).toLocaleString() ? (
           <Route exact path="/user" component={Home} />
+        ) : (
+          <Redirect to="/user/login" />
         )}
         <Route exact path="/user/setting" component={Setting} />
         <Route
@@ -51,13 +52,13 @@ const Navigation = () => {
         <Route path="/user/setting/update-profile" component={UpdateProfile} />
 
         {/* shop */}
-        <Route exact path="/user/shop/:id" component={OwnerShopDetails} />
-        <Route path="/user/shop/:id/change" component={ChangeShop} />
+        <Route exact path="/shop/:id" component={OwnerShopDetails} />
+        <Route path="/shop/:id/change" component={ChangeShop} />
 
         <Switch>
-          <Route exact path="/user/shop/:id" component={ShopDetails} />
-          <Route path="/user/shop/:id/product" component={Product} />
-          <Route path="/user/shop/:id/invoice" component={Invoice} />
+          <Route exact path="/shop/:id" component={ShopDetails} />
+          <Route path="/shop/:id/product" component={Product} />
+          <Route path="/shop/:id/invoice" component={Invoice} />
         </Switch>
       </Switch>
     </Router>

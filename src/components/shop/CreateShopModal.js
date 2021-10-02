@@ -5,6 +5,8 @@ import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
 import Select from "react-select";
+import { motion } from "framer-motion";
+
 const CreateShopModal = ({ setIsOpen }) => {
   const user = useAuthState();
   const dispatch = useAuthDispatch();
@@ -133,7 +135,23 @@ const CreateShopModal = ({ setIsOpen }) => {
     }
   };
   return (
-    <div className="bg-blue-400">
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: {
+          scale: 0.1,
+          opacity: 0.1,
+        },
+        visible: {
+          scale: 1,
+          opacity: 1,
+          transition: {
+            delay: 0.5,
+          },
+        },
+      }}
+    >
       <div className="modal absolute bg-white shadow-lg p-4 rounded-lg">
         <div className="text-right">
           <button
@@ -210,7 +228,7 @@ const CreateShopModal = ({ setIsOpen }) => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

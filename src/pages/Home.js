@@ -1,13 +1,18 @@
 import { useEffect } from "react";
-import OwnerShopList from "../components/shop/OwnerShopList";
-import { Helmet } from "react-helmet";
-import { useAuthState, useAuthDispatch } from "../hook";
-import home from "../images/home.png";
 import { Link } from "react-router-dom";
-import { BsGear } from "react-icons/bs";
-import axios from "axios";
-import FloatingCreateShopButton from "../components/shop/FloatingCreateShopButton";
+import { Helmet } from "react-helmet";
+
+//context
+import { useAuthState, useAuthDispatch } from "../hook";
+
+//lib
 import { motion } from "framer-motion";
+import axios from "axios";
+
+//components
+import OwnerShopList from "../components/shop/OwnerShopList";
+import FloatingCreateShopButton from "../components/shop/FloatingCreateShopButton";
+
 import Products from "../components/shop/Products";
 
 const Home = () => {
@@ -59,7 +64,7 @@ const Home = () => {
         </div>
         <div>
           <Link to="/user/setting">
-            <BsGear size="28px" />
+            <span class="material-icons">settings</span>
           </Link>
         </div>
       </nav>

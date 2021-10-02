@@ -1,6 +1,6 @@
 import React from "react";
-import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useHistory } from "react-router-dom";
+
 const NavWithBack = () => {
   let history = useHistory();
 
@@ -12,7 +12,7 @@ const NavWithBack = () => {
     <nav className="sticky top-0 z-10 shadow-lg flex justify-between bg-blue-700 text-white p-4">
       <div>
         <button onClick={goBack}>
-          <AiOutlineArrowLeft size="28px" />
+          <span class="material-icons">arrow_back</span>
         </button>
       </div>
       <div></div>

@@ -1,18 +1,19 @@
-import { useState } from 'react';
-import { Helmet } from 'react-helmet';
-import { logout, useAuthDispatch, useAuthState } from '../../hook';
-import Swal from 'sweetalert2';
-import NavWithBack from '../NavWithBack';
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useState } from "react";
+import { Helmet } from "react-helmet";
+import { logout, useAuthDispatch, useAuthState } from "../../hook";
+import Swal from "sweetalert2";
+import NavWithBack from "../NavWithBack";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const ChangePassword = () => {
   const [data, setData] = useState({
-    password: '',
-    newPassword: '',
+    password: "",
+    newPassword: "",
   });
 
-  const [loading, setLoading] = useState('change');
+  const [loading, setLoading] = useState("change");
   const { password, newPassword } = data;
 
   const dispatch = useAuthDispatch();
@@ -25,7 +26,7 @@ const ChangePassword = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading('loading...');
+    setLoading("loading...");
     try {
       await axios
         .put(`https://svc-not-e.herokuapp.com/v1/user/change-password/owner`, {
@@ -35,27 +36,43 @@ const ChangePassword = () => {
         })
         .then((result) => {
           logout(dispatch);
-          history.push('/user');
+          history.push("/user");
           Swal.fire({
-            icon: 'success',
+            icon: "success",
             text: result.data.message,
-            confirmButtonText: 'ok',
+            confirmButtonText: "ok",
           });
         });
 
-      setLoading('change');
+      setLoading("change");
     } catch (error) {
-      setLoading('change');
+      setLoading("change");
       Swal.fire({
-        icon: 'error',
-        text: 'email/password invalid',
-        confirmButtonText: 'ok',
+        icon: "error",
+        text: "email/password invalid",
+        confirmButtonText: "ok",
       });
     }
   };
 
   return (
-    <div className="">
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: {
+          scale: 0.8,
+          opacity: 0,
+        },
+        visible: {
+          scale: 1,
+          opacity: 1,
+          transition: {
+            delay: 0.9,
+          },
+        },
+      }}
+    >
       <Helmet>
         <meta charSet="utf-8" />
         <title>Change Password</title>
@@ -110,7 +127,7 @@ const ChangePassword = () => {
           </div>
         </form>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

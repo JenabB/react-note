@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { BrowserRouter as Link, useRouteMatch } from "react-router-dom";
 
-// eslint-disable-next-line no-unused-vars
-import { BrowserRouter as Route, Link, useRouteMatch } from "react-router-dom";
 import { useAuthState, useAuthDispatch } from "../../hook";
 import location from "../../images/location.png";
-import { AiOutlineArrowLeft } from "react-icons/ai";
+
 import ShopDetailBottom from "./ShopDetailBottom";
+import { motion } from "framer-motion";
 
 const OwnerShopDetails = (props) => {
   const [detail, setDetail] = useState([]);
@@ -35,14 +35,41 @@ const OwnerShopDetails = (props) => {
         dispatch({ type: "GET_SHOP_DETAIL", payload: result.data.data });
         dispatch({ type: "GET_SHOP_ID", payload: shopId });
       });
-  }, [dispatch, shopId]);
+
+    axios
+      .get(`https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}/product`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      })
+      .then((result) => {
+        dispatch({ type: "GET_SHOP_PRODUCT", payload: result.data.data });
+      });
+  }, [dispatch, shopId, user.shopId, user.token]);
 
   return (
-    <div>
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: {
+          scale: 0.8,
+          opacity: 0,
+        },
+        visible: {
+          scale: 1,
+          opacity: 1,
+          transition: {
+            delay: 0.9,
+          },
+        },
+      }}
+    >
       <nav className="sticky top-0 z-10 shadow-lg flex justify-between bg-blue-700 text-white p-4">
         <div>
           <button onClick={goBack}>
-            <AiOutlineArrowLeft size="28px" />
+            <span class="material-icons">arrow_back</span>
           </button>
         </div>
         <div>
@@ -76,7 +103,7 @@ const OwnerShopDetails = (props) => {
             </div>
 
             <div>
-              <div className=" inline-block p-2 text-center">
+              <div className=" inline-block rounded-lg p-2 text-center">
                 <h1>Products</h1>
                 {user.shopProduct ? (
                   <h2 className="text-blue-700 bg-white font-bold">
@@ -87,7 +114,7 @@ const OwnerShopDetails = (props) => {
                 )}
               </div>
 
-              <div className="inline-block p-2 text-center">
+              <div className="inline-block rounded-xl p-2 text-center">
                 <h1>Invoices</h1>
                 {user.shopInvoice ? (
                   <h2 className="text-blue-700 bg-white font-bold">
@@ -103,7 +130,7 @@ const OwnerShopDetails = (props) => {
       </div>
 
       <ShopDetailBottom />
-    </div>
+    </motion.div>
   );
 };
 

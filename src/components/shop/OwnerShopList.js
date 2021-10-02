@@ -31,7 +31,7 @@ const OwnerShopList = () => {
             style={{ maxWidth: "90%" }}
           >
             {user.shopList.map((shop, index) => (
-              <Link to={`user/shop/${shop.shopId}`}>
+              <Link to={`shop/${shop.shopId}`}>
                 <div
                   key={index}
                   tabofindex={index}
