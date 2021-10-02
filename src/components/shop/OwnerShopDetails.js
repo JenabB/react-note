@@ -1,17 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import {
-  BrowserRouter as Switch,
-  Route,
-  Link,
-  useRouteMatch,
-} from "react-router-dom";
+import { BrowserRouter as Link, useRouteMatch } from "react-router-dom";
 
 import { useAuthState, useAuthDispatch } from "../../hook";
-
-import Product from "./product/Product";
-
 import ShopDetailBottom from "./ShopDetailBottom";
 import { motion } from "framer-motion";
 
@@ -21,7 +13,7 @@ const OwnerShopDetails = (props) => {
   const dispatch = useAuthDispatch();
   const user = useAuthState();
 
-  let { url, path } = useRouteMatch();
+  let { url } = useRouteMatch();
   let history = useHistory();
 
   function goBack() {
@@ -134,19 +126,19 @@ const OwnerShopDetails = (props) => {
         </div>
       </div>
 
-      <div>
+      {/* <div>
         <div className="bg-blue-400 p-4">
           <Link to={`${url}/products`}>Products</Link>
-          <Link to="invoice">Invoice</Link>
+          <Link to={`${url}/invoice`}>Invoice</Link>
         </div>
         <Switch>
           <Route path={`${path}/products`}>
             <h1>Ini product</h1>
           </Route>
         </Switch>
-      </div>
+      </div> */}
 
-      {/* <ShopDetailBottom /> */}
+      <ShopDetailBottom />
     </motion.div>
   );
 };

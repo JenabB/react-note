@@ -1,21 +1,22 @@
-import { useState, useEffect } from 'react';
-import { useAuthState } from '../../../hook';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import { useAuthState } from "../../../hook";
+import axios from "axios";
+import NavWithBack from "../../NavWithBack";
 
 const ProductDetails = (props) => {
   const [product, setProduct] = useState([]);
   const user = useAuthState();
   const productId = props.match.params.id;
-  console.log(product);
+
   useEffect(() => {
     axios
       .get(
         `https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}/product/${productId}`,
         {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${JSON.parse(
-              localStorage.getItem('token')
+              localStorage.getItem("token")
             )}`,
           },
         }
@@ -27,6 +28,7 @@ const ProductDetails = (props) => {
 
   return (
     <div>
+      <NavWithBack />
       <h1>{product.productName}</h1>
       <h1>{product.productPrice}</h1>
     </div>
