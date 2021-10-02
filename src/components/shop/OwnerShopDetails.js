@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { BrowserRouter as Link, useRouteMatch } from "react-router-dom";
+import {
+  BrowserRouter as Switch,
+  Route,
+  Link,
+  useRouteMatch,
+} from "react-router-dom";
 
 import { useAuthState, useAuthDispatch } from "../../hook";
-import location from "../../images/location.png";
+
+import Product from "./product/Product";
 
 import ShopDetailBottom from "./ShopDetailBottom";
 import { motion } from "framer-motion";
@@ -15,7 +21,7 @@ const OwnerShopDetails = (props) => {
   const dispatch = useAuthDispatch();
   const user = useAuthState();
 
-  let { url } = useRouteMatch();
+  let { url, path } = useRouteMatch();
   let history = useHistory();
 
   function goBack() {
@@ -91,7 +97,6 @@ const OwnerShopDetails = (props) => {
                 </Link>
                 {detail.Country ? (
                   <div className="flex flex-wrap items-center">
-                    <img src={location} width="30px" alt="location" />
                     <h2 className="mx-2">{detail.Country.niceName}</h2>
                     <h3 className="mx-1">{detail.Province.provinceName}</h3>
                     <h4 className="mx-2">{detail.Regency.regencyName}</h4>
@@ -129,7 +134,19 @@ const OwnerShopDetails = (props) => {
         </div>
       </div>
 
-      <ShopDetailBottom />
+      <div>
+        <div className="bg-blue-400 p-4">
+          <Link to={`${url}/products`}>Products</Link>
+          <Link to="invoice">Invoice</Link>
+        </div>
+        <Switch>
+          <Route path={`${path}/products`}>
+            <h1>Ini product</h1>
+          </Route>
+        </Switch>
+      </div>
+
+      {/* <ShopDetailBottom /> */}
     </motion.div>
   );
 };

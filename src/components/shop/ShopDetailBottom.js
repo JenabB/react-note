@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 import {
   BrowserRouter as Router,
@@ -6,12 +6,12 @@ import {
   Switch,
   Route,
   useRouteMatch,
-} from 'react-router-dom';
+} from "react-router-dom";
 
-import Product from './product/Product';
-import ProductDetails from './product/ProductDetails';
-import Invoice from './invoice/Invoice';
-import { useAuthState } from '../../hook';
+import Product from "./product/Product";
+import ProductDetails from "./product/ProductDetails";
+import Invoice from "./invoice/Invoice";
+import { useAuthState } from "../../hook";
 
 const ShopDetailBottom = () => {
   const user = useAuthState();
@@ -20,13 +20,13 @@ const ShopDetailBottom = () => {
     <Router>
       <nav className="bg-blue-400 font-bold flex justify-center px-8 py-2 text-white">
         <div className="mx-4">
-          <Link to={`${url}/`}>Details</Link>
+          <Link to={`/`}>Details</Link>
         </div>
         <div className="mx-4">
-          <Link to={`${url}/product`}>Product</Link>
+          <Link to={`/product`}>Product</Link>
         </div>
         <div className="mx-4">
-          <Link to={`${url}/invoice`}>invoice</Link>
+          <Link to={`/invoice`}>invoice</Link>
         </div>
       </nav>
 
