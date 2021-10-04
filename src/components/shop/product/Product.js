@@ -1,5 +1,5 @@
 //lib
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 
@@ -25,7 +25,7 @@ const Product = () => {
       .then((result) => {
         dispatch({ type: "GET_SHOP_PRODUCT", payload: result.data.data });
       });
-  });
+  }, [dispatch, user.shopId, user.token]);
 
   return (
     <motion.div
