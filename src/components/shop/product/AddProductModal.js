@@ -1,16 +1,15 @@
-import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useAuthState } from '../../../hook';
-import Swal from 'sweetalert2';
-import axios from 'axios';
-import CurrencyInput from 'react-currency-input-field';
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useAuthState } from "../../../hook";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 const AddProductModal = ({ setIsOpen }) => {
   const [data, setData] = useState({
-    productName: '',
-    productPrice: '',
+    productName: "",
+    productPrice: "",
   });
-  const [loading, setLoading] = useState('create');
+  const [loading, setLoading] = useState("create");
   const { productName, productPrice } = data;
   const user = useAuthState();
   let history = useHistory();
@@ -21,7 +20,8 @@ const AddProductModal = ({ setIsOpen }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading('Loading...');
+
+    setLoading("Loading...");
     try {
       const res = await axios.post(
         `https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}/product`,
@@ -31,33 +31,33 @@ const AddProductModal = ({ setIsOpen }) => {
         },
         {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${user.token}`,
           },
         }
       );
 
-      setLoading('create');
+      setLoading("create");
       Swal.fire({
-        icon: 'success',
+        icon: "success",
         text: res.data.message,
-        confirmButtonText: 'ok',
+        confirmButtonText: "ok",
       });
-      setData({ ...data, productName: '', productPrice: '' });
+      setData({ ...data, productName: "", productPrice: "" });
     } catch (error) {
-      setLoading('create');
+      setLoading("create");
       if (error.response.data.status === 401) {
         Swal.fire({
-          icon: 'error',
+          icon: "error",
           text: error.response.data.message,
-          confirmButtonText: 'ok',
+          confirmButtonText: "ok",
         });
-        history.push('/user/login');
+        history.push("/user/login");
       } else {
         Swal.fire({
-          icon: 'error',
+          icon: "error",
           text: error.response.data.message,
-          confirmButtonText: 'ok',
+          confirmButtonText: "ok",
         });
       }
     }
@@ -91,14 +91,14 @@ const AddProductModal = ({ setIsOpen }) => {
 
             <div className="my-2">
               <h1>Product Price</h1>
-              <CurrencyInput
+              <input
                 className="w-full text-right p-2"
-                prefix="Rp"
                 placeholder="0"
+                type="number"
+                min="0"
                 name="productPrice"
-                onValueChange={(value) =>
-                  setData({ ...data, productPrice: value })
-                }
+                value={productPrice}
+                onChange={handleChange}
                 required
               />
             </div>
