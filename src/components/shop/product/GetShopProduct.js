@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { formatRp } from "../../../utils/formatRp";
 import { useAuthDispatch, useAuthState } from "../../../hook";
@@ -15,18 +15,6 @@ const GetShopProduct = ({ id }) => {
   const handleQueryChange = (e) => {
     setQuery(e.target.value);
   };
-  useEffect(() => {
-    axios
-      .get(`https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}/product`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
-        },
-      })
-      .then((result) => {
-        dispatch({ type: "GET_SHOP_PRODUCT", payload: result.data.data });
-      });
-  });
 
   const handleDeleteProduct = (productId) => {
     Swal.fire({

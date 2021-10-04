@@ -1,17 +1,11 @@
-import { useState } from 'react';
-import CreateInvoiceModal from './CreateInvoiceModal';
-
+import { Link } from "react-router-dom";
+import { useAuthState } from "../../../hook";
 const FloatingCreateInvoiceButton = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const user = useAuthState();
 
   return (
-    <div>
-      <button
-        className="p-0 fixed bottom-10 right-10 w-16 h-16 bg-blue-500 rounded-full hover:bg-blue-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
-        onClick={() => {
-          setIsOpen(true);
-        }}
-      >
+    <Link to={`/shop/${user.shopId}/invoice/create`}>
+      <button className="p-0 fixed bottom-10 right-10 w-16 h-16 bg-blue-500 rounded-full hover:bg-blue-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
         <svg
           viewBox="0 0 20 20"
           enable-background="new 0 0 20 20"
@@ -25,8 +19,7 @@ const FloatingCreateInvoiceButton = () => {
           />
         </svg>
       </button>
-      {isOpen && <CreateInvoiceModal setIsOpen={setIsOpen} />}
-    </div>
+    </Link>
   );
 };
 

@@ -10,8 +10,8 @@ import { motion } from "framer-motion";
 import axios from "axios";
 
 //components
-import OwnerShopList from "../components/shop/OwnerShopList";
-import FloatingCreateShopButton from "../components/shop/FloatingCreateShopButton";
+import OwnerShopList from "../components/shop/shop/OwnerShopList";
+import FloatingCreateShopButton from "../components/shop/shop/FloatingCreateShopButton";
 
 import Products from "../components/shop/Products";
 

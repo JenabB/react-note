@@ -4,8 +4,8 @@ import { useHistory } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { BrowserRouter as Route, Link, useRouteMatch } from "react-router-dom";
 
-import { useAuthState, useAuthDispatch } from "../../hook";
-import ShopDetailBottom from "./ShopDetailBottom";
+import { useAuthState, useAuthDispatch } from "../../../hook";
+import ShopDetailBottom from "../ShopDetailBottom";
 import { motion } from "framer-motion";
 
 const OwnerShopDetails = (props) => {

@@ -1,12 +1,18 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+
+//lib
 import axios from "axios";
-import { useAuthState, useAuthDispatch } from "../../hook";
+
+//context
+import { useAuthState, useAuthDispatch } from "../../../hook";
 
 const OwnerShopList = () => {
+  //context
   const dispatch = useAuthDispatch();
   const user = useAuthState();
 
+  //host
   const HOST = "https://svc-not-e.herokuapp.com";
 
   useEffect(() => {
@@ -22,6 +28,8 @@ const OwnerShopList = () => {
       });
   });
 
+  const sorted = user.shopList.sort((a, b) => a.shopId - b.shopId);
+
   return (
     <div className="">
       {user.shopList ? (
@@ -30,7 +38,7 @@ const OwnerShopList = () => {
             className="flex overflow-x-auto mx-auto"
             style={{ maxWidth: "90%" }}
           >
-            {user.shopList.map((shop, index) => (
+            {sorted.map((shop, index) => (
               <Link to={`shop/${shop.shopId}`}>
                 <div
                   key={index}

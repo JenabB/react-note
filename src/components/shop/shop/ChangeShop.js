@@ -5,11 +5,11 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 //context
-import { useAuthState, useAuthDispatch } from "../../hook";
+import { useAuthState, useAuthDispatch } from "../../../hook";
 
 import Select from "react-select";
 import Swal from "sweetalert2";
-import NavWithBack from "../../components/NavWithBack";
+import NavWithBack from "../../NavWithBack";
 import { motion } from "framer-motion";
 
 const ChangeShop = () => {
