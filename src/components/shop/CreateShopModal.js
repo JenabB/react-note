@@ -114,8 +114,6 @@ const CreateShopModal = ({ setIsOpen }) => {
         confirmButtonText: "ok",
       });
       setLoading("create");
-
-      setData({ ...data, shopName: "", addressDetail: "", contactNumber: "" });
     } catch (error) {
       setLoading("create");
       if (error.response.data.status === 401) {
