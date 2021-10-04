@@ -21,6 +21,7 @@ export const initialState = {
   shopId: "",
   shopDetails: [],
   shopProduct: [],
+  selectedProduct: null,
   shopInvoice: [],
   loading: false,
   errorMessage: null,
@@ -122,6 +123,12 @@ export const AuthReducer = (initialState, action) => {
       return {
         ...initialState,
         shopProduct: action.payload,
+      };
+
+    case "GET_ONE_PRODUCT":
+      return {
+        ...initialState,
+        selectedProduct: action.payload,
       };
 
     case "GET_SHOP_INVOICE":

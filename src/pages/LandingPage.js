@@ -1,27 +1,9 @@
-import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
-import Service1 from "../images/icons/001-email.png";
-import Service2 from "../images/icons/002-hosting.png";
-import Service3 from "../images/icons/003-browser.png";
-import { useAuthState } from "../hook";
 import { Link } from "react-router-dom";
-import Hero from "../images/landing.png";
-import Footer from "../components/Footer";
+
 import { motion } from "framer-motion";
 
 const LandingPage = () => {
-  const [isLogin, SetIsLogin] = useState(false);
-  const user = useAuthState();
-
-  useEffect(() => {
-    let token = user.token;
-    if (token) {
-      SetIsLogin(true);
-    } else {
-      SetIsLogin(false);
-    }
-  }, [user.token]);
-
   return (
     <motion.div
       initial="hidden"
@@ -39,91 +21,40 @@ const LandingPage = () => {
           },
         },
       }}
+      className="bg-blue-400 h-screen"
     >
       <Helmet>
         <meta charSet="utf-8" />
         <title>Landing Page</title>
       </Helmet>
 
-      {isLogin ? (
-        <nav className="sticky top-0 z-10 shadow-lg flex justify-between bg-blue-700 text-white p-4">
-          <div></div>
-          <div>
-            <Link className="text-2xl font-bold" to="/user">
-              Home
-            </Link>
-          </div>
-          <div></div>
-        </nav>
-      ) : (
-        <nav className="sticky top-0 z-10 shadow-lg flex justify-between bg-blue-700 text-white p-4">
-          <div>
-            <Link to="/">
-              <h1 className="font-bold text-xl">NOTE</h1>
-            </Link>
-          </div>
-          <div className="flex">
-            <div className="mr-5">
-              <Link to="/user/register">
-                <h1 className="bg-white text-blue-600 px-1 rounded">
-                  Register
-                </h1>
-              </Link>
-            </div>
-            <div>
-              <Link to="/user/login">Login</Link>
-            </div>
-          </div>
-        </nav>
-      )}
-
       <div className="hero-landing grid lg:grid-cols-2 sm:grid-cols-1 py-8">
-        <div className="w-full">
-          <img src={Hero} alt="hero" />
-        </div>
-        <div className="text-center lg:py-32 sm:py-8 w-full">
-          <h1 className="text-6xl font-bold text-blue-700">NOTE</h1>
-          <p>Ini nama aplikasinya !E</p>
-        </div>
-      </div>
-
-      <div className="py-10 mx-auto">
-        <h1 className="text-center mb-10">Our Services</h1>
-        <div className="grid lg:grid-cols-3 text-center lg:w-3/5 w-4/5 mx-auto">
-          <div className="my-4 mx-2">
-            <img
-              className="mx-auto"
-              src={Service1}
-              alt="service 1"
-              width="120px"
-            />
-            <h1>Service 1</h1>
-            <p>Ini service pertama</p>
-          </div>
-          <div className="my-4 mx-2">
-            <img
-              className="mx-auto"
-              src={Service2}
-              alt="service 2"
-              width="120px"
-            />
-            <h1>Service 2</h1>
-            <p>Ini service kedua</p>
-          </div>
-          <div className="my-4 mx-2">
-            <img
-              className="mx-auto"
-              src={Service3}
-              alt="service 3"
-              width="120px"
-            />
-            <h1>Service 3</h1>
-            <p>Ini service ketiga</p>
-          </div>
+        <div className=" lg:py-32 sm:py-8 px-6 w-full">
+          <motion.h1
+            initial={{ y: -100 }}
+            animate={{ y: [-100, 0] }}
+            transition={{ ease: "easeOut", duration: 2 }}
+            className=" text-center text-6xl font-bold text-white"
+          >
+            NOTE
+          </motion.h1>
+          <p className="mt-6 text-white text-lg">
+            management of your business is more when you are able to do neat
+            records
+          </p>
         </div>
       </div>
 
-      <Footer />
+      <Link to="/user/login">
+        <motion.button
+          initial={{ x: -100 }}
+          animate={{ x: [-100, 13] }}
+          transition={{ ease: "easeOut", duration: 2 }}
+          className="fixed bottom-10 right-10 bg-white px-4 py-3 rounded-full"
+        >
+          <h1 className="material-icons text-blue-600">arrow_forward</h1>
+        </motion.button>
+      </Link>
     </motion.div>
   );
 };

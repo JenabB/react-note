@@ -20,12 +20,15 @@ import UpdateProfile from "./components/auth/UpdateProfile";
 import OwnerShopDetails from "./components/shop/OwnerShopDetails";
 import ChangeShop from "./components/shop/ChangeShop";
 
+//product
 import Product from "./components/shop/product/Product";
+import EditProduct from "./components/shop/product/EditProduct";
+
+//invoice
 import Invoice from "./components/shop/invoice/Invoice";
 
 //context
 import { useAuthState } from "./hook";
-import ProductDetails from "./components/shop/product/ProductDetails";
 
 const Navigation = () => {
   const user = useAuthState();
@@ -56,8 +59,8 @@ const Navigation = () => {
         <Route exact path="/shop/:id" component={OwnerShopDetails} />
         <Route path="/shop/:id/change" component={ChangeShop} />
         <Route exact path="/shop/:id/product" component={Product} />
-        <Route path="/shop/:id/product/:id" component={ProductDetails} />
 
+        <Route path="/shop/:id/product/:id/edit" component={EditProduct} />
         <Route path="/shop/:id/invoice" component={Invoice} />
       </Switch>
     </Router>
