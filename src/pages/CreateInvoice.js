@@ -58,8 +58,6 @@ const CreateInvoice = () => {
       .then((result) => {
         dispatch({ type: "GET_SHOP_PRODUCT", payload: result.data.data });
       });
-
-    const insertedProduct = user.shopProduct;
   }, [dispatch, user.shopId, user.token]);
 
   const handleInsertMode = (e) => {

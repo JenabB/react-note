@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useAuthState } from "../../../hook";
-import axios from "axios";
+import { editProduct } from "./actions";
 import NavWithBack from "../../NavWithBack";
 import { useHistory } from "react-router-dom";
-import Swal from "sweetalert2";
+
+import { handleSuccess, handleError } from "../../../utils/responseHandler";
 
 const EditProduct = () => {
   const user = useAuthState();
@@ -26,39 +27,21 @@ const EditProduct = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put(
-        `https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}/product/${user.selectedProduct.productId}`,
-        {
-          productName: productName,
-          productPrice: productPrice,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
-          },
-        }
+      const res = await editProduct(
+        productName,
+        productPrice,
+        user.shopId,
+        user.selectedProduct.productId,
+        user.token
       );
 
-      Swal.fire({
-        icon: "success",
-        text: res.data.message,
-        confirmButtonText: "ok",
-      });
+      handleSuccess(res);
       history.goBack();
     } catch (error) {
       if (error.response.data.status === 401) {
-        Swal.fire({
-          icon: "error",
-          text: error.response.data.message,
-          confirmButtonText: "ok",
-        });
+        handleError(error);
       } else {
-        Swal.fire({
-          icon: "error",
-          text: error.response.data.message,
-          confirmButtonText: "ok",
-        });
+        handleError(error);
       }
     }
   };

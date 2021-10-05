@@ -14,23 +14,17 @@ import OwnerShopList from "../components/shop/shop/OwnerShopList";
 import FloatingCreateShopButton from "../components/shop/shop/FloatingCreateShopButton";
 
 import Products from "../components/shop/Products";
+import { getUserProfile } from "../components/home/actions";
 
 const Home = () => {
   const user = useAuthState();
   const dispatch = useAuthDispatch();
 
   useEffect(() => {
-    axios
-      .get(`https://svc-not-e.herokuapp.com/v1/user/profile`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
-        },
-      })
-      .then((result) => {
-        dispatch({ type: "GET_USER_PROFILE", payload: result.data.data });
-      });
-  }, [dispatch, user.token]);
+    getUserProfile(user.token).then((result) => {
+      dispatch({ type: "GET_USER_PROFILE", payload: result.data.data });
+    });
+  }, []);
 
   return (
     <motion.div
