@@ -10,6 +10,8 @@ import { motion } from "framer-motion";
 const CreateShopModal = ({ setIsOpen }) => {
   const user = useAuthState();
   const dispatch = useAuthDispatch();
+  const [allProvinces, setAllProvinces] = useState([]);
+  const [allCountries, setAllCountries] = useState([]);
   const [data, setData] = useState({
     shopName: "",
     address: "",
@@ -29,14 +31,14 @@ const CreateShopModal = ({ setIsOpen }) => {
     fetch(`${host}/v1/area/country`)
       .then((response) => response.json())
       .then((data) => {
-        dispatch({ type: "GET_ALL_COUNTRIES", payload: data.data });
+        setAllCountries(data.data);
       })
       .catch((error) => console.log(error));
 
     fetch(`${host}/v1/area/province?countryId=${selectedCountry}`)
       .then((response) => response.json())
       .then((data) => {
-        dispatch({ type: "GET_ALL_PROVINCES", payload: data.data });
+        setAllProvinces(data.data);
       })
       .catch((error) => console.log(error));
 
@@ -44,17 +46,16 @@ const CreateShopModal = ({ setIsOpen }) => {
       .then((response) => response.json())
       .then((data) => {
         setAllRegencies(data.data);
-        dispatch({ type: "GET_ALL_REGENCIES", payload: data.data });
       })
       .catch((error) => console.log(error));
   }, [data, dispatch, selectedCountry, selectedProvince]);
 
-  const countriesOptions = user.allCountries.map((c) => ({
+  const countriesOptions = allCountries.map((c) => ({
     value: c.countryId,
     label: c.niceName,
   }));
 
-  const provinciesOptions = user.allProvinces.map((c) => ({
+  const provinciesOptions = allProvinces.map((c) => ({
     value: c.provinceId,
     label: c.provinceName,
   }));
@@ -68,17 +69,14 @@ const CreateShopModal = ({ setIsOpen }) => {
 
   const handleSelectCountry = (e) => {
     setSelectedCountry(e.value);
-    dispatch({ type: "GET_COUNTRY_ID", payload: e.value });
   };
 
   const handleSelectProvince = (e) => {
     setSelectedProvince(e.value);
-    dispatch({ type: "GET_PROVINCE_ID", payload: e.value });
   };
 
   const handleSelectRegency = (e) => {
     setSelectedRegency(e.value);
-    dispatch({ type: "GET_REGENCY_ID", payload: e.value });
   };
 
   const handleChange = (e) => {

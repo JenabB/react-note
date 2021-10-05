@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 //context
-import { useAuthState, useAuthDispatch } from "../../../hook";
+import { useAuthState } from "../../../hook";
 
 import Select from "react-select";
 import Swal from "sweetalert2";
@@ -14,7 +14,7 @@ import { motion } from "framer-motion";
 
 const ChangeShop = () => {
   //context
-  const dispatch = useAuthDispatch();
+
   const user = useAuthState();
 
   //state
@@ -34,6 +34,7 @@ const ChangeShop = () => {
     user.shopDetails.provinceId
   );
 
+  const [allCountries, setAllCountries] = useState([]);
   const [allProvinces, setAllProvinces] = useState([]);
   const [allRegencies, setAllRegencies] = useState([]);
   const [selectedRegency, setSelectedRegency] = useState(
@@ -43,6 +44,13 @@ const ChangeShop = () => {
   const host = "https://svc-not-e.herokuapp.com";
 
   useEffect(() => {
+    fetch(`${host}/v1/area/country`)
+      .then((response) => response.json())
+      .then((data) => {
+        setAllCountries(data.data);
+      })
+      .catch((error) => console.log(error));
+
     fetch(`${host}/v1/area/province?countryId=${selectedCountry}`)
       .then((response) => response.json())
       .then((data) => {
@@ -54,12 +62,11 @@ const ChangeShop = () => {
       .then((response) => response.json())
       .then((data) => {
         setAllRegencies(data.data);
-        dispatch({ type: "GET_ALL_REGENCIES", payload: data.data });
       })
       .catch((error) => console.log(error));
-  }, [dispatch, selectedCountry, selectedProvince]);
+  }, [selectedCountry, selectedProvince]);
 
-  const countriesOptions = user.allCountries.map((c) => ({
+  const countriesOptions = allCountries.map((c) => ({
     value: c.countryId,
     label: c.niceName,
   }));
