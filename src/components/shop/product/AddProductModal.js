@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+
+import { addProduct } from "./actions";
+import { handleError, handleSuccess } from "./utils";
 import { useAuthState } from "../../../hook";
-import Swal from "sweetalert2";
-import axios from "axios";
 
 const AddProductModal = ({ setIsOpen }) => {
+  //state
   const [data, setData] = useState({
     productName: "",
     productPrice: "",
@@ -12,6 +14,7 @@ const AddProductModal = ({ setIsOpen }) => {
   const [loading, setLoading] = useState("create");
   const { productName, productPrice } = data;
   const user = useAuthState();
+
   let history = useHistory();
 
   const handleChange = (e) => {
@@ -23,42 +26,16 @@ const AddProductModal = ({ setIsOpen }) => {
 
     setLoading("Loading...");
     try {
-      const res = await axios.post(
-        `https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}/product`,
-        {
-          productName: productName,
-          productPrice: productPrice,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
-          },
-        }
-      );
-
+      await addProduct(productName, productPrice, user.shopId, user.token);
       setLoading("create");
-      Swal.fire({
-        icon: "success",
-        text: res.data.message,
-        confirmButtonText: "ok",
-      });
-      setData({ ...data, productName: "", productPrice: "" });
+      handleSuccess();
     } catch (error) {
       setLoading("create");
       if (error.response.data.status === 401) {
-        Swal.fire({
-          icon: "error",
-          text: error.response.data.message,
-          confirmButtonText: "ok",
-        });
+        handleError(error);
         history.push("/user/login");
       } else {
-        Swal.fire({
-          icon: "error",
-          text: error.response.data.message,
-          confirmButtonText: "ok",
-        });
+        handleError(error);
       }
     }
   };
