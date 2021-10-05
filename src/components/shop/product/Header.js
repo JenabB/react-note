@@ -17,7 +17,8 @@ const Header = () => {
     const total = products.reduce((prev, curr) => prev + curr, 0);
 
     setTotalPrice(total);
-  }, [products, user.shopProduct]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user.shopProduct]);
 
   return (
     <div className="bg-blue-600 pt-5 rounded-b-3xl" style={{ height: "100px" }}>

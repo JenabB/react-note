@@ -25,7 +25,7 @@ const Product = () => {
       .then((result) => {
         dispatch({ type: "GET_SHOP_PRODUCT", payload: result.data.data });
       });
-  }, [dispatch, user.shopId, user.token]);
+  });
 
   return (
     <motion.div
