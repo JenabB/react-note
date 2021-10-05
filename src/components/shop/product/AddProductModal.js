@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { addProduct } from "./actions";
-import { handleError, handleSuccess } from "./utils";
+import { handleSuccess } from "./utils";
+import { handleError } from "../../../utils/responseHandler";
 import { useAuthState } from "../../../hook";
 
 const AddProductModal = ({ setIsOpen }) => {

@@ -1,22 +1,19 @@
 import { useEffect } from "react";
-import axios from "axios";
 import { useAuthDispatch, useAuthState } from "../../hook";
+import { userProfile } from "./actions";
 
 const UserProfile = () => {
   const dispatch = useAuthDispatch();
   const user = useAuthState();
 
   useEffect(() => {
-    axios
-      .get(`https://svc-not-e.herokuapp.com/v1/user/profile`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
-        },
-      })
-      .then((result) => {
+    try {
+      userProfile(user.token).then((result) => {
         dispatch({ type: "GET_USER_PROFILE", payload: result.data.data });
       });
+    } catch (error) {
+      console.log(error);
+    }
   });
 
   return (

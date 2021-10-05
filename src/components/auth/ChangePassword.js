@@ -1,11 +1,17 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet";
-import { logout, useAuthDispatch, useAuthState } from "../../hook";
-import Swal from "sweetalert2";
-import NavWithBack from "../NavWithBack";
-import axios from "axios";
 import { useHistory } from "react-router-dom";
+
+//components
+import NavWithBack from "../NavWithBack";
+
+//lib
 import { motion } from "framer-motion";
+
+//util
+import { changePassword } from "./actions";
+import { logout, useAuthDispatch, useAuthState } from "../../hook";
+import { handleSuccess, handleError } from "../../utils/responseHandler";
 
 const ChangePassword = () => {
   const [data, setData] = useState({
@@ -20,6 +26,7 @@ const ChangePassword = () => {
   const user = useAuthState();
 
   let history = useHistory();
+
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -28,30 +35,18 @@ const ChangePassword = () => {
     e.preventDefault();
     setLoading("loading...");
     try {
-      await axios
-        .put(`https://svc-not-e.herokuapp.com/v1/user/change-password/owner`, {
-          email: user.emailUser,
-          password: password,
-          newPassword: newPassword,
-        })
-        .then((result) => {
+      await changePassword(user.userProfile.email, password, newPassword).then(
+        (result) => {
           logout(dispatch);
           history.push("/user");
-          Swal.fire({
-            icon: "success",
-            text: result.data.message,
-            confirmButtonText: "ok",
-          });
-        });
+          handleSuccess(result);
+        }
+      );
 
       setLoading("change");
     } catch (error) {
       setLoading("change");
-      Swal.fire({
-        icon: "error",
-        text: "email/password invalid",
-        confirmButtonText: "ok",
-      });
+      handleError(error);
     }
   };
 
@@ -84,14 +79,7 @@ const ChangePassword = () => {
         <form className="text-center" onSubmit={handleSubmit}>
           <div className="mt-4">
             <h1>Email</h1>
-            <input
-              className="p-2 bg-blue-400 w-full"
-              type="email"
-              name="email"
-              defaultValue={user.userProfile.email}
-              placeholder={user.userProfile.email}
-              required
-            />
+            <h1>{user.userProfile.email}</h1>
           </div>
 
           <div className="mt-4">

@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { useHistory } from "react-router-dom";
+
+//utils
 import { useAuthState } from "../../hook";
-import Swal from "sweetalert2";
-import NavWithBack from "../NavWithBack";
-import axios from "axios";
+import { handleSuccess, handleError } from "../../utils/responseHandler";
 import { motion } from "framer-motion";
+import { updateProfile } from "./actions";
+
+//components
+import NavWithBack from "../NavWithBack";
 
 const UpdateProfile = () => {
   const user = useAuthState();
@@ -23,7 +27,6 @@ const UpdateProfile = () => {
   const [loading, setLoading] = useState("update");
   const { fullName, contactNumber, address } = data;
 
-  console.log(data);
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -32,45 +35,20 @@ const UpdateProfile = () => {
     e.preventDefault();
     setLoading("loading...");
     try {
-      await axios
-        .put(
-          `https://svc-not-e.herokuapp.com/v1/user/profile`,
-          {
-            fullName: fullName,
-            contactNumber: contactNumber,
-            address: address,
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${user.token}`,
-            },
-          }
-        )
-        .then((result) => {
-          Swal.fire({
-            icon: "success",
-            text: result.data.message,
-            confirmButtonText: "ok",
-          });
+      await updateProfile(fullName, contactNumber, address, user.token).then(
+        (result) => {
+          handleSuccess(result);
           goBack();
-        });
+        }
+      );
       setLoading("update");
     } catch (error) {
       setLoading("update");
       if (error.response.data.status === 401) {
-        Swal.fire({
-          icon: "error",
-          text: error.response.data.message,
-          confirmButtonText: "ok",
-        });
+        handleError(error);
         history.push("/user/login");
       } else {
-        Swal.fire({
-          icon: "error",
-          text: error.response.data.message,
-          confirmButtonText: "ok",
-        });
+        handleError(error);
       }
     }
   };

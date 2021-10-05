@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 //lib
 import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
-import Swal from "sweetalert2";
 
+import { handleSuccess, handleWarning } from "../../utils/responseHandler";
 //context
 import { registerUser, useAuthDispatch } from "../../hook";
 
@@ -40,27 +40,15 @@ const Register = (props) => {
       });
 
       if (res.status === 201) {
-        Swal.fire({
-          icon: "success",
-          text: res.message,
-          confirmButtonText: "ok",
-        });
+        handleSuccess(res);
         setLoading("register");
         props.history.push("/user/login");
       } else {
-        Swal.fire({
-          icon: "warning",
-          text: res.message,
-          confirmButtonText: "ok",
-        });
+        handleWarning(res);
         setLoading("register");
       }
     } catch (error) {
-      Swal.fire({
-        icon: "error",
-        text: error.response.data.message,
-        confirmButtonText: "ok",
-      });
+      console.log(error);
       setLoading("register");
     }
   };

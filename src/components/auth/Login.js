@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
+//utils
+import { handleSuccess } from "../../utils/responseHandler";
+
 //lib
 import { Helmet } from "react-helmet";
-import Swal from "sweetalert2";
 import { motion } from "framer-motion";
 
 //context
@@ -30,11 +32,7 @@ const Login = (props) => {
       const res = await loginUser(dispatch, { email, password });
       setLoading("login");
       if (res.status === 200) {
-        Swal.fire({
-          icon: "success",
-          text: "login success",
-          confirmButtonText: "ok",
-        });
+        handleSuccess(res);
         props.history.push("/user");
       }
     } catch (error) {

@@ -7,11 +7,3 @@ export const handleSuccess = () => {
     confirmButtonText: "ok",
   });
 };
-
-export const handleError = (error) => {
-  Swal.fire({
-    icon: "error",
-    text: error.response.data.message,
-    confirmButtonText: "ok",
-  });
-};
