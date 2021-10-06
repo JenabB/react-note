@@ -1,8 +1,9 @@
 import axios from "axios";
+const host = "https://svc-not-e.herokuapp.com/v1";
 
 export const addProduct = async (productName, productPrice, shopId, token) => {
   return await axios.post(
-    `https://svc-not-e.herokuapp.com/v1/shop/${shopId}/product`,
+    `${host}/shop/${shopId}/product`,
     {
       productName: productName,
       productPrice: productPrice,
@@ -24,7 +25,7 @@ export const editProduct = async (
   token
 ) => {
   return await axios.put(
-    `https://svc-not-e.herokuapp.com/v1/shop/${shopId}/product/${productId}`,
+    `${host}/shop/${shopId}/product/${productId}`,
     {
       productName: productName,
       productPrice: productPrice,
@@ -39,13 +40,10 @@ export const editProduct = async (
 };
 
 export const deleteProduct = async (shopId, productId, token) => {
-  return await axios.delete(
-    `https://svc-not-e.herokuapp.com/v1/shop/${shopId}/product/${productId}`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  return await axios.delete(`${host}/shop/${shopId}/product/${productId}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };

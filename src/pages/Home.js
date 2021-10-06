@@ -7,7 +7,6 @@ import { useAuthState, useAuthDispatch } from "../hook";
 
 //lib
 import { motion } from "framer-motion";
-import axios from "axios";
 
 //components
 import OwnerShopList from "../components/shop/shop/OwnerShopList";
@@ -24,6 +23,7 @@ const Home = () => {
     getUserProfile(user.token).then((result) => {
       dispatch({ type: "GET_USER_PROFILE", payload: result.data.data });
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

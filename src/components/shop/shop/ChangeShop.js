@@ -1,14 +1,11 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-//lib
-import axios from "axios";
-
 //context
 import { useAuthState } from "../../../hook";
 
 import Select from "react-select";
-import Swal from "sweetalert2";
+
 import NavWithBack from "../../NavWithBack";
 import { motion } from "framer-motion";
 import {
@@ -16,6 +13,13 @@ import {
   handleError,
   handleSuccess,
 } from "../../../utils/responseHandler";
+import {
+  deleteShop,
+  getAllCountries,
+  getAllProvinces,
+  getAllRegencies,
+  updateShop,
+} from "./actions";
 
 const ChangeShop = () => {
   //context
@@ -46,25 +50,20 @@ const ChangeShop = () => {
     user.shopDetails.regencyId
   );
 
-  const host = "https://svc-not-e.herokuapp.com";
-
   useEffect(() => {
-    fetch(`${host}/v1/area/country`)
-      .then((response) => response.json())
+    getAllCountries()
       .then((data) => {
         setAllCountries(data.data);
       })
       .catch((error) => console.log(error));
 
-    fetch(`${host}/v1/area/province?countryId=${selectedCountry}`)
-      .then((response) => response.json())
+    getAllProvinces(selectedCountry)
       .then((data) => {
         setAllProvinces(data.data);
       })
       .catch((error) => console.log(error));
 
-    fetch(`${host}/v1/area/regency?provinceId=${selectedProvince}`)
-      .then((response) => response.json())
+    getAllRegencies(selectedProvince)
       .then((data) => {
         setAllRegencies(data.data);
       })
@@ -111,24 +110,16 @@ const ChangeShop = () => {
   const handleShopChange = (e) => {
     e.preventDefault();
     setLoading("loading...");
-    axios
-      .put(
-        `https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}`,
-        {
-          shopName: shopName,
-          countryId: selectedCountry,
-          provinceId: selectedProvince,
-          regencyId: selectedRegency,
-          address: address,
-          contactNumber: contactNumber,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
-          },
-        }
-      )
+    updateShop(
+      user.shopId,
+      shopName,
+      selectedCountry,
+      selectedProvince,
+      selectedRegency,
+      address,
+      contactNumber,
+      user.token
+    )
       .then((result) => {
         setLoading("change");
         handleSuccess(result);
@@ -148,28 +139,13 @@ const ChangeShop = () => {
     handleAreYouSure().then((result) => {
       if (result.isConfirmed) {
         try {
-          axios
-            .delete(`https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}`, {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${user.token}`,
-              },
-            })
-            .then((result) => {
-              Swal.fire({
-                icon: "success",
-                text: result.data.message,
-                confirmButtonText: "ok",
-              });
+          deleteShop(user.shopId, user.token).then((result) => {
+            handleSuccess(result);
 
-              history.push("/user");
-            });
-        } catch (error) {
-          Swal.fire({
-            icon: "error",
-            text: error.response.data.message,
-            confirmButtonText: "ok",
+            history.push("/user");
           });
+        } catch (error) {
+          handleError(error);
         }
       }
     });

@@ -1,54 +1,59 @@
 import { useEffect, useState } from "react";
-import { useAuthDispatch, useAuthState } from "../../../hook";
+import { useAuthState } from "../../../hook";
 
 import { useHistory } from "react-router-dom";
-import Swal from "sweetalert2";
-import axios from "axios";
+
 import Select from "react-select";
 import { motion } from "framer-motion";
+import {
+  createShop,
+  getAllCountries,
+  getAllProvinces,
+  getAllRegencies,
+} from "./actions";
+import { handleError, handleSuccess } from "../../../utils/responseHandler";
 
 const CreateShopModal = ({ setIsOpen }) => {
   const user = useAuthState();
-  const dispatch = useAuthDispatch();
-  const [allProvinces, setAllProvinces] = useState([]);
-  const [allCountries, setAllCountries] = useState([]);
+
   const [data, setData] = useState({
     shopName: "",
     address: "",
     contactNumber: "",
   });
 
+  const { shopName, address, contactNumber } = data;
+
   let history = useHistory();
   const [loading, setLoading] = useState("create");
 
+  const [allCountries, setAllCountries] = useState([]);
+  const [allProvinces, setAllProvinces] = useState([]);
+  const [allRegencies, setAllRegencies] = useState([]);
+
   const [selectedCountry, setSelectedCountry] = useState("100");
   const [selectedProvince, setSelectedProvince] = useState("9");
-  const [allRegencies, setAllRegencies] = useState([]);
   const [selectedRegency, setSelectedRegency] = useState("10");
 
-  const host = "https://svc-not-e.herokuapp.com";
   useEffect(() => {
-    fetch(`${host}/v1/area/country`)
-      .then((response) => response.json())
+    getAllCountries()
       .then((data) => {
         setAllCountries(data.data);
       })
       .catch((error) => console.log(error));
 
-    fetch(`${host}/v1/area/province?countryId=${selectedCountry}`)
-      .then((response) => response.json())
+    getAllProvinces(selectedCountry)
       .then((data) => {
         setAllProvinces(data.data);
       })
       .catch((error) => console.log(error));
 
-    fetch(`${host}/v1/area/regency?provinceId=${selectedProvince}`)
-      .then((response) => response.json())
+    getAllRegencies(selectedProvince)
       .then((data) => {
         setAllRegencies(data.data);
       })
       .catch((error) => console.log(error));
-  }, [data, dispatch, selectedCountry, selectedProvince]);
+  }, [selectedCountry, selectedProvince]);
 
   const countriesOptions = allCountries.map((c) => ({
     value: c.countryId,
@@ -64,8 +69,6 @@ const CreateShopModal = ({ setIsOpen }) => {
     value: c.regencyId,
     label: c.regencyName,
   }));
-
-  const { shopName, address, contactNumber } = data;
 
   const handleSelectCountry = (e) => {
     setSelectedCountry(e.value);
@@ -88,45 +91,24 @@ const CreateShopModal = ({ setIsOpen }) => {
     setLoading("Loading...");
     try {
       setData({ ...data, error: null });
-      const res = await axios.post(
-        `${host}/v1/shop`,
-        {
-          shopName: shopName,
-          countryId: selectedCountry,
-          provinceId: selectedProvince,
-          regencyId: selectedRegency,
-          address: address,
-          contactNumber: contactNumber,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
-          },
-        }
+      const res = await createShop(
+        shopName,
+        selectedCountry,
+        selectedProvince,
+        selectedRegency,
+        address,
+        contactNumber,
+        user.token
       );
-
-      Swal.fire({
-        icon: "success",
-        text: res.data.message,
-        confirmButtonText: "ok",
-      });
+      handleSuccess(res);
       setLoading("create");
     } catch (error) {
       setLoading("create");
       if (error.response.data.status === 401) {
-        Swal.fire({
-          icon: "error",
-          text: error.response.data.message,
-          confirmButtonText: "ok",
-        });
+        handleError(error);
         history.push("/user/login");
       } else {
-        Swal.fire({
-          icon: "error",
-          text: error.response.data.message,
-          confirmButtonText: "ok",
-        });
+        handleError(error);
       }
     }
   };
