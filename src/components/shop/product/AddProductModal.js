@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { addProduct } from "./actions";
-import { handleSuccess } from "./utils";
-import { handleError } from "../../../utils/responseHandler";
+import { handleSuccess, handleError } from "../../../utils/responseHandler";
 import { useAuthState } from "../../../hook";
 
 const AddProductModal = ({ setIsOpen }) => {
@@ -27,9 +26,14 @@ const AddProductModal = ({ setIsOpen }) => {
 
     setLoading("Loading...");
     try {
-      await addProduct(productName, productPrice, user.shopId, user.token);
+      const res = await addProduct(
+        productName,
+        productPrice,
+        user.shopId,
+        user.token
+      );
       setLoading("create");
-      handleSuccess();
+      handleSuccess(res);
     } catch (error) {
       setLoading("create");
       if (error.response.data.status === 401) {

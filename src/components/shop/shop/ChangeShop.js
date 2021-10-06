@@ -11,6 +11,11 @@ import Select from "react-select";
 import Swal from "sweetalert2";
 import NavWithBack from "../../NavWithBack";
 import { motion } from "framer-motion";
+import {
+  handleAreYouSure,
+  handleError,
+  handleSuccess,
+} from "../../../utils/responseHandler";
 
 const ChangeShop = () => {
   //context
@@ -126,21 +131,13 @@ const ChangeShop = () => {
       )
       .then((result) => {
         setLoading("change");
-        Swal.fire({
-          icon: "success",
-          text: result.data.message,
-          confirmButtonText: "ok",
-        });
+        handleSuccess(result);
 
         history.goBack();
       })
       .catch((error) => {
         setLoading("change");
-        Swal.fire({
-          icon: "error",
-          text: error.response.data.message,
-          confirmButtonText: "ok",
-        });
+        handleError(error);
         if (error.response.data.status === 401) {
           history.push("/user/login");
         }
@@ -148,15 +145,7 @@ const ChangeShop = () => {
   };
 
   const handleDeleteShop = () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
+    handleAreYouSure().then((result) => {
       if (result.isConfirmed) {
         try {
           axios

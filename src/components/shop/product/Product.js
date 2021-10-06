@@ -14,18 +14,33 @@ const Product = () => {
   const user = useAuthState();
   const dispatch = useAuthDispatch();
 
+  const url = `https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}/product`;
+
   useEffect(() => {
-    axios
-      .get(`https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}/product`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
-        },
-      })
-      .then((result) => {
-        dispatch({ type: "GET_SHOP_PRODUCT", payload: result.data.data });
-      });
-  });
+    let intervalId;
+
+    const fetchData = async () => {
+      axios
+        .get(url, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+        })
+        .then((result) => {
+          dispatch({ type: "GET_SHOP_PRODUCT", payload: result.data.data });
+        });
+      intervalId = setTimeout(fetchData, 4000);
+    };
+
+    fetchData();
+    return () => {
+      if (intervalId) {
+        clearTimeout(intervalId);
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [url]);
 
   return (
     <motion.div

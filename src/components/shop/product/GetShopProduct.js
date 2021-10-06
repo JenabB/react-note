@@ -1,9 +1,15 @@
 import React, { useState } from "react";
-import axios from "axios";
+
 import { formatRp } from "../../../utils/formatRp";
 import { useAuthDispatch, useAuthState } from "../../../hook";
 import { Link } from "react-router-dom";
-import Swal from "sweetalert2";
+
+import {
+  handleAreYouSure,
+  handleError,
+  handleSuccess,
+} from "../../../utils/responseHandler";
+import { deleteProduct } from "./actions";
 
 const GetShopProduct = ({ id }) => {
   const [query, setQuery] = useState(null);
@@ -17,40 +23,14 @@ const GetShopProduct = ({ id }) => {
   };
 
   const handleDeleteProduct = (productId) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
+    handleAreYouSure().then((result) => {
       if (result.isConfirmed) {
         try {
-          axios
-            .delete(
-              `https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}/product/${productId}`,
-              {
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${user.token}`,
-                },
-              }
-            )
-            .then((result) => {
-              Swal.fire({
-                icon: "success",
-                text: result.data.message,
-                confirmButtonText: "ok",
-              });
-            });
-        } catch (error) {
-          Swal.fire({
-            icon: "error",
-            text: error.response.data.message,
-            confirmButtonText: "ok",
+          deleteProduct(user.shopId, productId, user.token).then((result) => {
+            handleSuccess(result);
           });
+        } catch (error) {
+          handleError(error);
         }
       }
     });
