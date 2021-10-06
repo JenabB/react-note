@@ -10,7 +10,9 @@ import { motion } from "framer-motion";
 
 const OwnerShopDetails = (props) => {
   const [detail, setDetail] = useState([]);
+
   const shopId = props.match.params.id;
+
   const dispatch = useAuthDispatch();
   const user = useAuthState();
 

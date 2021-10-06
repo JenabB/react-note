@@ -24,7 +24,7 @@ const Setting = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Logout",
     }).then((result) => {
       if (result.isConfirmed) {
         history.push("/");
