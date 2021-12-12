@@ -17,6 +17,7 @@ import NavWithBack from "../components/NavWithBack";
 import { useAuthDispatch, useAuthState } from "../hook";
 
 import CurrencyInput from "react-currency-input-field";
+import { formInput } from "../theme/formInput";
 
 const CreateInvoice = () => {
   const HOST = "https://svc-not-e.herokuapp.com";
@@ -140,7 +141,7 @@ const CreateInvoice = () => {
               <div className="my-2 text-center">
                 <h1>Customer name</h1>
                 <input
-                  className="bg-blue-200 px-2 py-1 w-full"
+                  className={formInput}
                   type="name"
                   name="customerName"
                   value={customerName}
@@ -177,7 +178,7 @@ const CreateInvoice = () => {
               ) : (
                 <form onSubmit={handleUpdateProduct} className="my-4">
                   <input
-                    className="w-full text-center bg-blue-100 px-2 py-2 my-2"
+                    className={formInput}
                     type="name"
                     placeholder="product name"
                     value={addProduct.productName}

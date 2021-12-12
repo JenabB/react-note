@@ -5,8 +5,9 @@ import NavWithBack from "../../NavWithBack";
 import { useNavigate } from "react-router-dom";
 
 import { handleSuccess, handleError } from "../../../utils/responseHandler";
+import { formInput } from "../../../theme/formInput";
 
-const EditProductModal = () => {
+const EditProductModal = ({ open, handleEditClose }) => {
   const user = useAuthState();
   const [productName, setProductName] = useState(
     user.selectedProduct.productName
@@ -36,7 +37,7 @@ const EditProductModal = () => {
       );
 
       handleSuccess(res);
-      navigate(-1);
+      handleEditClose();
     } catch (error) {
       if (error.response.data.status === 401) {
         handleError(error);
@@ -47,34 +48,48 @@ const EditProductModal = () => {
   };
 
   return (
-    <div>
-      <div className="mt-10 text-center">
-        <h1>Edit Product</h1>
-        <form className="mt-10" onSubmit={handleUpdate}>
-          <h1>Product Name</h1>
-          <input
-            type="text"
-            className="bg-gray-100 px-2 py-1 rounded-lg mt-4 mb-8"
-            value={productName}
-            onChange={handleNameChange}
-          />
-          <h1>Product Price</h1>
-          <input
-            type="number"
-            className="bg-gray-100 px-2 py-1 rounded-lg mb-8 mt-4"
-            value={productPrice}
-            onChange={handlePriceChange}
-          />
-          <br />
-          <button
-            type="submit"
-            className="bg-blue-600 px-3 py-2 rounded-lg text-white"
-          >
-            Confirm
-          </button>
-        </form>
-      </div>
-    </div>
+    <>
+      {open && (
+        <div className="modal absolute bg-white shadow-lg p-4 rounded-l">
+          <div className="text-right">
+            <button
+              className="bg-red-400 px-3 py-1 rounded-lg text-white"
+              onClick={handleEditClose}
+            >
+              X
+            </button>
+          </div>
+          <div className="mt-10 text-center">
+            <h1>Edit Product</h1>
+            <form className="mt-10" onSubmit={handleUpdate}>
+              <h1>Product Name</h1>
+              <input
+                type="text"
+                className={formInput}
+                value={productName}
+                onChange={handleNameChange}
+                required
+              />
+              <h1>Product Price</h1>
+              <input
+                type="number"
+                className={formInput}
+                value={productPrice}
+                onChange={handlePriceChange}
+                required
+              />
+              <br />
+              <button
+                type="submit"
+                className="bg-blue-600 px-3 py-2 rounded-lg text-white"
+              >
+                Confirm
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

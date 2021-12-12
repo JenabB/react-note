@@ -10,9 +10,11 @@ import {
   handleSuccess,
 } from "../../../utils/responseHandler";
 import { deleteProduct } from "./actions";
+import EditProductModal from "./EditProductModal";
 
 const GetShopProduct = ({ id }) => {
   const [query, setQuery] = useState(null);
+  const [editOpen, setEditOpen] = useState(false);
   const user = useAuthState();
   const dispatch = useAuthDispatch();
   const productList = user.shopProduct;
@@ -21,6 +23,9 @@ const GetShopProduct = ({ id }) => {
   const handleQueryChange = (e) => {
     setQuery(e.target.value);
   };
+
+  const handleEditOpen = () => setEditOpen(true);
+  const handleEditClose = () => setEditOpen(false);
 
   const handleDeleteProduct = (productId) => {
     handleAreYouSure().then((result) => {
@@ -56,14 +61,9 @@ const GetShopProduct = ({ id }) => {
           </div>
 
           <div className="flex">
-            <Link
-              to={`/product/${product.productId}`}
-              onClick={() =>
-                dispatch({ type: "GET_ONE_PRODUCT", payload: product })
-              }
-            >
-              <h1 className="material-icons mx-4">edit</h1>
-            </Link>
+            <button className="material-icons mx-4" onClick={handleEditOpen}>
+              edit
+            </button>
             <h1
               className="material-icons text-red-600"
               onClick={() => handleDeleteProduct(product.productId)}
@@ -71,6 +71,7 @@ const GetShopProduct = ({ id }) => {
               delete
             </h1>
           </div>
+          <EditProductModal open={editOpen} handleEditClose={handleEditClose} />
         </div>
       );
     });

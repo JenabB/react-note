@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { addProduct } from "./actions";
 import { handleSuccess, handleError } from "../../../utils/responseHandler";
 import { useAuthState } from "../../../hook";
+import { formInput } from "../../../theme/formInput";
 
 const AddProductModal = ({ setIsOpen }) => {
   //state
@@ -38,7 +39,7 @@ const AddProductModal = ({ setIsOpen }) => {
       setLoading("create");
       if (error.response.data.status === 401) {
         handleError(error);
-        navigate("login");
+        navigate("/login");
       } else {
         handleError(error);
       }
@@ -62,7 +63,7 @@ const AddProductModal = ({ setIsOpen }) => {
             <div className="my-2">
               <h1>Product Name</h1>
               <input
-                className=" text-center bg-blue-200 px-2 py-1 w-full"
+                className={formInput}
                 type="name"
                 name="productName"
                 value={productName}
@@ -74,7 +75,7 @@ const AddProductModal = ({ setIsOpen }) => {
             <div className="my-2">
               <h1>Product Price</h1>
               <input
-                className="w-full text-right p-2"
+                className={formInput}
                 placeholder="0"
                 type="number"
                 min="0"
