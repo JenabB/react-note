@@ -8,7 +8,7 @@ import axios from "axios";
 import { useAuthState, useAuthDispatch } from "../../../hook";
 
 const OwnerShopList = () => {
-  //context
+  //contextb
   const dispatch = useAuthDispatch();
   const user = useAuthState();
 
@@ -53,7 +53,7 @@ const OwnerShopList = () => {
         user.shopList.length > 0 ? (
           <div
             className="flex overflow-x-auto mx-auto"
-            style={{ maxWidth: "90%" }}
+            style={{ width: "90%" }}
           >
             {sorted.map((shop, index) => (
               <Link to={`/shop/${shop.shopId}`}>

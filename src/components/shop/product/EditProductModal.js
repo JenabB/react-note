@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useAuthState } from "../../../hook";
 import { editProduct } from "./actions";
-import NavWithBack from "../../NavWithBack";
-import { useNavigate } from "react-router-dom";
 
 import { handleSuccess, handleError } from "../../../utils/responseHandler";
 import { formInput } from "../../../theme/formInput";
@@ -15,7 +13,6 @@ const EditProductModal = ({ open, handleEditClose }) => {
   const [productPrice, setProductPrice] = useState(
     user.selectedProduct.productPrice
   );
-  let navigate = useNavigate();
 
   const handleNameChange = (e) => {
     setProductName(e.target.value);

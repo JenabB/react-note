@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
 import { formatRp } from "../../../utils/formatRp";
-import { useAuthDispatch, useAuthState } from "../../../hook";
-import { Link } from "react-router-dom";
+import { useAuthState } from "../../../hook";
 
 import {
   handleAreYouSure,
@@ -16,7 +15,7 @@ const GetShopProduct = ({ id }) => {
   const [query, setQuery] = useState(null);
   const [editOpen, setEditOpen] = useState(false);
   const user = useAuthState();
-  const dispatch = useAuthDispatch();
+
   const productList = user.shopProduct;
   // let { path, url } = useRouteMatch();
 

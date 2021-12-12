@@ -12,10 +12,11 @@ import { motion } from "framer-motion";
 import OwnerShopList from "../components/shop/shop/OwnerShopList";
 import FloatingCreateShopButton from "../components/shop/shop/FloatingCreateShopButton";
 
-import Products from "../components/shop/Products";
 import { getUserProfile } from "../components/home/actions";
 import UserIformation from "../components/home/UserIformation";
-
+import { formatRp } from "../utils/formatRp";
+import moment from "moment";
+import LatestProduct from "../components/home/LatestProduct";
 const Home = () => {
   const user = useAuthState();
   const dispatch = useAuthDispatch();
@@ -78,10 +79,16 @@ const Home = () => {
         }}
       >
         <div className="flex justify-between">
-          <h1>ini info</h1>
+          <div className="py-2">
+            <h1 className="text-xs text-gray-400 mb-2">Account Create At</h1>
+            <h1 className="text-sm">
+              {moment(user.userProfile.createAt).format("YYYY MMM DD")}
+            </h1>
+          </div>
+
           <div className="bg-gray-200 rounded-xl p-4">
-            <h1>Total Transaction</h1>
-            <h1>23232323</h1>
+            <h1 className="text-xs">Total Transaction</h1>
+            <h1 className="text-xl font-bold">{formatRp(3232323)}</h1>
           </div>
         </div>
       </div>
@@ -89,6 +96,7 @@ const Home = () => {
       <div className="mt-24 lg:w-3/5 mx-auto">
         <h1 className="mt-2 ml-4 font-bold mb-4">Your Shop</h1>
         <OwnerShopList />
+        <LatestProduct />
       </div>
 
       <FloatingCreateShopButton />
