@@ -62,12 +62,12 @@ const Setting = () => {
       </div>
       <div className="bottom-0 w-screen">
         <div className="text-center">
-          <Link to="/user/setting/update-profile">
+          <Link to="/update-profile">
             <button className="py-2 px-4 w-full">Update Profile</button>
           </Link>
         </div>
         <div className="text-center">
-          <Link to="/user/setting/change-password">
+          <Link to="/change-password">
             <button className="py-2 px-4 w-full">Change Password</button>
           </Link>
         </div>

@@ -57,7 +57,7 @@ const GetShopProduct = ({ id }) => {
 
           <div className="flex">
             <Link
-              to={`product/${product.productId}/edit`}
+              to={`/product/${product.productId}`}
               onClick={() =>
                 dispatch({ type: "GET_ONE_PRODUCT", payload: product })
               }
@@ -80,12 +80,12 @@ const GetShopProduct = ({ id }) => {
       <div className="text-center">
         <input
           type="search"
-          className="bg-gray-200 px-2 py-1 rounded-full my-10"
+          className="bg-gray-200 px-2 py-1 rounded-lg my-6"
           placeholder="search"
           onChange={handleQueryChange}
         />
       </div>
-      {productList ? (
+      {productList?.length > 0 ? (
         items
       ) : (
         <div>

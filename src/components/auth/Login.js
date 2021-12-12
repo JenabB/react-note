@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 //utils
 import { handleSuccess } from "../../utils/responseHandler";
@@ -16,6 +16,7 @@ const Login = (props) => {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
   const [loading, setLoading] = useState("login");
   const { email, password } = data;
 
@@ -33,7 +34,7 @@ const Login = (props) => {
       setLoading("login");
       if (res.status === 200) {
         handleSuccess(res);
-        props.history.push("home");
+        navigate("/home");
       }
     } catch (error) {
       setLoading("login");

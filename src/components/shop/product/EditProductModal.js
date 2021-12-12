@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import { handleSuccess, handleError } from "../../../utils/responseHandler";
 
-const EditProduct = () => {
+const EditProductModal = () => {
   const user = useAuthState();
   const [productName, setProductName] = useState(
     user.selectedProduct.productName
@@ -48,7 +48,6 @@ const EditProduct = () => {
 
   return (
     <div>
-      <NavWithBack />
       <div className="mt-10 text-center">
         <h1>Edit Product</h1>
         <form className="mt-10" onSubmit={handleUpdate}>
@@ -79,4 +78,4 @@ const EditProduct = () => {
   );
 };
 
-export default EditProduct;
+export default EditProductModal;

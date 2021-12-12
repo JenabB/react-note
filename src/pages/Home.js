@@ -52,12 +52,12 @@ const Home = () => {
       <nav className="sticky top-0 z-10 shadow-lg flex justify-between bg-blue-700 text-white p-4">
         <div></div>
         <div>
-          <Link to="/user" className="text-2xl font-bold">
+          <Link to="/home" className="text-2xl font-bold">
             Home
           </Link>
         </div>
         <div>
-          <Link to="/user/setting">
+          <Link to="/setting">
             <span class="material-icons">settings</span>
           </Link>
         </div>

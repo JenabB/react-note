@@ -142,7 +142,7 @@ const ChangeShop = () => {
           deleteShop(user.shopId, user.token).then((result) => {
             handleSuccess(result);
 
-            navigate("home");
+            navigate("/home");
           });
         } catch (error) {
           handleError(error);
@@ -181,7 +181,7 @@ const ChangeShop = () => {
                 <div className="my-2">
                   <h1>Shop name</h1>
                   <input
-                    className="bg-blue-200 px-2 py-1 w-full"
+                    className="bg-blue-200 px-2 py-1 rounded-lg my-4 w-full"
                     type="name"
                     name="shopName"
                     value={shopName}
@@ -241,7 +241,7 @@ const ChangeShop = () => {
         </div>
         <div>
           <button
-            className="bg-red-500 text-white w-screen"
+            className="bg-red-500 text-white w-full"
             onClick={handleDeleteShop}
           >
             <span class="material-icons">delete</span>

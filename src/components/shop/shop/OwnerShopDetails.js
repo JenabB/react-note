@@ -2,13 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
-import {
-  BrowserRouter as Route,
-  NavLink,
-  Link,
-  useParams,
-  Outlet,
-} from "react-router-dom";
+import { NavLink, Link, useParams, Outlet } from "react-router-dom";
 
 import { useAuthState, useAuthDispatch } from "../../../hook";
 
@@ -20,10 +14,7 @@ const OwnerShopDetails = () => {
     textDecoration: "underline",
   };
 
-  let activeClassName = "underline";
-
   const { id } = useParams();
-  console.log(useParams(), "iuds");
 
   const dispatch = useAuthDispatch();
   const user = useAuthState();
@@ -96,7 +87,7 @@ const OwnerShopDetails = () => {
             <div className="">
               <div className="">
                 <h1 className="font-bold text-lg">{detail.shopName}</h1>
-                <Link to={`/change`}>
+                <Link to={`update-shop`}>
                   <button className="bg-white text-blue-600 px-2 rounded-lg my-4">
                     Edit
                   </button>
@@ -142,16 +133,16 @@ const OwnerShopDetails = () => {
 
       <nav className=" w-full p-2 flex justify-evenly bg-white shadow-lg items-center">
         <div className="flex flex-col items-center">
-          <div className="material-icons">home</div>
+          <div className="material-icons text-blue-900">inventory_2</div>
           <NavLink
-            to="product"
+            to=""
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             Products
           </NavLink>
         </div>
         <div className="flex flex-col items-center">
-          <div className="material-icons">payment</div>
+          <div className="material-icons text-blue-900">receipt</div>
           <NavLink
             to="invoice"
             style={({ isActive }) => (isActive ? activeStyle : undefined)}

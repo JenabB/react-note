@@ -22,7 +22,6 @@ import ChangeShop from "./components/shop/shop/ChangeShop";
 
 //product
 import Product from "./components/shop/product/Product";
-import EditProduct from "./components/shop/product/EditProduct";
 
 //invoice
 import Invoice from "./components/shop/invoice/Invoice";
@@ -44,30 +43,36 @@ const Navigation = () => {
         <Route path="home" element={<Home />} />
 
         <Route path="shop/:id" element={<OwnerShopDetails />}>
-          <Route index path="product" element={<Product />} />
+          <Route index s element={<Product />} />
           <Route path="invoice" element={<Invoice />} />
         </Route>
+
+        <Route path="/setting" element={<Setting />} />
+        <Route path="/change-password" element={<ChangePassword />} />
+        <Route path="/update-profile" element={<UpdateProfile />} />
+
+        <Route path="shop/:id/update-shop" element={<ChangeShop />} />
+        <Route
+          path="shop/:id/invoice/create-invoice"
+          element={<CreateInvoice />}
+        />
+
         {/* {new Date().toLocaleString() >
         new Date(user.user.exp).toLocaleString() ? (
           <Route path="/home" element={<Home />} />
         ) : (
           <Navigate to="login" />
         )}
-        <Route exact path="/user/setting" component={Setting} />
-        <Route
-          path="/user/setting/change-password"
-          component={ChangePassword}
-        />
-        <Route path="/user/setting/update-profile" component={UpdateProfile} />
+       
 
     
         <Route exact path="/shop/:id" component={OwnerShopDetails} />
-        <Route path="/shop/:id/change" component={ChangeShop} />
-        <Route exact path="/shop/:id/product" component={Product} />
+   
+    
 
         <Route path="/shop/:id/product/:id/edit" component={EditProduct} />
         <Route exact path="/shop/:id/invoice" component={Invoice} />
-        <Route path="/shop/:id/invoice/create" component={CreateInvoice} /> */}
+         */}
       </Routes>
     </Router>
   );

@@ -4,7 +4,7 @@ const FloatingCreateInvoiceButton = () => {
   const user = useAuthState();
 
   return (
-    <Link to={`/shop/${user.shopId}/invoice/create`}>
+    <Link to={`create-invoice`}>
       <button className="p-0 fixed bottom-10 right-10 w-16 h-16 bg-blue-500 rounded-full hover:bg-blue-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
         <svg
           viewBox="0 0 20 20"
