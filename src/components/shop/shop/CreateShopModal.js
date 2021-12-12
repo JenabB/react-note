@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuthState } from "../../../hook";
 
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Select from "react-select";
 import { motion } from "framer-motion";
@@ -24,7 +24,7 @@ const CreateShopModal = ({ setIsOpen }) => {
 
   const { shopName, address, contactNumber } = data;
 
-  let history = useHistory();
+  let navigate = useNavigate();
   const [loading, setLoading] = useState("create");
 
   const [allCountries, setAllCountries] = useState([]);
@@ -106,7 +106,7 @@ const CreateShopModal = ({ setIsOpen }) => {
       setLoading("create");
       if (error.response.data.status === 401) {
         handleError(error);
-        history.push("/user/login");
+        navigate("login");
       } else {
         handleError(error);
       }

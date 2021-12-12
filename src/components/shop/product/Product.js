@@ -60,8 +60,6 @@ const Product = () => {
         },
       }}
     >
-      <NavWithBack />
-      <Header />
       <GetShopProduct />
       <FloatingAddProductButton />
     </motion.div>

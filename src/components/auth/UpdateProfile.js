@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 //utils
 import { useAuthState } from "../../hook";
@@ -19,9 +19,9 @@ const UpdateProfile = () => {
     address: user.userProfile.address,
   });
 
-  let history = useHistory();
+  let navigate = useNavigate();
   function goBack() {
-    history.goBack();
+    navigate(-1);
   }
 
   const [loading, setLoading] = useState("update");
@@ -46,7 +46,7 @@ const UpdateProfile = () => {
       setLoading("update");
       if (error.response.data.status === 401) {
         handleError(error);
-        history.push("/user/login");
+        navigate("login");
       } else {
         handleError(error);
       }

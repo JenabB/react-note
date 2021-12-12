@@ -1,11 +1,11 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const NavWithBack = () => {
-  let history = useHistory();
+  let navigate = useNavigate();
 
   function goBack() {
-    history.goBack();
+    navigate(-1);
   }
 
   return (

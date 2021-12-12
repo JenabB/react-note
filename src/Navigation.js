@@ -1,8 +1,8 @@
 import {
   BrowserRouter as Router,
-  Switch,
   Route,
-  Redirect,
+  Routes,
+  Navigate,
 } from "react-router-dom";
 
 //pages
@@ -36,18 +36,22 @@ const Navigation = () => {
 
   return (
     <Router>
-      <Switch>
-        {/* landing */}
-        <Route exact path="/" component={LandingPage} />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="register" element={<Register />} />
+        <Route path="login" element={<Login />} />
 
-        {/* auth */}
-        <Route path="/user/register" component={Register} />
-        <Route path="/user/login" component={Login} />
-        {new Date().toLocaleString() >
+        <Route path="home" element={<Home />} />
+
+        <Route path="shop/:id" element={<OwnerShopDetails />}>
+          <Route index path="product" element={<Product />} />
+          <Route path="invoice" element={<Invoice />} />
+        </Route>
+        {/* {new Date().toLocaleString() >
         new Date(user.user.exp).toLocaleString() ? (
-          <Route exact path="/user" component={Home} />
+          <Route path="/home" element={<Home />} />
         ) : (
-          <Redirect to="/user/login" />
+          <Navigate to="login" />
         )}
         <Route exact path="/user/setting" component={Setting} />
         <Route
@@ -56,26 +60,16 @@ const Navigation = () => {
         />
         <Route path="/user/setting/update-profile" component={UpdateProfile} />
 
-        {/* shop */}
+    
         <Route exact path="/shop/:id" component={OwnerShopDetails} />
         <Route path="/shop/:id/change" component={ChangeShop} />
         <Route exact path="/shop/:id/product" component={Product} />
 
         <Route path="/shop/:id/product/:id/edit" component={EditProduct} />
         <Route exact path="/shop/:id/invoice" component={Invoice} />
-        <Route path="/shop/:id/invoice/create" component={CreateInvoice} />
-      </Switch>
+        <Route path="/shop/:id/invoice/create" component={CreateInvoice} /> */}
+      </Routes>
     </Router>
   );
 };
 export default Navigation;
-
-// <Switch>
-// <Route path={`${path}/product`}>
-//   <Product />
-// </Route>
-
-// <Route path={`${path}/invoice`}>
-//   <Invoice />
-// </Route>
-// </Switch>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 //lib
 import Swal from "sweetalert2";
@@ -22,7 +22,7 @@ const CreateInvoice = () => {
   const HOST = "https://svc-not-e.herokuapp.com";
   const dispatch = useAuthDispatch();
   const user = useAuthState();
-  let history = useHistory();
+  let navigate = useNavigate();
   const [product, setProduct] = useState([]);
   const [addProduct, setAddProduct] = useState({
     productName: "",
@@ -109,7 +109,7 @@ const CreateInvoice = () => {
           text: error.response.data.message,
           confirmButtonText: "ok",
         });
-        history.push("/user/login");
+        navigate("login");
       } else {
         Swal.fire({
           icon: "error",

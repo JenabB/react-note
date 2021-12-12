@@ -1,31 +1,42 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
-import { BrowserRouter as Route, Link, useRouteMatch } from "react-router-dom";
+import {
+  BrowserRouter as Route,
+  NavLink,
+  Link,
+  useParams,
+  Outlet,
+} from "react-router-dom";
 
 import { useAuthState, useAuthDispatch } from "../../../hook";
-import ShopDetailBottom from "../ShopDetailBottom";
+
 import { motion } from "framer-motion";
 
-const OwnerShopDetails = (props) => {
+const OwnerShopDetails = () => {
   const [detail, setDetail] = useState([]);
+  let activeStyle = {
+    textDecoration: "underline",
+  };
 
-  const shopId = props.match.params.id;
+  let activeClassName = "underline";
+
+  const { id } = useParams();
+  console.log(useParams(), "iuds");
 
   const dispatch = useAuthDispatch();
   const user = useAuthState();
 
-  let { url } = useRouteMatch();
-  let history = useHistory();
+  let navigate = useNavigate();
 
   function goBack() {
-    history.goBack();
+    navigate(-1);
   }
 
   useEffect(() => {
     axios
-      .get(`https://svc-not-e.herokuapp.com/v1/shop/${shopId}`, {
+      .get(`https://svc-not-e.herokuapp.com/v1/shop/${id}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
@@ -34,7 +45,7 @@ const OwnerShopDetails = (props) => {
       .then((result) => {
         setDetail(result.data.data);
         dispatch({ type: "GET_SHOP_DETAIL", payload: result.data.data });
-        dispatch({ type: "GET_SHOP_ID", payload: shopId });
+        dispatch({ type: "GET_SHOP_ID", payload: id });
       });
 
     axios
@@ -47,7 +58,7 @@ const OwnerShopDetails = (props) => {
       .then((result) => {
         dispatch({ type: "GET_SHOP_PRODUCT", payload: result.data.data });
       });
-  }, [dispatch, shopId, user.shopId, user.token]);
+  }, [dispatch, id, user.shopId, user.token]);
 
   return (
     <motion.div
@@ -74,7 +85,7 @@ const OwnerShopDetails = (props) => {
           </button>
         </div>
         <div>
-          <Link to="/user">Home</Link>
+          <Link to="/home">Home</Link>
         </div>
         <div></div>
       </nav>
@@ -85,7 +96,7 @@ const OwnerShopDetails = (props) => {
             <div className="">
               <div className="">
                 <h1 className="font-bold text-lg">{detail.shopName}</h1>
-                <Link to={`${url}/change`}>
+                <Link to={`/change`}>
                   <button className="bg-white text-blue-600 px-2 rounded-lg my-4">
                     Edit
                   </button>
@@ -129,19 +140,28 @@ const OwnerShopDetails = (props) => {
         </div>
       </div>
 
-      {/* <div>
-        <div className="bg-blue-400 p-4">
-          <Link to={`${url}/products`}>Products</Link>
-          <Link to={`${url}/invoice`}>Invoice</Link>
+      <nav className=" w-full p-2 flex justify-evenly bg-white shadow-lg items-center">
+        <div className="flex flex-col items-center">
+          <div className="material-icons">home</div>
+          <NavLink
+            to="product"
+            style={({ isActive }) => (isActive ? activeStyle : undefined)}
+          >
+            Products
+          </NavLink>
         </div>
-        <Switch>
-          <Route path={`${path}/products`}>
-            <h1>Ini product</h1>
-          </Route>
-        </Switch>
-      </div> */}
+        <div className="flex flex-col items-center">
+          <div className="material-icons">payment</div>
+          <NavLink
+            to="invoice"
+            style={({ isActive }) => (isActive ? activeStyle : undefined)}
+          >
+            Invoice
+          </NavLink>
+        </div>
+      </nav>
 
-      <ShopDetailBottom />
+      <Outlet />
     </motion.div>
   );
 };

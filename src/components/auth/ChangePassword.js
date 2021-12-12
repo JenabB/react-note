@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 //components
 import NavWithBack from "../NavWithBack";
@@ -25,7 +25,7 @@ const ChangePassword = () => {
   const dispatch = useAuthDispatch();
   const user = useAuthState();
 
-  let history = useHistory();
+  let navigate = useNavigate();
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -38,7 +38,7 @@ const ChangePassword = () => {
       await changePassword(user.userProfile.email, password, newPassword).then(
         (result) => {
           logout(dispatch);
-          history.push("/user");
+          navigate("/login");
           handleSuccess(result);
         }
       );

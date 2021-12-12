@@ -1,45 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import Modal from 'react-modal';
-import Swal from 'sweetalert2';
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
-import Select from 'react-select';
-import { useAuthDispatch, useAuthState } from '../../../hook';
-import add1 from '../../../images/icons/add1.png';
-import CurrencyInput from 'react-currency-input-field';
+import React, { useState, useEffect } from "react";
+import Modal from "react-modal";
+import Swal from "sweetalert2";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Select from "react-select";
+import { useAuthDispatch, useAuthState } from "../../../hook";
+import add1 from "../../../images/icons/add1.png";
+import CurrencyInput from "react-currency-input-field";
 
 const CreateInvoice = () => {
-  const HOST = 'https://svc-not-e.herokuapp.com';
+  const HOST = "https://svc-not-e.herokuapp.com";
   const dispatch = useAuthDispatch();
   const user = useAuthState();
-  let history = useHistory();
+  let navigate = useNavigate();
   const [product, setProduct] = useState([]);
   const [addProduct, setAddProduct] = useState({
-    productName: '',
-    productPrice: '',
-    quantity: '',
+    productName: "",
+    productPrice: "",
+    quantity: "",
   });
 
-  const [invoiceCode] = useState('1');
-  const [productInsertMode, setProductInsertMode] = useState('inside');
+  const [invoiceCode] = useState("1");
+  const [productInsertMode, setProductInsertMode] = useState("inside");
 
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState({
-    customerName: '',
+    customerName: "",
   });
 
   const options = [
-    { value: 'inside', label: 'inside' },
-    { value: 'outside', label: 'outside' },
+    { value: "inside", label: "inside" },
+    { value: "outside", label: "outside" },
   ];
 
   const handleUpdateProduct = (e) => {
     e.preventDefault();
     setProduct([...product, addProduct]);
     setAddProduct({
-      productName: '',
-      productPrice: '',
-      quantity: '',
+      productName: "",
+      productPrice: "",
+      quantity: "",
     });
   };
 
@@ -47,12 +47,12 @@ const CreateInvoice = () => {
     axios
       .get(`${HOST}/v1/shop/${user.shopId}/product`, {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${user.token}`,
         },
       })
       .then((result) => {
-        dispatch({ type: 'GET_SHOP_PRODUCT', payload: result.data.data });
+        dispatch({ type: "GET_SHOP_PRODUCT", payload: result.data.data });
       });
   }, [dispatch, user.shopId, user.token]);
 
@@ -93,32 +93,32 @@ const CreateInvoice = () => {
         },
         {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${JSON.parse(
-              localStorage.getItem('token')
+              localStorage.getItem("token")
             )}`,
           },
         }
       );
       console.log(res);
       Swal.fire({
-        icon: 'success',
+        icon: "success",
         text: res.data.message,
-        confirmButtonText: 'ok',
+        confirmButtonText: "ok",
       });
     } catch (error) {
       if (error.response.data.status === 401) {
         Swal.fire({
-          icon: 'error',
+          icon: "error",
           text: error.response.data.message,
-          confirmButtonText: 'ok',
+          confirmButtonText: "ok",
         });
-        history.push('/user/login');
+        navigate("login");
       } else {
         Swal.fire({
-          icon: 'error',
+          icon: "error",
           text: error.response.data.message,
-          confirmButtonText: 'ok',
+          confirmButtonText: "ok",
         });
       }
     }
@@ -148,7 +148,7 @@ const CreateInvoice = () => {
                   />
                 </div>
                 <Select options={options} onChange={handleInsertMode} />
-                {productInsertMode === 'inside' ? (
+                {productInsertMode === "inside" ? (
                   <div className="grid grid-cols-4">
                     {user.shopProduct.map((product, index) => (
                       <div

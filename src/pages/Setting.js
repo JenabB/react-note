@@ -1,4 +1,4 @@
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 //components
 import profile from "../images/ziva.jpeg";
 import NavWithBack from "../components/NavWithBack";
@@ -14,7 +14,7 @@ import { logout, useAuthDispatch } from "../hook";
 const Setting = () => {
   const dispatch = useAuthDispatch();
 
-  let history = useHistory();
+  let navigate = useNavigate();
 
   const handleLogout = () => {
     Swal.fire({
@@ -27,7 +27,7 @@ const Setting = () => {
       confirmButtonText: "Logout",
     }).then((result) => {
       if (result.isConfirmed) {
-        history.push("/");
+        navigate("/home");
         logout(dispatch);
       }
     });

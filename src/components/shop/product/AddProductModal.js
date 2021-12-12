@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { addProduct } from "./actions";
 import { handleSuccess, handleError } from "../../../utils/responseHandler";
@@ -15,7 +15,7 @@ const AddProductModal = ({ setIsOpen }) => {
   const { productName, productPrice } = data;
   const user = useAuthState();
 
-  let history = useHistory();
+  let navigate = useNavigate();
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -38,7 +38,7 @@ const AddProductModal = ({ setIsOpen }) => {
       setLoading("create");
       if (error.response.data.status === 401) {
         handleError(error);
-        history.push("/user/login");
+        navigate("login");
       } else {
         handleError(error);
       }

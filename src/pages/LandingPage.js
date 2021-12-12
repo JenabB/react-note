@@ -45,7 +45,7 @@ const LandingPage = () => {
         </div>
       </div>
 
-      <Link to="/user/login">
+      <Link to="login">
         <motion.button
           initial={{ x: -100 }}
           animate={{ x: [-100, 13] }}

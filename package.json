@@ -16,7 +16,7 @@
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
     "react-modal": "^3.13.1",
-    "react-router-dom": "^5.2.0",
+    "react-router-dom": "^6.1.1",
     "react-scripts": "4.0.3",
     "react-select": "^4.3.1",
     "sweetalert2": "^10.16.6",

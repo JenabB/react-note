@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useAuthState } from "../../../hook";
 import { editProduct } from "./actions";
 import NavWithBack from "../../NavWithBack";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { handleSuccess, handleError } from "../../../utils/responseHandler";
 
@@ -14,7 +14,7 @@ const EditProduct = () => {
   const [productPrice, setProductPrice] = useState(
     user.selectedProduct.productPrice
   );
-  let history = useHistory();
+  let navigate = useNavigate();
 
   const handleNameChange = (e) => {
     setProductName(e.target.value);
@@ -36,7 +36,7 @@ const EditProduct = () => {
       );
 
       handleSuccess(res);
-      history.goBack();
+      navigate(-1);
     } catch (error) {
       if (error.response.data.status === 401) {
         handleError(error);

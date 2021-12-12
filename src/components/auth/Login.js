@@ -33,7 +33,7 @@ const Login = (props) => {
       setLoading("login");
       if (res.status === 200) {
         handleSuccess(res);
-        props.history.push("/user");
+        props.history.push("home");
       }
     } catch (error) {
       setLoading("login");
@@ -102,7 +102,7 @@ const Login = (props) => {
             <p className="mt-3 text-center">
               Dont have an account?
               <button className="font-bold text-blue-600 mx-2">
-                <Link to="/user/register">Register</Link>
+                <Link to="register">Register</Link>
               </button>
             </p>
           </form>

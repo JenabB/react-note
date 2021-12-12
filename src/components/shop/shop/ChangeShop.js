@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 //context
 import { useAuthState } from "../../../hook";
@@ -34,7 +34,7 @@ const ChangeShop = () => {
   });
   const { shopName, address, contactNumber } = data;
 
-  let history = useHistory();
+  let navigate = useNavigate();
 
   const [selectedCountry, setSelectedCountry] = useState(
     user.shopDetails.countryId
@@ -124,13 +124,13 @@ const ChangeShop = () => {
         setLoading("change");
         handleSuccess(result);
 
-        history.goBack();
+        navigate(-1);
       })
       .catch((error) => {
         setLoading("change");
         handleError(error);
         if (error.response.data.status === 401) {
-          history.push("/user/login");
+          navigate("login");
         }
       });
   };
@@ -142,7 +142,7 @@ const ChangeShop = () => {
           deleteShop(user.shopId, user.token).then((result) => {
             handleSuccess(result);
 
-            history.push("/user");
+            navigate("home");
           });
         } catch (error) {
           handleError(error);

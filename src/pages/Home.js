@@ -78,7 +78,6 @@ const Home = () => {
       <div className="mt-4 lg:w-3/5 mx-auto">
         <h1 className="mt-2 ml-4 font-bold mb-4">Your Shop</h1>
         <OwnerShopList />
-        <Products products={user.shopProduct} />
       </div>
 
       <FloatingCreateShopButton />
