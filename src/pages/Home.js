@@ -14,6 +14,7 @@ import FloatingCreateShopButton from "../components/shop/shop/FloatingCreateShop
 
 import Products from "../components/shop/Products";
 import { getUserProfile } from "../components/home/actions";
+import UserIformation from "../components/home/UserIformation";
 
 const Home = () => {
   const user = useAuthState();
@@ -63,19 +64,29 @@ const Home = () => {
         </div>
       </nav>
 
-      <div className=" py-8">
-        <div className="px-4">
-          <h1 className="text-lg">
-            Hi,{" "}
-            <span className="text-2xl font-bold text-blue-700">
-              {user.userProfile.fullName}
-            </span>
-          </h1>
-          <p>Have a nice day</p>
+      <UserIformation name={user.userProfile.fullName} />
+
+      <div
+        className="bg-white shadow-lg z-10 absolute w-3/4 p-4 mx-auto rounded-lg"
+        style={{
+          top: "170px",
+          marginLeft: "auto",
+          marginRight: "auto",
+          left: 0,
+          right: 0,
+          textAlign: "center",
+        }}
+      >
+        <div className="flex justify-between">
+          <h1>ini info</h1>
+          <div className="bg-gray-200 rounded-xl p-4">
+            <h1>Total Transaction</h1>
+            <h1>23232323</h1>
+          </div>
         </div>
       </div>
 
-      <div className="mt-4 lg:w-3/5 mx-auto">
+      <div className="mt-24 lg:w-3/5 mx-auto">
         <h1 className="mt-2 ml-4 font-bold mb-4">Your Shop</h1>
         <OwnerShopList />
       </div>
