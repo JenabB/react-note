@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+
 // eslint-disable-next-line no-unused-vars
 import { NavLink, Link, useParams, Outlet } from "react-router-dom";
 
@@ -8,6 +8,7 @@ import { useAuthState, useAuthDispatch } from "../../../hook";
 
 import { motion } from "framer-motion";
 import Detail from "./ShopDetail/Detail";
+import AppBar from "../../common/AppBar";
 
 const OwnerShopDetails = () => {
   const [detail, setDetail] = useState([]);
@@ -19,12 +20,6 @@ const OwnerShopDetails = () => {
 
   const dispatch = useAuthDispatch();
   const user = useAuthState();
-
-  let navigate = useNavigate();
-
-  function goBack() {
-    navigate(-1);
-  }
 
   useEffect(() => {
     axios
@@ -70,17 +65,7 @@ const OwnerShopDetails = () => {
         },
       }}
     >
-      <nav className="sticky top-0 z-10 shadow-lg flex justify-between bg-blue-700 text-white p-4">
-        <div>
-          <button onClick={goBack}>
-            <span class="material-icons">arrow_back</span>
-          </button>
-        </div>
-        <div>
-          <Link to="/home">Home</Link>
-        </div>
-        <div></div>
-      </nav>
+      <AppBar />
 
       <Detail user={user} detail={detail} />
 

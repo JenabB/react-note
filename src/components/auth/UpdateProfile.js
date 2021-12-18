@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import { updateProfile } from "./actions";
 
 //components
-import NavWithBack from "../NavWithBack";
+import NavWithBack from "../common/NavWithBack";
 
 const UpdateProfile = () => {
   const user = useAuthState();

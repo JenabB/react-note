@@ -2,7 +2,7 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Navigate,
+  // Navigate,
 } from "react-router-dom";
 
 //pages
@@ -27,11 +27,12 @@ import Product from "./components/shop/product/Product";
 import Invoice from "./components/shop/invoice/Invoice";
 
 //context
-import { useAuthState } from "./hook";
+// import { useAuthState } from "./hook";
 import CreateInvoice from "./pages/CreateInvoice";
+import InvoiceDetail from "./components/shop/invoice/InvoiceDetail";
 
 const Navigation = () => {
-  const user = useAuthState();
+  // const user = useAuthState();
 
   return (
     <Router>
@@ -57,21 +58,15 @@ const Navigation = () => {
           element={<CreateInvoice />}
         />
 
+        <Route path="/invoice/:id" element={<InvoiceDetail />} />
+
         {/* {new Date().toLocaleString() >
         new Date(user.user.exp).toLocaleString() ? (
           <Route path="/home" element={<Home />} />
         ) : (
           <Navigate to="login" />
         )}
-       
 
-    
-        <Route exact path="/shop/:id" component={OwnerShopDetails} />
-   
-    
-
-        <Route path="/shop/:id/product/:id/edit" component={EditProduct} />
-        <Route exact path="/shop/:id/invoice" component={Invoice} />
          */}
       </Routes>
     </Router>

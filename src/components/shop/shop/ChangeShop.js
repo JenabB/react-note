@@ -6,7 +6,7 @@ import { useAuthState } from "../../../hook";
 
 import Select from "react-select";
 
-import NavWithBack from "../../NavWithBack";
+import NavWithBack from "../../common/NavWithBack";
 import { motion } from "framer-motion";
 import {
   handleAreYouSure,

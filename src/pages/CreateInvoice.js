@@ -11,25 +11,28 @@ import { formatRp } from "../utils/formatRp";
 import options from "../components/shop/invoice/utils/insertOptions";
 
 //components
-import NavWithBack from "../components/NavWithBack";
+import NavWithBack from "../components/common/NavWithBack";
 
 //context
 import { useAuthDispatch, useAuthState } from "../hook";
 
-import CurrencyInput from "react-currency-input-field";
 import { formInput } from "../theme/formInput";
+import OutsideMode from "../components/shop/invoice/OutsideMode";
 
 const CreateInvoice = () => {
   const HOST = "https://svc-not-e.herokuapp.com";
   const dispatch = useAuthDispatch();
   const user = useAuthState();
   let navigate = useNavigate();
-  const [product, setProduct] = useState([]);
-  const [addProduct, setAddProduct] = useState({
-    productName: "",
-    productPrice: "",
-    quantity: "",
-  });
+
+  const [addProduct, setAddProduct] = useState([
+    {
+      productName: "",
+      productPrice: "",
+      quantity: "",
+    },
+  ]);
+  console.log(addProduct, "add prod");
 
   const [invoiceCode] = useState("1");
   const [productInsertMode, setProductInsertMode] = useState("inside");
@@ -38,14 +41,26 @@ const CreateInvoice = () => {
     customerName: "",
   });
 
+  const handleProductChange = (index, e) => {
+    let produks = [...addProduct];
+    let produk = produks[index];
+    produks[index] = { ...produk, [e.target.name]: e.target.value };
+    setAddProduct(produks);
+  };
+
   const handleUpdateProduct = (e) => {
     e.preventDefault();
-    setProduct([...product, addProduct]);
-    setAddProduct({
-      productName: "",
-      productPrice: "",
-      quantity: "",
-    });
+    // const prod = [...product];
+    // setAddProduct({
+    //   productName: "",
+    //   productPrice: "",
+    //   quantity: "",
+    // });
+
+    setAddProduct([
+      ...addProduct,
+      { productName: "", productPrice: "", quantity: 0 },
+    ]);
   };
 
   useEffect(() => {
@@ -86,7 +101,7 @@ const CreateInvoice = () => {
           invoiceCode: invoiceCode,
           productInsertMode: productInsertMode,
           customerName: customerName,
-          products: product,
+          products: addProduct,
         },
         {
           headers: {
@@ -130,10 +145,21 @@ const CreateInvoice = () => {
 
           <div
             className="sticky top-10 z-10 bg-white shadow-lg p-4 m-4"
-            style={{ minHeight: "200px" }}
+            style={{ minHeight: "100px" }}
           >
+            <h1 className="text-blue-800 text-xl font-bold">Summary</h1>
             <h1>{customerName}</h1>
             <h2>Insert Mode: {productInsertMode}</h2>
+            <div>
+              {addProduct.length > 0 ? (
+                <div>
+                  <h1>total {addProduct.length} product</h1>
+                  <h1>Total:</h1>
+                </div>
+              ) : (
+                <h1>no product</h1>
+              )}
+            </div>
           </div>
 
           <div className="card py-2 px-5">
@@ -176,65 +202,13 @@ const CreateInvoice = () => {
                   ))}
                 </div>
               ) : (
-                <form onSubmit={handleUpdateProduct} className="my-4">
-                  <input
-                    className={formInput}
-                    type="name"
-                    placeholder="product name"
-                    value={addProduct.productName}
-                    onChange={(e) =>
-                      setAddProduct({
-                        ...addProduct,
-                        productName: e.target.value,
-                      })
-                    }
-                    required
+                <div>
+                  <OutsideMode
+                    addProduct={addProduct}
+                    handleProductChange={handleProductChange}
+                    handleUpdateProduct={handleUpdateProduct}
                   />
-
-                  <CurrencyInput
-                    className="w-full bg-blue-100 text-right my-2 px-2 py-1"
-                    prefix="Rp"
-                    placeholder="0"
-                    name="productPrice"
-                    onValueChange={(value) =>
-                      setAddProduct({
-                        ...addProduct,
-                        productPrice: value,
-                      })
-                    }
-                  />
-                  {/* <input
-                      type="text"
-                      placeholder="product price"
-                      value={addProduct.productPrice}
-                      onChange={(e) =>
-                        setAddProduct({
-                          ...addProduct,
-                          productPrice: e.target.value,
-                        })
-                      }
-                      required
-                    /> */}
-
-                  <input
-                    type="number"
-                    className="text-right w-4/5 bg-blue-100 px-2 py-2 my-2 mr-2"
-                    placeholder="quantity"
-                    value={addProduct.quantity}
-                    onChange={(e) =>
-                      setAddProduct({
-                        ...addProduct,
-                        quantity: e.target.value,
-                      })
-                    }
-                    required
-                  />
-                  <input
-                    type="submit"
-                    value="add"
-                    className="text-white bg-blue-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 px-3 py-1 rounded-lg"
-                  />
-                </form>
+                </div>
               )}
               <div className="text-center">
                 <input

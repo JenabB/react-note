@@ -8,10 +8,10 @@ import { formInput } from "../../../theme/formInput";
 const EditProductModal = ({ open, handleEditClose }) => {
   const user = useAuthState();
   const [productName, setProductName] = useState(
-    user.selectedProduct.productName
+    user.selectedProduct?.productName
   );
   const [productPrice, setProductPrice] = useState(
-    user.selectedProduct.productPrice
+    user.selectedProduct?.productPrice
   );
 
   const handleNameChange = (e) => {

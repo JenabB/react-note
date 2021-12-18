@@ -52,15 +52,18 @@ const GetShopProduct = ({ id }) => {
       return (
         <div
           key={index}
-          className="shadow m-3 flex justify-between rounded-lg p-4"
+          className="shadow-md bg-white m-3 flex justify-between rounded-sm p-4"
         >
           <div>
             <h1 className="font-bold text-blue-600">{product.productName}</h1>
             <h1 className="text-gray-600">{formatRp(product.productPrice)}</h1>
           </div>
 
-          <div className="flex">
-            <button className="material-icons mx-4" onClick={handleEditOpen}>
+          <div className="flex items-center">
+            <button
+              className="material-icons mx-2 text-blue-700"
+              onClick={handleEditOpen}
+            >
               edit
             </button>
             <h1

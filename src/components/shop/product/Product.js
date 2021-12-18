@@ -1,35 +1,24 @@
-//lib
 import { useEffect } from "react";
-import axios from "axios";
 import { motion } from "framer-motion";
 
 //components
-import NavWithBack from "../../NavWithBack";
-import Header from "./Header";
 import FloatingAddProductButton from "./FloatingAddProductButton";
 import GetShopProduct from "./GetShopProduct";
 import { useAuthState, useAuthDispatch } from "../../../hook";
+import { getProducts } from "./actions";
 
 const Product = () => {
-  const user = useAuthState();
+  const { shopId, token } = useAuthState();
   const dispatch = useAuthDispatch();
-
-  const url = `https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}/product`;
+  const url = `https://svc-not-e.herokuapp.com/v1/shop/${shopId}/product`;
 
   useEffect(() => {
     let intervalId;
 
     const fetchData = async () => {
-      axios
-        .get(url, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
-          },
-        })
-        .then((result) => {
-          dispatch({ type: "GET_SHOP_PRODUCT", payload: result.data.data });
-        });
+      getProducts(shopId, token).then((result) =>
+        dispatch({ type: "GET_SHOP_PRODUCT", payload: result.data.data })
+      );
       intervalId = setTimeout(fetchData, 4000);
     };
 

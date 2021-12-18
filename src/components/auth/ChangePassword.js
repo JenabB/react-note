@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 
 //components
-import NavWithBack from "../NavWithBack";
+import NavWithBack from "../common/NavWithBack";
 
 //lib
 import { motion } from "framer-motion";

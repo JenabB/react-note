@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Detail = ({ user, detail }) => {
   return (
-    <div className="lg:p-5 sm:p-2 py-5 bg-blue-400">
+    <div className="lg:p-5 sm:p-2 py-4 bg-blue-400">
       <div className="text-white m-4 lg:px-10 sm:px-0">
         <div className="">
           <div className="">

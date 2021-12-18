@@ -13,9 +13,7 @@ const Header = () => {
     user.shopProduct.forEach((el) => {
       products.push(el.productPrice);
     });
-
     const total = products.reduce((prev, curr) => prev + curr, 0);
-
     setTotalPrice(total);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.shopProduct]);

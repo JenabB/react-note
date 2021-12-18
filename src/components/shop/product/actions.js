@@ -1,6 +1,16 @@
 import axios from "axios";
 const host = "https://svc-not-e.herokuapp.com/v1";
 
+export const getProducts = async (shopId, token) => {
+  const url = `https://svc-not-e.herokuapp.com/v1/shop/${shopId}/product`;
+  return axios.get(url, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 export const addProduct = async (productName, productPrice, shopId, token) => {
   return await axios.post(
     `${host}/shop/${shopId}/product`,

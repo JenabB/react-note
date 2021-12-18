@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 //components
 import profile from "../images/ziva.jpeg";
-import NavWithBack from "../components/NavWithBack";
+import NavWithBack from "../components/common/NavWithBack";
 import UserProfile from "../components/auth/UserProfile";
 
 //lib
