@@ -7,16 +7,18 @@ import { useAuthState, useAuthDispatch } from "../hook";
 
 //lib
 import { motion } from "framer-motion";
+import { formatRp } from "../utils/formatRp";
+import moment from "moment";
+import { getUserProfile } from "../components/home/actions";
 
 //components
 import OwnerShopList from "../components/shop/shop/OwnerShopList";
 import FloatingCreateShopButton from "../components/shop/shop/FloatingCreateShopButton";
 
-import { getUserProfile } from "../components/home/actions";
 import UserIformation from "../components/home/UserIformation";
-import { formatRp } from "../utils/formatRp";
-import moment from "moment";
+
 import LatestProduct from "../components/home/LatestProduct";
+
 const Home = () => {
   const user = useAuthState();
   const dispatch = useAuthDispatch();

@@ -1,26 +1,39 @@
 import React, { useEffect } from "react";
-import axios from "axios";
+
 import moment from "moment";
 import { useAuthState, useAuthDispatch } from "../../../hook";
 import { Link } from "react-router-dom";
 import { formatRp } from "../../../utils/formatRp";
+import { deleteInvoice, getInvoices } from "./actions";
+import {
+  handleAreYouSure,
+  handleSuccess,
+  handleError,
+} from "../../../utils/responseHandler";
 
 const ShopInvoiceList = () => {
   const dispatch = useAuthDispatch();
   const user = useAuthState();
 
   useEffect(() => {
-    axios
-      .get(`https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}/invoice`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
-        },
-      })
-      .then((result) => {
-        dispatch({ type: "GET_SHOP_INVOICE", payload: result.data.data });
-      });
+    getInvoices(user.shopId).then((result) => {
+      dispatch({ type: "GET_SHOP_INVOICE", payload: result.data.data });
+    });
   });
+
+  const handleDeleteInvoice = (invoiceId) => {
+    handleAreYouSure().then((result) => {
+      if (result.isConfirmed) {
+        try {
+          deleteInvoice(user.shopId, invoiceId, user.token).then((result) => {
+            handleSuccess(result);
+          });
+        } catch (error) {
+          handleError(error);
+        }
+      }
+    });
+  };
 
   return (
     <div className="lg:w-2/3 mx-auto sm:w-full">
@@ -46,7 +59,7 @@ const ShopInvoiceList = () => {
                   </button>
                   <h1
                     className="material-icons text-red-600"
-                    // onClick={() => handleDeleteProduct(product.productId)}
+                    onClick={() => handleDeleteInvoice(invoice.invoiceId)}
                   >
                     delete
                   </h1>

@@ -5,14 +5,15 @@ import { editProduct } from "./actions";
 import { handleSuccess, handleError } from "../../../utils/responseHandler";
 import { formInput } from "../../../theme/formInput";
 
-const EditProductModal = ({ open, handleEditClose }) => {
+const EditProductModal = ({
+  open,
+  handleEditClose,
+  productName,
+  productPrice,
+}) => {
   const user = useAuthState();
-  const [productName, setProductName] = useState(
-    user.selectedProduct?.productName
-  );
-  const [productPrice, setProductPrice] = useState(
-    user.selectedProduct?.productPrice
-  );
+  const [name, setProductName] = useState(productName);
+  const [price, setProductPrice] = useState(productPrice);
 
   const handleNameChange = (e) => {
     setProductName(e.target.value);
@@ -63,7 +64,7 @@ const EditProductModal = ({ open, handleEditClose }) => {
               <input
                 type="text"
                 className={formInput}
-                value={productName}
+                value={name}
                 onChange={handleNameChange}
                 required
               />
@@ -71,7 +72,7 @@ const EditProductModal = ({ open, handleEditClose }) => {
               <input
                 type="number"
                 className={formInput}
-                value={productPrice}
+                value={price}
                 onChange={handlePriceChange}
                 required
               />

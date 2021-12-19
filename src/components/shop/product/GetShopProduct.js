@@ -73,7 +73,12 @@ const GetShopProduct = ({ id }) => {
               delete
             </h1>
           </div>
-          <EditProductModal open={editOpen} handleEditClose={handleEditClose} />
+          <EditProductModal
+            open={editOpen}
+            productName={product.productName}
+            productPrice={product.productPrice}
+            handleEditClose={handleEditClose}
+          />
         </div>
       );
     });

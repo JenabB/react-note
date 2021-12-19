@@ -70,24 +70,22 @@ const OwnerShopDetails = () => {
       <Detail user={user} detail={detail} />
 
       <nav className=" w-full p-2 flex justify-evenly bg-white shadow-lg items-center">
-        <div className="flex flex-col items-center">
-          <div className="material-icons text-blue-900">inventory_2</div>
-          <NavLink
-            to=""
-            style={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            Products
-          </NavLink>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="material-icons text-blue-900">receipt</div>
-          <NavLink
-            to="invoice"
-            style={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            Invoice
-          </NavLink>
-        </div>
+        <NavLink
+          to=""
+          style={({ isActive }) => (isActive ? activeStyle : undefined)}
+          className="flex items-center"
+        >
+          <div className="material-icons mx-2 text-blue-900">inventory_2</div>
+          Products
+        </NavLink>
+        <NavLink
+          to="invoice"
+          style={({ isActive }) => (isActive ? activeStyle : undefined)}
+          className="flex items-center"
+        >
+          <div className="material-icons mx-2  text-blue-900">receipt</div>
+          Invoice
+        </NavLink>
       </nav>
 
       <Outlet />

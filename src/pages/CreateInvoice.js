@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 //lib
-import Swal from "sweetalert2";
+
 import axios from "axios";
 import Select from "react-select";
-import { formatRp } from "../utils/formatRp";
 
 //utils
 import options from "../components/shop/invoice/utils/insertOptions";
@@ -17,7 +16,9 @@ import NavWithBack from "../components/common/NavWithBack";
 import { useAuthDispatch, useAuthState } from "../hook";
 
 import { formInput } from "../theme/formInput";
-import OutsideMode from "../components/shop/invoice/OutsideMode";
+import ModeOutside from "../components/shop/invoice/ModeOutside";
+import ModeInside from "../components/shop/invoice/ModeInside";
+import { handleError, handleSuccess } from "../utils/responseHandler";
 
 const CreateInvoice = () => {
   const HOST = "https://svc-not-e.herokuapp.com";
@@ -34,7 +35,6 @@ const CreateInvoice = () => {
   ]);
   console.log(addProduct, "add prod");
 
-  const [invoiceCode] = useState("1");
   const [productInsertMode, setProductInsertMode] = useState("inside");
 
   const [data, setData] = useState({
@@ -80,10 +80,10 @@ const CreateInvoice = () => {
     setProductInsertMode(e.value);
   };
 
-  const handleClickProduct = (e) => {
-    e.preventDefault();
-    console.log(e);
-  };
+  // const handleClickProduct = (e) => {
+  //   e.preventDefault();
+  //   console.log(e);
+  // };
 
   const { customerName } = data;
 
@@ -98,7 +98,6 @@ const CreateInvoice = () => {
       const res = await axios.post(
         `https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}/invoice`,
         {
-          invoiceCode: invoiceCode,
           productInsertMode: productInsertMode,
           customerName: customerName,
           products: addProduct,
@@ -112,26 +111,14 @@ const CreateInvoice = () => {
           },
         }
       );
-      console.log(res);
-      Swal.fire({
-        icon: "success",
-        text: res.data.message,
-        confirmButtonText: "ok",
-      });
+
+      handleSuccess(res);
     } catch (error) {
       if (error.response.data.status === 401) {
-        Swal.fire({
-          icon: "error",
-          text: error.response.data.message,
-          confirmButtonText: "ok",
-        });
+        handleError(error);
         navigate("login");
       } else {
-        Swal.fire({
-          icon: "error",
-          text: error.response.data.message,
-          confirmButtonText: "ok",
-        });
+        handleError(error);
       }
     }
   };
@@ -178,32 +165,11 @@ const CreateInvoice = () => {
               <Select options={options} onChange={handleInsertMode} />
               {productInsertMode === "inside" ? (
                 <div className="mt-10">
-                  {user.shopProduct.map((product, index) => (
-                    <div
-                      key={index}
-                      className="m-2 shadow-lg rounded p-4"
-                      onClick={handleClickProduct}
-                    >
-                      <h1 className="text-blue-800">{product.productName}</h1>
-                      <h2 className="text-gray-500">
-                        {formatRp(product.productPrice)}
-                      </h2>
-                      <input
-                        placeholder="0"
-                        value={addProduct.quantity}
-                        onChange={(e) =>
-                          setAddProduct({
-                            ...addProduct,
-                            quantity: e.target.value,
-                          })
-                        }
-                      />
-                    </div>
-                  ))}
+                  <ModeInside user={user} />
                 </div>
               ) : (
                 <div>
-                  <OutsideMode
+                  <ModeOutside
                     addProduct={addProduct}
                     handleProductChange={handleProductChange}
                     handleUpdateProduct={handleUpdateProduct}
@@ -211,13 +177,13 @@ const CreateInvoice = () => {
                 </div>
               )}
               <div className="text-center">
-                <input
-                  type="submit"
-                  value="create"
+                <button
                   className="text-white bg-blue-700 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 px-3 py-1 rounded-lg"
-                />
+                  onClick={handleSubmit}
+                >
+                  Submit
+                </button>
               </div>
-              <button onClick={handleSubmit}>Submit</button>
             </div>
           </div>
         </div>

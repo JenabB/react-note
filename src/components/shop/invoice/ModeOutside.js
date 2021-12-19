@@ -1,7 +1,8 @@
 import React from "react";
 import { formInput } from "../../../theme/formInput";
+import { formatRp } from "../../../utils/formatRp";
 
-const OutsideMode = ({
+const ModeOutside = ({
   addProduct,
   handleProductChange,
   handleUpdateProduct,
@@ -41,7 +42,7 @@ const OutsideMode = ({
             required
           />
           <div className="p-2 shadow-sm bg-gray-200 rounded-sm">
-            <h1>Total: {product.productPrice * product.quantity}</h1>
+            <h1>Total: {formatRp(product.productPrice * product.quantity)}</h1>
           </div>
         </div>
       ))}
@@ -55,4 +56,4 @@ const OutsideMode = ({
   );
 };
 
-export default OutsideMode;
+export default ModeOutside;
