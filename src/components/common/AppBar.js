@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const AppBar = () => {
+const AppBar = ({ title }) => {
   let navigate = useNavigate();
 
   function goBack() {
@@ -15,7 +15,7 @@ const AppBar = () => {
           <span class="material-icons">arrow_back</span>
         </button>
       </div>
-      <div></div>
+      <div>{title}</div>
       <div></div>
     </nav>
   );

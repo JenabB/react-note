@@ -33,6 +33,8 @@ const CreateInvoice = () => {
       quantity: "",
     },
   ]);
+
+  // const [insertProduct, setInsertProduct] = useState([]);
   console.log(addProduct, "add prod");
 
   const [productInsertMode, setProductInsertMode] = useState("inside");
@@ -47,6 +49,10 @@ const CreateInvoice = () => {
     produks[index] = { ...produk, [e.target.name]: e.target.value };
     setAddProduct(produks);
   };
+
+  // const handleAddInsertMode = (productId) => {
+  //   setAddProduct();
+  // };
 
   const handleUpdateProduct = (e) => {
     e.preventDefault();
@@ -81,7 +87,7 @@ const CreateInvoice = () => {
   };
 
   // const handleClickProduct = (e) => {
-  //   e.preventDefault();
+  //   // e.preventDefault();
   //   console.log(e);
   // };
 
@@ -98,6 +104,7 @@ const CreateInvoice = () => {
       const res = await axios.post(
         `https://svc-not-e.herokuapp.com/v1/shop/${user.shopId}/invoice`,
         {
+          invoiceCode: "INV002",
           productInsertMode: productInsertMode,
           customerName: customerName,
           products: addProduct,

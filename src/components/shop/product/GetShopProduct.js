@@ -84,7 +84,7 @@ const GetShopProduct = ({ id }) => {
     });
 
   return (
-    <div className="lg:w-2/3 mx-auto sm:w-full">
+    <div className="lg:w-2/3 mx-auto sm:w-full bg-gray-100 h-screen">
       <div className="text-center">
         <input
           type="search"

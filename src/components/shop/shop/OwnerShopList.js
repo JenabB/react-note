@@ -56,7 +56,7 @@ const OwnerShopList = () => {
             style={{ width: "90%" }}
           >
             {sorted.map((shop, index) => (
-              <Link to={`/shop/${shop.shopId}`}>
+              <Link to={`/shop/${shop.shopId}`} key={index}>
                 <div
                   key={index}
                   tabofindex={index}

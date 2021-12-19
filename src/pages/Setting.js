@@ -1,15 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 //components
-import profile from "../images/ziva.jpeg";
 import NavWithBack from "../components/common/NavWithBack";
 import UserProfile from "../components/auth/UserProfile";
-
-//lib
-import Swal from "sweetalert2";
 import { motion } from "framer-motion";
 
 //context
 import { logout, useAuthDispatch } from "../hook";
+import { handleAreYouSure } from "../utils/responseHandler";
 
 const Setting = () => {
   const dispatch = useAuthDispatch();
@@ -17,17 +14,9 @@ const Setting = () => {
   let navigate = useNavigate();
 
   const handleLogout = () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Logout",
-    }).then((result) => {
+    handleAreYouSure().then((result) => {
       if (result.isConfirmed) {
-        navigate("/home");
+        navigate("/login");
         logout(dispatch);
       }
     });
@@ -52,12 +41,9 @@ const Setting = () => {
       }}
       className="pb-10"
     >
-      <NavWithBack />
+      <NavWithBack title="Setting" />
 
-      <div className="pb-10">
-        <div className="flex justify-center my-10">
-          <img src={profile} alt="profile" className="profile-picture" />
-        </div>
+      <div className="py-10">
         <UserProfile />
       </div>
       <div className="bottom-0 w-screen">

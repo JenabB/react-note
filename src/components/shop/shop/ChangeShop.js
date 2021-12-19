@@ -153,6 +153,7 @@ const ChangeShop = () => {
 
   return (
     <motion.div
+      className="bg-gray-50 h-screen"
       initial="hidden"
       animate="visible"
       variants={{
@@ -169,19 +170,16 @@ const ChangeShop = () => {
         },
       }}
     >
-      <NavWithBack />
-      <div className="w-5/6 mx-auto">
+      <NavWithBack title="Change Shop Information" />
+      <div className="w-5/6 mx-auto ">
         <div className="mt-4">
           <div>
-            <h4 className="text-muted text-center mb-2">
-              Change Shop Information
-            </h4>
             <div className="card py-2">
-              <form className="text-center" onSubmit={handleShopChange}>
-                <div className="my-2">
+              <form onSubmit={handleShopChange}>
+                <div>
                   <h1>Shop name</h1>
                   <input
-                    className="bg-blue-200 px-2 py-1 rounded-lg my-4 w-full"
+                    className="bg-white shadow-md p-2 rounded  w-full"
                     type="name"
                     name="shopName"
                     value={shopName}
@@ -190,26 +188,33 @@ const ChangeShop = () => {
                   />
                 </div>
 
-                <Select
-                  options={countriesOptions}
-                  placeholder="Indonesia"
-                  onChange={handleSelectCountry}
-                />
-                <Select
-                  options={provincesOptions}
-                  onChange={handleSelectProvince}
-                />
-                <Select
-                  options={regenciesOptions}
-                  onChange={handleSelectRegency}
-                />
+                <div className="my-4">
+                  <h1>Domicile</h1>
+                  <Select
+                    className="my-2"
+                    options={countriesOptions}
+                    placeholder="Indonesia"
+                    onChange={handleSelectCountry}
+                  />
+                  <Select
+                    className="my-2"
+                    options={provincesOptions}
+                    onChange={handleSelectProvince}
+                  />
+                  <Select
+                    className="my-2"
+                    options={regenciesOptions}
+                    onChange={handleSelectRegency}
+                  />
+                </div>
 
                 <div className="my-2">
                   <h1>Address Detail</h1>
-                  <input
-                    className="bg-blue-200 px-2 py-1 w-full"
+                  <textarea
+                    className="bg-white shadow-md px-2 py-1 w-full"
                     type="name"
                     name="address"
+                    rows={5}
                     value={address}
                     onChange={handleChange}
                     required
@@ -219,7 +224,7 @@ const ChangeShop = () => {
                 <div className="my-2">
                   <h1>Contact Number</h1>
                   <input
-                    className="bg-blue-200 px-2 py-1 w-full"
+                    className="bg-white shadow-md px-2 my-2 py-1 w-full"
                     type="number"
                     name="contactNumber"
                     value={contactNumber}

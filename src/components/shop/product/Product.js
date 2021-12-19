@@ -8,7 +8,7 @@ import { useAuthState, useAuthDispatch } from "../../../hook";
 import { getProducts } from "./actions";
 
 const Product = () => {
-  const { shopId, token } = useAuthState();
+  const { shopId } = useAuthState();
   const dispatch = useAuthDispatch();
   const url = `https://svc-not-e.herokuapp.com/v1/shop/${shopId}/product`;
 
@@ -16,7 +16,7 @@ const Product = () => {
     let intervalId;
 
     const fetchData = async () => {
-      getProducts(shopId, token).then((result) =>
+      getProducts(shopId).then((result) =>
         dispatch({ type: "GET_SHOP_PRODUCT", payload: result.data.data })
       );
       intervalId = setTimeout(fetchData, 4000);

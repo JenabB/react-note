@@ -65,7 +65,7 @@ const OwnerShopDetails = () => {
         },
       }}
     >
-      <AppBar />
+      <AppBar title="Shop Details" />
 
       <Detail user={user} detail={detail} />
 

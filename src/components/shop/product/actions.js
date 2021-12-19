@@ -1,8 +1,10 @@
 import axios from "axios";
 const host = "https://svc-not-e.herokuapp.com/v1";
 
-export const getProducts = async (shopId, token) => {
-  const url = `https://svc-not-e.herokuapp.com/v1/shop/${shopId}/product`;
+const token = JSON.parse(localStorage.getItem("token"));
+
+export const getProducts = async (shopId) => {
+  const url = `${host}/shop/${shopId}/product`;
   return axios.get(url, {
     headers: {
       "Content-Type": "application/json",
