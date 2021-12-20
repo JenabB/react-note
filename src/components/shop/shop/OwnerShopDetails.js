@@ -20,6 +20,9 @@ const OwnerShopDetails = () => {
 
   const dispatch = useAuthDispatch();
   const user = useAuthState();
+  const { shopDetails } = useAuthState();
+
+  console.log(shopDetails);
 
   useEffect(() => {
     axios
@@ -67,7 +70,7 @@ const OwnerShopDetails = () => {
     >
       <AppBar title="Shop Details" />
 
-      <Detail user={user} detail={detail} />
+      <Detail user={user} detail={shopDetails} />
 
       <nav className=" w-full p-2 flex justify-evenly bg-white shadow-lg items-center">
         <NavLink

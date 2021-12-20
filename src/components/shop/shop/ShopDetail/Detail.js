@@ -1,14 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 const Detail = ({ user, detail }) => {
   return (
-    <div className="lg:p-5 sm:p-2 py-4 bg-blue-400">
+    <div className="lg:p-5 sm:p-2 py-4 bg-yellow-500">
       <div className="text-white m-4 lg:px-10 sm:px-0">
         <div className="">
           <div className="flex items-center">
             <div>
-              <h1 className="font-bold text-lg ml-2">{detail.shopName}</h1>
+              <h1 className="font-bold text-lg">{detail.shopName}</h1>
+
               <div>
                 <div>
                   <div className="inline-block p-2 text-center">
@@ -39,10 +41,21 @@ const Detail = ({ user, detail }) => {
                 </div>
               </div>
               {detail.Country ? (
-                <div className="flex flex-wrap items-center">
-                  <h2 className="mx-2">{detail.Country.niceName}</h2>
-                  <h3 className="mx-1">{detail.Province.provinceName}</h3>
-                  <h4 className="mx-2">{detail.Regency.regencyName}</h4>
+                <div>
+                  {" "}
+                  <div>
+                    <div className="flex flex-wrap items-center">
+                      <h2 className="mx-2">{detail.Country.niceName}</h2>
+                      <h3 className="mx-1">{detail.Province.provinceName}</h3>
+                      <h4 className="mx-2">{detail.Regency.regencyName}</h4>
+                    </div>
+                    <h1>
+                      {" "}
+                      Created {moment(detail.createdAt).format("YYYY MMMM DD")}
+                    </h1>
+                    <h2>{detail.contactNumber}</h2>
+                    <h3>{detail.address}</h3>
+                  </div>
                 </div>
               ) : (
                 <h1>Loading...</h1>

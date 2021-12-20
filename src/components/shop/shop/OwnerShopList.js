@@ -60,7 +60,7 @@ const OwnerShopList = () => {
                 <div
                   key={index}
                   tabofindex={index}
-                  className="shadow-lg m-1 p-3 bg-blue-400 text-white rounded-lg"
+                  className="shadow-lg m-1 p-3 bg-yellow-500 text-white rounded-lg"
                   style={{ width: "250px", height: "150px" }}
                 >
                   <h1 className="font-bold">{shop.shopName}</h1>

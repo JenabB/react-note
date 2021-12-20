@@ -46,6 +46,10 @@ export const createShop = async (
   );
 };
 
+export const getShopDetail = async () => {
+  return;
+};
+
 export const updateShop = async (
   shopId,
   shopName,

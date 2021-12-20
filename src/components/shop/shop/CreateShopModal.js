@@ -147,7 +147,7 @@ const CreateShopModal = ({ setIsOpen }) => {
                 <div className="my-2">
                   <h1>Shop name</h1>
                   <input
-                    className="bg-blue-200 px-2 py-1 w-full"
+                    className="bg-yellow-200 px-2 py-1 w-full"
                     type="name"
                     name="shopName"
                     value={shopName}
@@ -173,7 +173,7 @@ const CreateShopModal = ({ setIsOpen }) => {
                 <div className="my-2">
                   <h1>Address Detail</h1>
                   <input
-                    className="bg-blue-200 px-2 py-1 w-full"
+                    className="bg-yellow-200 px-2 py-1 w-full"
                     type="name"
                     name="address"
                     value={address}
@@ -185,7 +185,7 @@ const CreateShopModal = ({ setIsOpen }) => {
                 <div className="my-2">
                   <h1>Contact Number</h1>
                   <input
-                    className="bg-blue-200 px-2 py-1 w-full"
+                    className="bg-yellow-200 px-2 py-1 w-full"
                     type="number"
                     name="contactNumber"
                     value={contactNumber}
@@ -198,7 +198,7 @@ const CreateShopModal = ({ setIsOpen }) => {
                   <input
                     type="submit"
                     value={loading}
-                    className="text-white bg-blue-700 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 px-3 py-1 rounded-lg"
+                    className="text-white bg-yellow-500  focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 px-3 py-1 rounded-lg"
                   />
                 </div>
               </form>

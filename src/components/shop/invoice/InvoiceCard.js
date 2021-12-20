@@ -30,7 +30,7 @@ const InvoiceCard = ({ invoice }) => {
   return (
     <div className="shadow-lg flex bg-white justify-between m-3 p-4">
       <Link to={`/invoice/${invoice.invoiceId}`}>
-        <h1 className="font-bold text-blue-700">{invoice.customerName}</h1>
+        <h1 className="font-bold text-yellow-500">{invoice.customerName}</h1>
         <h2 className="text-xs">
           {moment(invoice.createdAt).startOf("hour").fromNow()}
         </h2>
