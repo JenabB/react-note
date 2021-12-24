@@ -3,15 +3,15 @@ import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 
 //components
-import NavWithBack from "../common/NavWithBack";
+import NavWithBack from "components/common/NavWithBack";
 
 //lib
 import { motion } from "framer-motion";
 
 //util
 import { changePassword } from "./actions";
-import { logout, useAuthDispatch, useAuthState } from "../../hook";
-import { handleSuccess, handleError } from "../../utils/responseHandler";
+import { logout, useAuthDispatch, useAuthState } from "hook";
+import { handleSuccess, handleError } from "utils/responseHandler";
 
 const ChangePassword = () => {
   const [data, setData] = useState({

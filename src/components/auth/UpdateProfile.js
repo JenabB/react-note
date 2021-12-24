@@ -3,13 +3,13 @@ import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 
 //utils
-import { useAuthState } from "../../hook";
-import { handleSuccess, handleError } from "../../utils/responseHandler";
+import { useAuthState } from "hook";
+import { handleSuccess, handleError } from "utils/responseHandler";
 import { motion } from "framer-motion";
 import { updateProfile } from "./actions";
 
 //components
-import NavWithBack from "../common/NavWithBack";
+import NavWithBack from "components/common/NavWithBack";
 
 const UpdateProfile = () => {
   const user = useAuthState();

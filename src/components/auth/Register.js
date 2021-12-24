@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
 
-import { handleSuccess, handleWarning } from "../../utils/responseHandler";
+import { handleSuccess, handleWarning } from "utils/responseHandler";
 //context
-import { registerUser, useAuthDispatch } from "../../hook";
+import { registerUser, useAuthDispatch } from "hook";
 
 const Register = (props) => {
   //state

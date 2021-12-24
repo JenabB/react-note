@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import NavWithBack from "../../common/NavWithBack";
-import { useAuthState } from "../../../hook";
+import NavWithBack from "components/common/NavWithBack";
+import { useAuthState } from "hook";
 import moment from "moment";
-import { formatRp } from "../../../utils/formatRp";
+import { formatRp } from "utils/formatRp";
 import { getOneInvoice } from "./actions";
 import InvoiceSkeleton from "./InvoiceSkeleton";
 

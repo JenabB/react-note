@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 //utils
-import { handleSuccess } from "../../utils/responseHandler";
+import { handleSuccess } from "utils/responseHandler";
 
 //lib
 import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
 
 //context
-import { loginUser, useAuthDispatch } from "../../hook";
+import { loginUser, useAuthDispatch } from "hook";
 
 const Login = (props) => {
   const [data, setData] = useState({

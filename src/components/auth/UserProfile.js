@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useAuthDispatch, useAuthState } from "../../hook";
+import { useAuthDispatch, useAuthState } from "hook";
 import { userProfile } from "./actions";
 
 const UserProfile = () => {

@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { formatRp } from "../../../utils/formatRp";
+import { formatRp } from "utils/formatRp";
 import moment from "moment";
 import {
   handleAreYouSure,
   handleSuccess,
   handleError,
-} from "../../../utils/responseHandler";
+} from "utils/responseHandler";
 import { deleteInvoice } from "./actions";
-import { useAuthState } from "../../../hook";
+import { useAuthState } from "hook";
 
 const InvoiceCard = ({ invoice }) => {
   const { shopId, token } = useAuthState();
