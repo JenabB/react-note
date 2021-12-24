@@ -151,7 +151,7 @@ const ChangeShop = () => {
 
   return (
     <motion.div
-      className="bg-gray-50 h-screen"
+      className="h-screen"
       initial="hidden"
       animate="visible"
       variants={{

@@ -1,6 +1,6 @@
 import React from "react";
-import { formInput } from "../../../theme/formInput";
-import { formatRp } from "../../../utils/formatRp";
+import { formInput } from "../../../../theme/formInput";
+import { formatRp } from "../../../../utils/formatRp";
 
 const ModeOutside = ({
   addProduct,

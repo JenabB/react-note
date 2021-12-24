@@ -1,5 +1,5 @@
 import React from "react";
-import { formatRp } from "../../../utils/formatRp";
+import { formatRp } from "../../../../utils/formatRp";
 
 const ModeInside = ({ user }) => {
   return (

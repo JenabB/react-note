@@ -16,8 +16,8 @@ import NavWithBack from "../components/common/NavWithBack";
 import { useAuthDispatch, useAuthState } from "../hook";
 
 import { formInput } from "../theme/formInput";
-import ModeOutside from "../components/shop/invoice/ModeOutside";
-import ModeInside from "../components/shop/invoice/ModeInside";
+import ModeOutside from "../components/shop/invoice/create-invoice/ModeOutside";
+import ModeInside from "../components/shop/invoice/create-invoice/ModeInside";
 import { handleError, handleSuccess } from "../utils/responseHandler";
 
 const CreateInvoice = () => {
