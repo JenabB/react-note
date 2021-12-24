@@ -7,7 +7,7 @@ import axios from "axios";
 import Select from "react-select";
 
 //utils
-import options from "components/shop/invoice/utils/insertOptions";
+import options from "components/shop/shop-invoice/utils/insertOptions";
 
 //components
 import NavWithBack from "components/common/NavWithBack";
@@ -16,8 +16,8 @@ import NavWithBack from "components/common/NavWithBack";
 import { useAuthDispatch, useAuthState } from "hook";
 
 import { formInput } from "theme/formInput";
-import ModeOutside from "components/shop/invoice/create-invoice/ModeOutside";
-import ModeInside from "components/shop/invoice/create-invoice/ModeInside";
+import ModeOutside from "components/shop/shop-invoice/create-invoice/ModeOutside";
+import ModeInside from "components/shop/shop-invoice/create-invoice/ModeInside";
 import { handleError, handleSuccess } from "utils/responseHandler";
 
 const CreateInvoice = () => {

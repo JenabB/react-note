@@ -25,12 +25,12 @@ import Product from "components/shop/shop-product/Products";
 import Detail from "components/shop/shop/ShopDetail/Detail";
 
 //invoice
-import Invoice from "components/shop/invoice/Invoices";
+import Invoice from "components/shop/shop-invoice/Invoices";
 
 //context
 import { useAuthState } from "hook";
 import CreateInvoice from "pages/CreateInvoice";
-import InvoiceDetail from "components/shop/invoice/InvoiceDetail";
+import InvoiceDetail from "components/shop/shop-invoice/InvoiceDetail";
 
 const Navigation = () => {
   const { user } = useAuthState();
