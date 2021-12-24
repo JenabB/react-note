@@ -52,7 +52,7 @@ const GetShopProduct = ({ id }) => {
       return (
         <div
           key={index}
-          className="shadow-md bg-white m-3 flex justify-between rounded-sm p-4"
+          className="shadow bg-white m-3 flex justify-between rounded-sm p-4"
         >
           <div>
             <h1 className="font-bold text-blue-600">{product.productName}</h1>
@@ -84,7 +84,7 @@ const GetShopProduct = ({ id }) => {
     });
 
   return (
-    <div className="lg:w-2/3 mx-auto sm:w-full bg-gray-100 h-screen">
+    <div className=" mx-auto sm:w-full">
       <div className="text-center">
         <input
           type="search"

@@ -22,6 +22,7 @@ import ChangeShop from "./components/shop/shop/ChangeShop";
 
 //product
 import Product from "./components/shop/product/Product";
+import Detail from "./components/shop/shop/ShopDetail/Detail";
 
 //invoice
 import Invoice from "./components/shop/invoice/Invoice";
@@ -44,21 +45,22 @@ const Navigation = () => {
         <Route path="home" element={<Home />} />
 
         <Route path="shop/:id" element={<OwnerShopDetails />}>
-          <Route index s element={<Product />} />
-          <Route path="invoice" element={<Invoice />} />
+          <Route index element={<Detail />} />
+          <Route path="products" element={<Product />} />
+          <Route path="invoices" element={<Invoice />} />
+          <Route path="update-shop" element={<ChangeShop />} />
         </Route>
 
         <Route path="/setting" element={<Setting />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/update-profile" element={<UpdateProfile />} />
 
-        <Route path="shop/:id/update-shop" element={<ChangeShop />} />
         <Route
-          path="shop/:id/invoice/create-invoice"
+          path="shop/:id/invoices/create-invoice"
           element={<CreateInvoice />}
         />
 
-        <Route path="/invoice/:id" element={<InvoiceDetail />} />
+        <Route path="/invoices/:id" element={<InvoiceDetail />} />
 
         {/* {new Date().toLocaleString() >
         new Date(user.user.exp).toLocaleString() ? (

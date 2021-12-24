@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { useAuthState } from "../../../hook";
 
 import Select from "react-select";
-
-import NavWithBack from "../../common/NavWithBack";
 import { motion } from "framer-motion";
 import {
   handleAreYouSure,
@@ -170,7 +168,6 @@ const ChangeShop = () => {
         },
       }}
     >
-      <NavWithBack title="Change Shop Information" />
       <div className="w-5/6 mx-auto ">
         <div className="mt-4">
           <div>
