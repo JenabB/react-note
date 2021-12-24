@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { addProduct } from "./actions";
-import { handleSuccess, handleError } from "../../../utils/responseHandler";
-import { useAuthState } from "../../../hook";
-import { formInput } from "../../../theme/formInput";
+import { handleSuccess, handleError } from "utils/responseHandler";
+import { useAuthState } from "hook";
+import { formInput } from "theme/formInput";
 
 const AddProductModal = ({ setIsOpen }) => {
   //state

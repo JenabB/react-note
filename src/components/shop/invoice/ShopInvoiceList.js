@@ -14,7 +14,7 @@ const ShopInvoiceList = () => {
   });
 
   return (
-    <div className="lg:w-2/3 mx-auto sm:w-full h-screen">
+    <div className=" h-screen">
       {shopInvoice && shopInvoice.length > 0 ? (
         <div className="pt-4">
           {shopInvoice.map((invoice, index) => (

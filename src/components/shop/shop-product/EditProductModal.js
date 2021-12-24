@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useAuthState } from "../../../hook";
+import { useAuthState } from "hook";
 import { editProduct } from "./actions";
 
-import { handleSuccess, handleError } from "../../../utils/responseHandler";
-import { formInput } from "../../../theme/formInput";
+import { handleSuccess, handleError } from "utils/responseHandler";
+import { formInput } from "theme/formInput";
 
 const EditProductModal = ({
   open,

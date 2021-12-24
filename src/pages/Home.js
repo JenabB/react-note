@@ -3,21 +3,21 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 //context
-import { useAuthState, useAuthDispatch } from "../hook";
+import { useAuthState, useAuthDispatch } from "hook";
 
 //lib
 import { motion } from "framer-motion";
-import { formatRp } from "../utils/formatRp";
+import { formatRp } from "utils/formatRp";
 import moment from "moment";
-import { getUserProfile } from "../components/home/actions";
+import { getUserProfile } from "components/home/actions";
 
 //components
-import OwnerShopList from "../components/shop/shop/OwnerShopList";
-import FloatingCreateShopButton from "../components/shop/shop/FloatingCreateShopButton";
+import OwnerShopList from "components/shop/shop/OwnerShopList";
+import FloatingCreateShopButton from "components/shop/shop/FloatingCreateShopButton";
 
-import UserIformation from "../components/home/UserIformation";
+import UserIformation from "components/home/UserIformation";
 
-import LatestProduct from "../components/home/LatestProduct";
+import LatestProduct from "components/home/LatestProduct";
 
 const Home = () => {
   const user = useAuthState();

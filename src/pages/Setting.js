@@ -1,12 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 //components
-import NavWithBack from "../components/common/NavWithBack";
-import UserProfile from "../components/auth/UserProfile";
+import NavWithBack from "components/common/NavWithBack";
+import UserProfile from "components/auth/UserProfile";
 import { motion } from "framer-motion";
 
 //context
-import { logout, useAuthDispatch } from "../hook";
-import { handleAreYouSure } from "../utils/responseHandler";
+import { logout, useAuthDispatch } from "hook";
+import { handleAreYouSure } from "utils/responseHandler";
 
 const Setting = () => {
   const dispatch = useAuthDispatch();
